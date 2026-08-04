@@ -1,32 +1,29 @@
 # Project status vs original plan
 
-Updated: 2026-08-04
+Updated: 2026-08-04 (continued upgrade)
 
-## Original handoff Top 10
+## Handoff Top 10
 
-| # | Asset | Status | Where |
-|---|--------|--------|--------|
-| 1 | Playwright starter kit | Done | `kits/playwright-mlx-starter/` |
-| 2 | Postman no-code kit | Done | `kits/postman/` + `/guides/postman-mlx/` |
-| 3 | WebGL leak checker | Done | `/tools/webgl-check/` |
-| 4 | Proxy pack formatter | Done | `/tools/proxy-format/` |
-| 5 | Telegram intent onboarding | Done | `@antidetect_automation_bot` |
-| 6 | Source-aware deep links | Done | `?start=aa_*` |
-| 7 | Troubleshooting / content factory | Partial (drafts ready) | `content/` + FAQ |
-| 8 | Use-case landings | Done | `/use-cases/*` |
-| 9 | Hub SSOT | Done | `aff-saas` → `*.github.io` |
-| 10 | Evergreen refresh Actions | Done | `.github/workflows/` |
+| # | Asset | Status |
+|---|--------|--------|
+| 1 | Playwright starter kit | Done — `kits/` + repo `playwright-mlx-starter` |
+| 2 | Postman kit | Done |
+| 3 | WebGL checker | Done — `/tools/webgl-check/` |
+| 4 | Proxy formatter | Done — `/tools/proxy-format/` |
+| 5 | Telegram intent onboarding | Done + expanded commands |
+| 6 | Source-aware deep links | Done |
+| 7 | Troubleshooting factory | Done — `/errors/mlx-automation/` + FAQ + drafts |
+| 8 | Use-case landings | Done — ads / ecommerce / cloud-phone |
+| 9 | Hub SSOT | Done — aff-saas → github.io |
+| 10 | Evergreen Actions | Done — Pages sync workflow |
 
-## Architecture (locked)
+## Extra shipped beyond original plan
+- Compares: AdsPower, GoLogin, Dolphin Anty
+- Workers AI `/ask`, D1 leads, webhook realtime
+- IndexNow, Atom feed, llms.txt, FAQ schema
+- Syndication pack in `content/`
 
-```text
-aff-saas (code) → antidetect-automation.github.io (site)
-               → CF Worker bot (webhook + D1 + KV + AI)
-profile README = brand door only
-```
-
-## Live
-
-- Site: https://antidetect-automation.github.io/
-- Bot: https://t.me/antidetect_automation_bot
-- Worker: https://aa-telegram-bot.antidetect-automation.workers.dev/health
+## Manual remaining
+1. Publish Dev.to/Hashnode from `content/`
+2. BotFather `/setuserpic`
+3. Google Search Console sitemap submit

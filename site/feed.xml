@@ -42,4 +42,26 @@
     <updated>2026-08-04T00:00:00Z</updated>
     <summary>Start profile and attach Playwright over CDP.</summary>
   </entry>
+
+  <entry>
+    <title>Multilogin vs Dolphin Anty</title>
+    <link href="https://antidetect-automation.github.io/vs/dolphin-anty/" />
+    <id>https://antidetect-automation.github.io/vs/dolphin-anty/</id>
+    <updated>2026-08-04T12:00:00Z</updated>
+    <summary>Premium Multilogin X vs Dolphin Anty media-buying workflows.</summary>
+  </entry>
+  <entry>
+    <title>Free WebGL + proxy tools</title>
+    <link href="https://antidetect-automation.github.io/tools/" />
+    <id>https://antidetect-automation.github.io/tools/</id>
+    <updated>2026-08-04T12:00:00Z</updated>
+    <summary>Client-side utilities for antidetect ops.</summary>
+  </entry>
+  <entry>
+    <title>MLX automation errors</title>
+    <link href="https://antidetect-automation.github.io/errors/mlx-automation/" />
+    <id>https://antidetect-automation.github.io/errors/mlx-automation/</id>
+    <updated>2026-08-04T12:00:00Z</updated>
+    <summary>Troubleshoot Multilogin X API / Playwright CDP failures.</summary>
+  </entry>
 </feed>

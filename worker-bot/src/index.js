@@ -6,7 +6,15 @@ const DISCLOSURE =
 const LINKS = {
   deal: `${HUB}/deal/`,
   compare: `${HUB}/vs/adspower/`,
+  gologin: `${HUB}/vs/gologin/`,
+  dolphin: `${HUB}/vs/dolphin-anty/`,
   guide: `${HUB}/guides/playwright-mlx/`,
+  postman: `${HUB}/guides/postman-mlx/`,
+  tools: `${HUB}/tools/`,
+  webgl: `${HUB}/tools/webgl-check/`,
+  proxy: `${HUB}/tools/proxy-format/`,
+  errors: `${HUB}/errors/mlx-automation/`,
+  faq: `${HUB}/faq/`,
   sitemap: `${HUB}/sitemap.xml`,
 };
 
@@ -59,10 +67,13 @@ function mainKeyboard() {
         { text: "Cloud Phone → MIN50", callback_data: "intent:phone" },
       ],
       [
-        { text: "Deal page", url: LINKS.deal },
-        { text: "Playwright guide", url: LINKS.guide },
+        { text: "Deal", url: LINKS.deal },
+        { text: "Tools", url: LINKS.tools },
       ],
-      [{ text: "vs AdsPower", url: LINKS.compare }],
+      [
+        { text: "Playwright", url: LINKS.guide },
+        { text: "FAQ", url: LINKS.faq },
+      ],
     ],
   };
 }
@@ -143,12 +154,16 @@ async function sendHelp(env, chatId) {
     text: [
       "*Commands*",
       "/start — choose Browser or Cloud Phone",
-      "/deal — same as start (deal desk)",
+      "/deal — deal desk",
       "/saas50 — browser code",
       "/min50 — cloud phone code",
       "/guide — Playwright + Multilogin X",
-      "/compare — Multilogin vs AdsPower",
-      "/ask <question> — short FAQ (Workers AI)",
+      "/postman — Postman starter",
+      "/tools — WebGL + proxy tools",
+      "/compare — vs AdsPower / GoLogin / Dolphin",
+      "/errors — automation troubleshooting",
+      "/faq — FAQ page",
+      "/ask <question> — Workers AI FAQ",
       "/help — this message",
       "",
       `Bot: ${BOT_PUBLIC}`,
@@ -265,8 +280,45 @@ async function handleUpdate(env, update) {
     await sendLink(env, chatId, "Playwright + Multilogin X guide:", LINKS.guide);
     return;
   }
+  if (text.startsWith("/postman")) {
+    await sendLink(env, chatId, "Postman + Multilogin X:", LINKS.postman);
+    return;
+  }
+  if (text.startsWith("/tools") || text.startsWith("/webgl") || text.startsWith("/proxy")) {
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: `Free tools (client-side):\n• WebGL: ${LINKS.webgl}\n• Proxy format: ${LINKS.proxy}\n• Hub: ${LINKS.tools}`,
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: "WebGL", url: LINKS.webgl },
+            { text: "Proxy", url: LINKS.proxy },
+          ],
+        ],
+      },
+    });
+    return;
+  }
   if (text.startsWith("/compare") || text.startsWith("/vs")) {
-    await sendLink(env, chatId, "Multilogin vs AdsPower:", LINKS.compare);
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: "Comparisons:",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "vs AdsPower", url: LINKS.compare }],
+          [{ text: "vs GoLogin", url: LINKS.gologin }],
+          [{ text: "vs Dolphin Anty", url: LINKS.dolphin }],
+        ],
+      },
+    });
+    return;
+  }
+  if (text.startsWith("/errors")) {
+    await sendLink(env, chatId, "MLX automation troubleshooting:", LINKS.errors);
+    return;
+  }
+  if (text.startsWith("/faq")) {
+    await sendLink(env, chatId, "FAQ:", LINKS.faq);
     return;
   }
   if (text.startsWith("/ask")) {

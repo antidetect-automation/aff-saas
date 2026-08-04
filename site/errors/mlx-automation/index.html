@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multilogin X API / automation errors — troubleshooting</title>
+  <meta name="description" content="Troubleshoot Multilogin X API, profile start, Playwright CDP, and Postman automation errors. Value-first guide + deal CTA." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/errors/mlx-automation/" />
+  <meta property="og:title" content="Multilogin X automation troubleshooting" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/errors/mlx-automation/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Profile start fails in API/Postman","acceptedAnswer":{"@type":"Answer","text":"Re-check token, folder permissions, profile UUID, and that the launcher agent is online. Confirm request paths against current Multilogin X docs."}},
+      {"@type":"Question","name":"Playwright cannot connectOverCDP","acceptedAnswer":{"@type":"Answer","text":"Ensure the profile actually started and you are using the debugger address from the start response. Firewall/VPN can block localhost CDP ports."}},
+      {"@type":"Question","name":"401 / unauthorized from Multilogin X API","acceptedAnswer":{"@type":"Answer","text":"Refresh automation token, check Authorization header format, and clock skew. Re-signin if using session cookies."}}
+    ]
+  }
+  </script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/guides/playwright-mlx/">Playwright</a>
+      <a href="/guides/postman-mlx/">Postman</a>
+      <a href="/errors/mlx-automation/">Errors</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Troubleshooting</p>
+    <h1>Multilogin X automation errors</h1>
+    <p class="lede">Fast checks when start-profile, Postman, or Playwright CDP fails. Always verify against current Multilogin docs — endpoints change.</p>
+
+    <h2>Profile start fails</h2>
+    <ul>
+      <li>Token expired / wrong workspace</li>
+      <li>Profile UUID typo or wrong folder</li>
+      <li>Local agent / browser core not running</li>
+      <li>Proxy credentials rejected → profile dies at start</li>
+    </ul>
+
+    <h2>Playwright <code>connectOverCDP</code> fails</h2>
+    <ul>
+      <li>Profile not fully started — wait for debugger port in API response</li>
+      <li>Wrong host (127.0.0.1 vs LAN) when running remote</li>
+      <li>Trying to connect after profile already stopped</li>
+    </ul>
+
+    <h2>401 / unauthorized</h2>
+    <ul>
+      <li>Regenerate automation token</li>
+      <li>Confirm <code>Authorization</code> header style in latest docs</li>
+      <li>Re-run signin flow in Postman</li>
+    </ul>
+
+    <p>Deep dives: <a href="/guides/playwright-mlx/">Playwright guide</a> · <a href="/guides/postman-mlx/">Postman guide</a> · official <a href="https://multilogin.com/help/en_US/getting-started-with-multilogin-x-automation/automation-faq">Automation FAQ</a></p>
+
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_errors">Deal desk</a>
+      <a class="btn ghost" href="https://t.me/antidetect_automation_bot?start=aa_errors">Bot /ask</a>
+    </p>
+    <div class="note">Affiliate disclosure applies. For bot FAQ: <a href="https://t.me/antidetect_automation_bot">Telegram</a> → <code>/ask …</code></div>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>
