@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>antidetect-automation</title>
+  <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
+  <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
+  <link href="https://antidetect-automation.github.io/" />
+  <updated>2026-08-04T00:00:00Z</updated>
+  <id>https://antidetect-automation.github.io/</id>
+  <author><name>antidetect-automation</name></author>
+  <entry>
+    <title>Multilogin coupons SAAS50 / MIN50</title>
+    <link href="https://antidetect-automation.github.io/deal/" />
+    <id>https://antidetect-automation.github.io/deal/</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <summary>Lifetime discount desk for Multilogin Browser and Cloud Phone.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin FAQ</title>
+    <link href="https://antidetect-automation.github.io/faq/" />
+    <id>https://antidetect-automation.github.io/faq/</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <summary>Coupons, Playwright, AdsPower/GoLogin comparisons, disclosure.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin vs AdsPower</title>
+    <link href="https://antidetect-automation.github.io/vs/adspower/" />
+    <id>https://antidetect-automation.github.io/vs/adspower/</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <summary>When premium fingerprints beat budget antidetect browsers.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin vs GoLogin</title>
+    <link href="https://antidetect-automation.github.io/vs/gologin/" />
+    <id>https://antidetect-automation.github.io/vs/gologin/</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <summary>Premium Multilogin X vs value-tier GoLogin.</summary>
+  </entry>
+  <entry>
+    <title>Playwright + Multilogin X</title>
+    <link href="https://antidetect-automation.github.io/guides/playwright-mlx/" />
+    <id>https://antidetect-automation.github.io/guides/playwright-mlx/</id>
+    <updated>2026-08-04T00:00:00Z</updated>
+    <summary>Start profile and attach Playwright over CDP.</summary>
+  </entry>
+</feed>

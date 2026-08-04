@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
+# Prefer indexing money + guide URLs; still allow all
 Sitemap: https://antidetect-automation.github.io/sitemap.xml
-Host: https://antidetect-automation.github.io

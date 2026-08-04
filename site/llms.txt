@@ -1,18 +1,26 @@
 # antidetect-automation
 
-> Multilogin X automation guides, antidetect browser ops, Playwright setups, and a transparent deal desk.
+> Multilogin X automation hub, antidetect comparisons, Playwright guides, and SAAS50/MIN50 deal desk.
 
-## Primary URLs
+## Money & intent pages
+- https://antidetect-automation.github.io/deal/ — Multilogin coupons SAAS50 / MIN50
+- https://antidetect-automation.github.io/faq/ — FAQ (coupons, Playwright, disclosure)
+- https://antidetect-automation.github.io/vs/adspower/ — Multilogin vs AdsPower
+- https://antidetect-automation.github.io/vs/gologin/ — Multilogin vs GoLogin
+- https://antidetect-automation.github.io/guides/playwright-mlx/ — Playwright + Multilogin X
+- https://antidetect-automation.github.io/about/ — About / affiliate disclosure
+
+## Hub & feeds
 - https://antidetect-automation.github.io/
-- https://antidetect-automation.github.io/deal/
-- https://antidetect-automation.github.io/vs/adspower/
-- https://antidetect-automation.github.io/guides/playwright-mlx/
+- https://antidetect-automation.github.io/sitemap.xml
+- https://antidetect-automation.github.io/feed.xml
+- https://antidetect-automation.github.io/robots.txt
+
+## Conversion
 - https://t.me/antidetect_automation_bot
+- Codes: SAAS50 (browser), MIN50 (cloud phone)
+
+## Source
 - https://github.com/antidetect-automation/aff-saas
 
-## Codes
-- SAAS50 — Multilogin Antidetect Browser
-- MIN50 — Multilogin Cloud Phone
-
-## Disclosure
-Affiliate: commission possible via Multilogin codes/links. Not official Multilogin Support.
+Affiliate disclosure: commission possible via Multilogin codes/links. Not official Multilogin Support.

@@ -1,43 +1,30 @@
-# antidetect-automation
+# aff-saas — Multilogin affiliate source
 
-**Primary site (free forever):** [https://antidetect-automation.github.io/](https://antidetect-automation.github.io/)
+**Published site (only):** https://antidetect-automation.github.io/  
+**Telegram:** https://t.me/antidetect_automation_bot · Codes: `SAAS50` / `MIN50`
 
-No Cloudflare Pages / `pages.dev`. Public SEO surface = **GitHub Pages only**.
+Source of truth for site HTML + Cloudflare Telegram Worker. **No pages.dev.**
 
-Telegram deal desk: [@antidetect_automation_bot](https://t.me/antidetect_automation_bot)  
-Codes: `SAAS50` (browser) · `MIN50` (cloud phone)
+### Keyword landing map
+| Intent | Live URL |
+|--------|----------|
+| multilogin coupon / discount | https://antidetect-automation.github.io/deal/ |
+| multilogin FAQ | https://antidetect-automation.github.io/faq/ |
+| multilogin vs adspower | https://antidetect-automation.github.io/vs/adspower/ |
+| multilogin vs gologin | https://antidetect-automation.github.io/vs/gologin/ |
+| multilogin playwright | https://antidetect-automation.github.io/guides/playwright-mlx/ |
+| about / disclosure | https://antidetect-automation.github.io/about/ |
 
----
-
-### Hub map
-| Page | URL |
-|------|-----|
-| Home | https://antidetect-automation.github.io/ |
-| Deal / coupons | https://antidetect-automation.github.io/deal/ |
-| Multilogin vs AdsPower | https://antidetect-automation.github.io/vs/adspower/ |
-| Playwright + MLX | https://antidetect-automation.github.io/guides/playwright-mlx/ |
-| Sitemap | https://antidetect-automation.github.io/sitemap.xml |
-| llms.txt | https://antidetect-automation.github.io/llms.txt |
-
-### Repos (keep 3 — do not merge)
+### Repos (keep 3)
 | Repo | Role |
 |------|------|
-| [antidetect-automation](https://github.com/antidetect-automation/antidetect-automation) | **Profile README** (GitHub profile door) — not the website |
-| [antidetect-automation.github.io](https://github.com/antidetect-automation/antidetect-automation.github.io) | **Published website only** (what Google indexes) |
-| [aff-saas](https://github.com/antidetect-automation/aff-saas) | **Source of truth** — `site/` + `worker-bot/` + drafts |
+| [antidetect-automation](https://github.com/antidetect-automation/antidetect-automation) | Profile README door |
+| [antidetect-automation.github.io](https://github.com/antidetect-automation/antidetect-automation.github.io) | Published website |
+| **aff-saas** (this) | Code + `site/` source |
 
-Full rationale: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+### Stack (free)
+GitHub Pages · CF Workers webhook · KV · D1 · Workers AI (`/ask`)
 
-### Stack (100% free tier)
-- **GitHub Pages** — sole public website (`antidetect-automation.github.io`)
-- **Cloudflare Workers** — Telegram webhook (realtime) + cron fallback
-- **KV + D1** — attribution / lead log
-- **Workers AI** — bot `/ask` FAQ
-- **GitHub Actions draft** — optional sync `site/` → github.io  
+Docs: [ARCHITECTURE](docs/ARCHITECTURE.md) · [SEO](docs/SEO.md)
 
-### Affiliate disclosure
-We may earn a commission if you buy Multilogin via our codes/links. Not Multilogin Support.
-
-```text
-Google / GitHub → antidetect-automation.github.io → t.me/antidetect_automation_bot → SAAS50|MIN50
-```
+**Affiliate disclosure:** commission possible via Multilogin codes/links. Not Multilogin Support.
