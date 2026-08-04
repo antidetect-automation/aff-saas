@@ -27,9 +27,11 @@ Codes: `SAAS50` (browser) · `MIN50` (cloud phone)
 | [antidetect-automation](https://github.com/antidetect-automation/antidetect-automation) | Profile README |
 
 ### Stack (100% free tier)
-- **GitHub Pages** — sole public website  
-- **Cloudflare Worker cron** — Telegram bot long-poll (not a public site)  
-- **GitHub Actions** — optional sync `site/` → github.io  
+- **GitHub Pages** — sole public website (`antidetect-automation.github.io`)
+- **Cloudflare Workers** — Telegram webhook (realtime) + cron fallback
+- **KV + D1** — attribution / lead log
+- **Workers AI** — bot `/ask` FAQ
+- **GitHub Actions draft** — optional sync `site/` → github.io  
 
 ### Affiliate disclosure
 We may earn a commission if you buy Multilogin via our codes/links. Not Multilogin Support.
