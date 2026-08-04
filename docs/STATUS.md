@@ -1,15 +1,17 @@
 # Project status
 
-Updated: 2026-08-04 (v0.8.0 — pricing + world compares)
+Updated: 2026-08-04 (editorial quality pass)
 
-## v0.8.0
-- Multilogin pricing page: Free 5 / Pro ≈$7.08/mo yr / Business
-- Deal + FAQ + home + glossary reframed around cheap entry + SAAS50
-- World compare hub scorecard + BitBrowser, Kameleo, VMLogin, Vision, Blink
-- AdsPower deep rewrite; other vs pages get 2026 price reality blocks
-- Bot: `/pricing`, denser `/compare`, Free/Pro messaging
+## Focus now
+Writing quality for ranking — human voice on money + compare pages, fewer template “AI” patterns.
+
+## Rewritten this pass
+- `/pricing/`, `/deal/`, `/faq/`, hub lede
+- `/vs/` hub (no star chart)
+- Deep essays: AdsPower, GoLogin, Octo, BitBrowser
+- Playwright guide opener + long-form CSS
 
 ## Manual remaining
-1. Publish Dev.to/Hashnode from `content/`
+1. Publish `content/` drafts with the same voice
 2. BotFather `/setuserpic`
-3. Google Search Console verify (meta already live) + sitemap submit
+3. GSC verify + sitemap submit

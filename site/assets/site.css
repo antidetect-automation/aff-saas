@@ -45,6 +45,37 @@ nav a:hover { color: var(--ink); }
   padding: 2.5rem 5vw;
   max-width: 920px;
 }
+article.long {
+  max-width: 42rem;
+}
+article.long p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin: 0 0 1.1rem;
+}
+article.long p.lede {
+  color: var(--muted);
+  font-size: 1.2rem;
+  line-height: 1.55;
+}
+article.long h2 {
+  margin-top: 2.25rem;
+}
+article.long h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 1.75rem 0 0.65rem;
+  color: var(--ink);
+}
+article.long li {
+  color: var(--muted);
+  margin-bottom: 0.4rem;
+}
+article.long strong {
+  color: var(--ink);
+  font-weight: 600;
+}
 .hero { padding-top: 4.5rem; padding-bottom: 2rem; }
 .eyebrow {
   text-transform: uppercase;

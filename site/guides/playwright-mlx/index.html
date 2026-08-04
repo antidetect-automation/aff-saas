@@ -19,16 +19,6 @@
   <meta name="twitter:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "TechArticle",
-    "headline": "Playwright + Multilogin X starter guide",
-    "description": "Start a Multilogin X profile and attach Playwright over CDP",
-    "url": "https://antidetect-automation.github.io/guides/playwright-mlx/",
-    "author": { "@type": "Organization", "name": "antidetect-automation" }
-  }
-  </script>
 </head>
 <body>
   <header class="top">
@@ -40,10 +30,14 @@
     </nav>
   </header>
 
-  <article>
+  <article class="long">
     <p class="eyebrow">Guide</p>
     <h1>Playwright + Multilogin X</h1>
-    <p class="lede">Pattern: authenticate to Multilogin X API → start profile → connect Playwright to the profile’s CDP endpoint → automate → stop profile.</p>
+    <p class="lede">You start a Multilogin profile through the API, grab the debugger endpoint, then hand that to Playwright. Most “it doesn’t connect” nights are timing or the wrong URL shape — not fingerprints.</p>
+
+    <p>Official routes and payloads move. Treat Multilogin’s current Postman docs as source of truth; this page is the pattern we use when teaching the flow.</p>
+
+    <p><strong>Plan note:</strong> Free Multilogin has no API. You want Pro or higher before this guide is useful. Pricing context: <a href="/pricing/">/pricing/</a>.</p>
 
     <h2>Prerequisites</h2>
     <ul>
