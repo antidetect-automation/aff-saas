@@ -1,0 +1,4 @@
+/* https://antidetect-automation.github.io/.well-known/security.txt */
+Contact: https://github.com/antidetect-automation/aff-saas/issues
+Preferred-Languages: en
+Canonical: https://antidetect-automation.github.io/.well-known/security.txt

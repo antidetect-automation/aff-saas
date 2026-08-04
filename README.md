@@ -1,34 +1,39 @@
 # antidetect-automation
 
-English Multilogin affiliate growth system:
+**Primary site (free forever):** [https://antidetect-automation.github.io/](https://antidetect-automation.github.io/)
 
-- **Hub (CTA home):** https://antidetect-automation.github.io
-- **Telegram bot:** https://t.me/antidetect_automation_bot
-- **Codes:** `SAAS50` (browser) · `MIN50` (cloud phone)
-- **Bot runtime:** Cloudflare Worker (`worker-bot/`) with **cron long-poll** (`* * * * *`) — webhook paused because this CF account’s `workers.dev` inbound TLS was failing at launch
-- **Source monorepo:** https://github.com/antidetect-automation/aff-saas
-- **Cloudflare account:** `vuonglecrown@gmail.com` (Workers + KV `LEADS`)
+No Cloudflare Pages / `pages.dev`. Public SEO surface = **GitHub Pages only**.
 
-## Deep-link map (`start=`)
+Telegram deal desk: [@antidetect_automation_bot](https://t.me/antidetect_automation_bot)  
+Codes: `SAAS50` (browser) · `MIN50` (cloud phone)
 
-| Source | Link |
-|--------|------|
-| Hub home | `https://t.me/antidetect_automation_bot?start=aa_home` |
-| Deal page | `...?start=aa_deal` |
-| vs AdsPower | `...?start=aa_vs_adspower` |
-| Playwright guide | `...?start=aa_playwright` |
-| Dev.to deal article | `...?start=devto_deal` |
+---
 
-## Layout
+### Hub map
+| Page | URL |
+|------|-----|
+| Home | https://antidetect-automation.github.io/ |
+| Deal / coupons | https://antidetect-automation.github.io/deal/ |
+| Multilogin vs AdsPower | https://antidetect-automation.github.io/vs/adspower/ |
+| Playwright + MLX | https://antidetect-automation.github.io/guides/playwright-mlx/ |
+| Sitemap | https://antidetect-automation.github.io/sitemap.xml |
+| llms.txt | https://antidetect-automation.github.io/llms.txt |
 
-- `site/` — GitHub Pages source (publish to `antidetect-automation.github.io`)
-- `worker-bot/` — Telegram webhook worker
-- `content/` — syndication drafts (Dev.to / Hashnode)
+### Repos
+| Repo | Role |
+|------|------|
+| [antidetect-automation.github.io](https://github.com/antidetect-automation/antidetect-automation.github.io) | **Live site** (GitHub Pages) |
+| [aff-saas](https://github.com/antidetect-automation/aff-saas) | Source monorepo (site + Telegram Worker) |
+| [antidetect-automation](https://github.com/antidetect-automation/antidetect-automation) | Profile README |
 
-## Affiliate disclosure
+### Stack (100% free tier)
+- **GitHub Pages** — sole public website  
+- **Cloudflare Worker cron** — Telegram bot long-poll (not a public site)  
+- **GitHub Actions** — optional sync `site/` → github.io  
 
-Pages and bot state that we may earn a commission. Not official Multilogin Support.
+### Affiliate disclosure
+We may earn a commission if you buy Multilogin via our codes/links. Not Multilogin Support.
 
-## Deploy notes
-
-See `worker-bot/README.md` and hub repo Actions.
+```text
+Google / GitHub → antidetect-automation.github.io → t.me/antidetect_automation_bot → SAAS50|MIN50
+```

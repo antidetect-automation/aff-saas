@@ -1,0 +1,47 @@
+name: Deploy site to GitHub Pages hub
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "site/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish site/ to antidetect-automation.github.io
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -rf /tmp/gh-pages-deploy
+          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/antidetect-automation/antidetect-automation.github.io.git" /tmp/gh-pages-deploy
+          # Note: default GITHUB_TOKEN cannot push to another repo.
+          # Use repository secret PAGES_PUSH_TOKEN (classic PAT / fine-grained) on aff-saas for cross-repo deploy.
+          echo "If this job fails auth, set secret PAGES_PUSH_TOKEN on aff-saas with repo scope to github.io."
+      - name: Deploy with PAGES_PUSH_TOKEN
+        env:
+          PAGES_PUSH_TOKEN: ${{ secrets.PAGES_PUSH_TOKEN }}
+        if: ${{ env.PAGES_PUSH_TOKEN != '' }}
+        run: |
+          set -euo pipefail
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -rf /tmp/gh-pages-deploy
+          git clone --depth 1 "https://x-access-token:${PAGES_PUSH_TOKEN}@github.com/antidetect-automation/antidetect-automation.github.io.git" /tmp/gh-pages-deploy
+          find /tmp/gh-pages-deploy -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cp -R site/. /tmp/gh-pages-deploy/
+          cd /tmp/gh-pages-deploy
+          git add -A
+          git diff --cached --quiet && echo "No site changes" && exit 0
+          git commit -m "Sync hub from aff-saas"
+          git push origin HEAD:main

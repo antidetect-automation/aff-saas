@@ -1,0 +1,18 @@
+# antidetect-automation
+
+> Multilogin X automation guides, antidetect browser ops, Playwright setups, and a transparent deal desk.
+
+## Primary URLs
+- https://antidetect-automation.github.io/
+- https://antidetect-automation.github.io/deal/
+- https://antidetect-automation.github.io/vs/adspower/
+- https://antidetect-automation.github.io/guides/playwright-mlx/
+- https://t.me/antidetect_automation_bot
+- https://github.com/antidetect-automation/aff-saas
+
+## Codes
+- SAAS50 — Multilogin Antidetect Browser
+- MIN50 — Multilogin Cloud Phone
+
+## Disclosure
+Affiliate: commission possible via Multilogin codes/links. Not official Multilogin Support.

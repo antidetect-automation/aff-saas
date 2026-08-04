@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://antidetect-automation.github.io/sitemap.xml
+Host: https://antidetect-automation.github.io
