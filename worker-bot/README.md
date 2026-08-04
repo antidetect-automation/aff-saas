@@ -1,12 +1,18 @@
-# aa-telegram-bot
+# aa-telegram-bot (Cloudflare free max)
 
-Telegram runtime for `@antidetect_automation_bot`.
+Public site: https://antidetect-automation.github.io/ only.
 
-**Public website is only** https://antidetect-automation.github.io/  
-(No Cloudflare Pages / `pages.dev`.)
+## Live stack
+- Worker + `workers.dev` **webhook** (realtime)
+- Cron every minute as **fallback poll** if webhook mode off
+- KV counters + D1 `aa-leads` lead log
+- Workers AI for `/ask`
+- Secrets: `BOT_TOKEN`, `WEBHOOK_SECRET`, `STATS_KEY`
 
-Worker uses **cron long-poll** (`* * * * *`) because this account’s `*.workers.dev` inbound TLS failed for Telegram webhooks.
+Webhook: `https://aa-telegram-bot.antidetect-automation.workers.dev/webhook`
 
-```bash
-cd worker-bot && npx wrangler deploy
-```
+## Stats
+`GET /stats?key=$STATS_KEY`
+
+## BotFather manual
+See [BOTFATHER_MANUAL.md](./BOTFATHER_MANUAL.md)

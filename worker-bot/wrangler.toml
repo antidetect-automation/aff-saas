@@ -4,10 +4,18 @@ compatibility_date = "2026-07-01"
 workers_dev = true
 account_id = "44bc4c025421375e599a08b06cce356a"
 
+[triggers]
+crons = ["* * * * *"]
+
 [[kv_namespaces]]
 binding = "LEADS"
 id = "e52151440e8f46818392747fe24b0224"
 preview_id = "7961d16c73f7424f8062c73efea2b33b"
 
-[triggers]
-crons = ["* * * * *"]
+[[d1_databases]]
+binding = "DB"
+database_name = "aa-leads"
+database_id = "ca12dbf0-8354-41a3-91ac-862eae3770bb"
+
+[ai]
+binding = "AI"

@@ -3,103 +3,238 @@ const BOT_PUBLIC = "https://t.me/antidetect_automation_bot";
 const DISCLOSURE =
   "Affiliate disclosure: if you buy Multilogin with our codes/links, we may earn a commission. We are not Multilogin Support.";
 
-function tgApi(token, method, body) {
-  const url = `https://api.telegram.org/bot${token}/${method}`;
-  if (body === undefined) return fetch(url);
-  return fetch(url, {
+const LINKS = {
+  deal: `${HUB}/deal/`,
+  compare: `${HUB}/vs/adspower/`,
+  guide: `${HUB}/guides/playwright-mlx/`,
+  sitemap: `${HUB}/sitemap.xml`,
+};
+
+async function tg(env, method, body) {
+  return fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/${method}`, {
     method: "POST",
     headers: { "content-type": "application/json" },
     body: JSON.stringify(body),
-  });
+  }).then((r) => r.json());
 }
 
-async function track(env, source, event, extra = {}) {
-  if (!env.LEADS) return;
+async function track(env, row) {
   const day = new Date().toISOString().slice(0, 10);
-  const key = `src:${source || "unknown"}:${day}`;
-  const raw = (await env.LEADS.get(key)) || "0";
-  await env.LEADS.put(key, String((Number(raw) || 0) + 1));
-  await env.LEADS.put(
-    `evt:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`,
-    JSON.stringify({ t: Date.now(), source, event, ...extra }),
-    { expirationTtl: 60 * 60 * 24 * 90 }
-  );
+  const source = (row.source || "unknown").slice(0, 64);
+  try {
+    if (env.LEADS) {
+      const key = `src:${source}:${day}`;
+      const n = Number((await env.LEADS.get(key)) || "0") || 0;
+      await env.LEADS.put(key, String(n + 1));
+    }
+  } catch (e) {
+    console.error("kv track", e);
+  }
+  try {
+    if (env.DB) {
+      await env.DB.prepare(
+        `INSERT INTO leads (tg_user_id, tg_username, chat_id, source, event, intent)
+         VALUES (?, ?, ?, ?, ?, ?)`
+      )
+        .bind(
+          row.tg_user_id ?? null,
+          row.tg_username ?? null,
+          row.chat_id ?? null,
+          source,
+          row.event || "event",
+          row.intent ?? null
+        )
+        .run();
+    }
+  } catch (e) {
+    console.error("d1 track", e);
+  }
 }
 
-function intentKeyboard() {
+function mainKeyboard() {
   return {
     inline_keyboard: [
       [
         { text: "Browser → SAAS50", callback_data: "intent:browser" },
         { text: "Cloud Phone → MIN50", callback_data: "intent:phone" },
       ],
-      [{ text: "Open hub", url: HUB }],
+      [
+        { text: "Deal page", url: LINKS.deal },
+        { text: "Playwright guide", url: LINKS.guide },
+      ],
+      [{ text: "vs AdsPower", url: LINKS.compare }],
     ],
   };
 }
 
-async function sendWelcome(env, chatId, source) {
-  const src = (source || "direct").slice(0, 64);
-  await track(env, src, "start", { chatId });
-  await tgApi(env.BOT_TOKEN, "sendMessage", {
+async function sendWelcome(env, chatId, source, from) {
+  await track(env, {
+    chat_id: chatId,
+    tg_user_id: from?.id,
+    tg_username: from?.username,
+    source,
+    event: "start",
+  });
+  await tg(env, "sendMessage", {
     chat_id: chatId,
     text: [
-      "Welcome to antidetect-automation.",
+      "Welcome to *antidetect-automation*.",
       "",
       DISCLOSURE,
       "",
-      "What do you need?",
-      "• Browser profiles / Playwright / ads / scraping → SAAS50",
-      "• Android cloud phone workflows → MIN50",
+      "Pick your product:",
+      "• *Browser* / Playwright / ads → `SAAS50`",
+      "• *Cloud Phone* / Android apps → `MIN50`",
       "",
-      `Source: ${src}`,
+      `Source tag: \`${(source || "direct").slice(0, 64)}\``,
       `Hub: ${HUB}`,
     ].join("\n"),
-    reply_markup: intentKeyboard(),
+    parse_mode: "Markdown",
+    reply_markup: mainKeyboard(),
     disable_web_page_preview: true,
   });
 }
 
-async function sendDeal(env, chatId, intent, source) {
+async function sendDeal(env, chatId, intent, source, from) {
   const browser = intent === "browser" || intent === "saas50";
   const code = browser ? "SAAS50" : "MIN50";
   const product = browser
-    ? "Multilogin Antidetect Browser (50% lifetime)"
-    : "Multilogin Cloud Phone (50% lifetime)";
-  await track(env, source || "callback", "deal", { intent: code, chatId });
-  await tgApi(env.BOT_TOKEN, "sendMessage", {
+    ? "Multilogin Antidetect Browser — 50% lifetime"
+    : "Multilogin Cloud Phone — 50% lifetime";
+  await track(env, {
+    chat_id: chatId,
+    tg_user_id: from?.id,
+    tg_username: from?.username,
+    source: source || "callback",
+    event: "deal",
+    intent: code,
+  });
+  await tg(env, "sendMessage", {
     chat_id: chatId,
     text: [
-      `Your code: ${code}`,
+      `Your code: *${code}*`,
       product,
       "",
-      "Apply it on Multilogin’s official checkout.",
-      "Then assign proxies carefully and warm profiles before scale.",
+      "1. Open Multilogin’s official checkout",
+      "2. Apply the code",
+      "3. Assign proxies carefully, then warm before scale",
       "",
       DISCLOSURE,
       "",
-      `Guides: ${HUB}/guides/playwright-mlx/`,
-      `Deal page: ${HUB}/deal/`,
+      `Deal: ${LINKS.deal}`,
+      `Guide: ${LINKS.guide}`,
     ].join("\n"),
+    parse_mode: "Markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Hub", url: HUB }],
-        [{ text: "Deal page", url: `${HUB}/deal/` }],
+        [
+          { text: "Open hub", url: HUB },
+          { text: "Deal page", url: LINKS.deal },
+        ],
       ],
     },
     disable_web_page_preview: true,
   });
 }
 
+async function sendHelp(env, chatId) {
+  await tg(env, "sendMessage", {
+    chat_id: chatId,
+    text: [
+      "*Commands*",
+      "/start — choose Browser or Cloud Phone",
+      "/deal — same as start (deal desk)",
+      "/saas50 — browser code",
+      "/min50 — cloud phone code",
+      "/guide — Playwright + Multilogin X",
+      "/compare — Multilogin vs AdsPower",
+      "/ask <question> — short FAQ (Workers AI)",
+      "/help — this message",
+      "",
+      `Bot: ${BOT_PUBLIC}`,
+      `Site: ${HUB}`,
+    ].join("\n"),
+    parse_mode: "Markdown",
+    reply_markup: mainKeyboard(),
+    disable_web_page_preview: true,
+  });
+}
+
+async function sendLink(env, chatId, label, url) {
+  await tg(env, "sendMessage", {
+    chat_id: chatId,
+    text: `${label}\n${url}`,
+    reply_markup: {
+      inline_keyboard: [[{ text: "Open", url }]],
+    },
+    disable_web_page_preview: false,
+  });
+}
+
+async function askAI(env, chatId, question) {
+  if (!env.AI) {
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: `AI FAQ unavailable. See hub: ${HUB}`,
+    });
+    return;
+  }
+  const prompt = [
+    "You are the antidetect-automation Telegram assistant.",
+    "Answer briefly in English (max 120 words).",
+    "Topics: Multilogin X, Playwright CDP, SAAS50/MIN50 coupons, antidetect ops.",
+    "Always mention affiliate disclosure in one short clause if recommending purchase.",
+    "Never claim undetectable / never-ban.",
+    "If off-topic, point to the hub.",
+    `Hub: ${HUB}`,
+    `User question: ${question}`,
+  ].join("\n");
+
+  try {
+    const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+      messages: [
+        { role: "system", content: "Helpful, concise Multilogin ops assistant." },
+        { role: "user", content: prompt },
+      ],
+      max_tokens: 220,
+    });
+    const text =
+      (typeof result === "string" ? result : result?.response || "") ||
+      `See ${HUB}`;
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: text.slice(0, 3500),
+      reply_markup: mainKeyboard(),
+      disable_web_page_preview: true,
+    });
+    await track(env, {
+      chat_id: chatId,
+      source: "ask",
+      event: "ask",
+      intent: question.slice(0, 80),
+    });
+  } catch (e) {
+    console.error("ai", e);
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: `AI busy. Read the guide instead: ${LINKS.guide}`,
+    });
+  }
+}
+
 async function handleUpdate(env, update) {
   if (update.callback_query) {
     const cq = update.callback_query;
     const chatId = cq.message?.chat?.id;
-    await tgApi(env.BOT_TOKEN, "answerCallbackQuery", {
-      callback_query_id: cq.id,
-    });
+    await tg(env, "answerCallbackQuery", { callback_query_id: cq.id });
     if ((cq.data || "").startsWith("intent:") && chatId) {
-      await sendDeal(env, chatId, cq.data.split(":")[1], "callback");
+      await sendDeal(
+        env,
+        chatId,
+        cq.data.split(":")[1],
+        "callback",
+        cq.from
+      );
     }
     return;
   }
@@ -108,59 +243,85 @@ async function handleUpdate(env, update) {
   if (!msg?.chat?.id) return;
   const chatId = msg.chat.id;
   const text = (msg.text || "").trim();
+  const from = msg.from;
 
   if (text.startsWith("/start")) {
-    await sendWelcome(env, chatId, text.split(/\s+/)[1] || "direct");
+    await sendWelcome(env, chatId, text.split(/\s+/)[1] || "direct", from);
     return;
   }
-  if (text === "/deal" || text === "/codes") {
-    await sendWelcome(env, chatId, "cmd_deal");
+  if (text.startsWith("/deal") || text.startsWith("/codes")) {
+    await sendWelcome(env, chatId, "cmd_deal", from);
     return;
   }
-  if (text === "/help") {
-    await tgApi(env.BOT_TOKEN, "sendMessage", {
-      chat_id: chatId,
-      text: [
-        "Commands: /start /deal /help",
-        `Bot: ${BOT_PUBLIC}`,
-        `Hub: ${HUB}`,
-      ].join("\n"),
-    });
+  if (text.startsWith("/saas50")) {
+    await sendDeal(env, chatId, "browser", "cmd_saas50", from);
     return;
   }
-  await tgApi(env.BOT_TOKEN, "sendMessage", {
-    chat_id: chatId,
-    text: "Send /start to pick SAAS50 (browser) or MIN50 (cloud phone).",
-    reply_markup: intentKeyboard(),
-  });
+  if (text.startsWith("/min50")) {
+    await sendDeal(env, chatId, "phone", "cmd_min50", from);
+    return;
+  }
+  if (text.startsWith("/guide") || text.startsWith("/playwright")) {
+    await sendLink(env, chatId, "Playwright + Multilogin X guide:", LINKS.guide);
+    return;
+  }
+  if (text.startsWith("/compare") || text.startsWith("/vs")) {
+    await sendLink(env, chatId, "Multilogin vs AdsPower:", LINKS.compare);
+    return;
+  }
+  if (text.startsWith("/ask")) {
+    const q = text.replace(/^\/ask(@\w+)?\s*/i, "").trim();
+    if (!q) {
+      await tg(env, "sendMessage", {
+        chat_id: chatId,
+        text: "Usage: `/ask how do I attach Playwright to Multilogin X?`",
+        parse_mode: "Markdown",
+      });
+      return;
+    }
+    await askAI(env, chatId, q);
+    return;
+  }
+  if (text.startsWith("/help")) {
+    await sendHelp(env, chatId);
+    return;
+  }
+
+  // Free-text → light AI if short, else redirect
+  if (text && !text.startsWith("/")) {
+    if (text.length < 180) {
+      await askAI(env, chatId, text);
+    } else {
+      await sendHelp(env, chatId);
+    }
+  }
 }
 
 async function pollTelegram(env) {
-  if (!env.BOT_TOKEN) {
-    console.error("BOT_TOKEN missing");
-    return { ok: false, error: "no token" };
-  }
-  const offsetRaw = (await env.LEADS.get("tg:offset")) || "0";
-  const offset = Number(offsetRaw) || 0;
+  if (!env.BOT_TOKEN || !env.LEADS) return { ok: false };
+  // Skip poll if webhook mode is healthy
+  const mode = (await env.LEADS.get("mode")) || "webhook";
+  if (mode === "webhook") return { ok: true, skipped: "webhook" };
+
+  const offset = Number((await env.LEADS.get("tg:offset")) || "0") || 0;
   const res = await fetch(
-    `https://api.telegram.org/bot${env.BOT_TOKEN}/getUpdates?timeout=0&offset=${offset}&allowed_updates=${encodeURIComponent('["message","callback_query"]')}`
+    `https://api.telegram.org/bot${env.BOT_TOKEN}/getUpdates?timeout=0&offset=${offset}&allowed_updates=${encodeURIComponent(
+      '["message","callback_query"]'
+    )}`
   );
   const data = await res.json();
-  if (!data.ok) {
-    console.error("getUpdates failed", data);
-    return data;
-  }
+  if (!data.ok) return data;
   let next = offset;
   for (const update of data.result || []) {
     next = update.update_id + 1;
     try {
       await handleUpdate(env, update);
-    } catch (err) {
-      console.error("handleUpdate", err);
+    } catch (e) {
+      console.error(e);
     }
   }
   if (next !== offset) await env.LEADS.put("tg:offset", String(next));
-  return { ok: true, processed: (data.result || []).length, next };
+  return { ok: true, processed: (data.result || []).length };
 }
 
 export default {
@@ -170,25 +331,57 @@ export default {
 
   async fetch(request, env) {
     const url = new URL(request.url);
-    // Manual kick (for testing) — does not require public TLS from Telegram
-    if (url.pathname === "/poll") {
-      const key = url.searchParams.get("key");
-      if (env.STATS_KEY && key !== env.STATS_KEY) {
-        return new Response("unauthorized", { status: 401 });
-      }
-      const result = await pollTelegram(env);
-      return Response.json(result);
-    }
+
     if (url.pathname === "/health") {
       return Response.json({
         ok: true,
-        mode: "cron-poll",
         hub: HUB,
         bot: BOT_PUBLIC,
+        features: ["webhook", "cron-fallback", "d1", "kv", "workers-ai"],
       });
     }
+
+    if (url.pathname === "/stats") {
+      const key = url.searchParams.get("key");
+      if (!env.STATS_KEY || key !== env.STATS_KEY) {
+        return new Response("unauthorized", { status: 401 });
+      }
+      let recent = [];
+      try {
+        if (env.DB) {
+          const r = await env.DB.prepare(
+            `SELECT source, event, intent, created_at FROM leads ORDER BY id DESC LIMIT 30`
+          ).all();
+          recent = r.results || [];
+        }
+      } catch (e) {
+        recent = [{ error: String(e) }];
+      }
+      return Response.json({ ok: true, recent });
+    }
+
+    if (request.method === "POST" && url.pathname === "/webhook") {
+      const secret = request.headers.get("x-telegram-bot-api-secret-token");
+      if (env.WEBHOOK_SECRET && secret !== env.WEBHOOK_SECRET) {
+        return new Response("forbidden", { status: 403 });
+      }
+      let update;
+      try {
+        update = await request.json();
+      } catch {
+        return new Response("bad json", { status: 400 });
+      }
+      try {
+        if (env.LEADS) await env.LEADS.put("mode", "webhook");
+        await handleUpdate(env, update);
+      } catch (e) {
+        console.error(e);
+      }
+      return new Response("ok");
+    }
+
     return new Response(
-      "antidetect-automation bot (cron long-poll)\nHub: " + HUB + "\n",
+      `aa-telegram-bot\nHub: ${HUB}\nPOST /webhook | GET /health | GET /stats?key=\n`,
       { headers: { "content-type": "text/plain" } }
     );
   },
