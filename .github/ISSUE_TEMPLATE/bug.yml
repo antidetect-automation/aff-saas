@@ -1,0 +1,17 @@
+name: Bug report
+description: Report a docs/tools/bot issue
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Steps, expected vs actual. Do not paste tokens or passwords.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Related URL
+      placeholder: https://antidetect-automation.github.io/...

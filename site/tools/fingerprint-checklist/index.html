@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fingerprint checklist — quick antidetect sanity tool</title>
+  <meta name="description" content="Client-side fingerprint checklist: timezone, language, platform, WebGL hints. Use inside Multilogin profiles." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/tools/fingerprint-checklist/" />
+  <meta property="og:title" content="Fingerprint checklist" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/tools/fingerprint-checklist/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/tools/">Tools</a>
+      <a href="/tools/fingerprint-checklist/">Checklist</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Free tool</p>
+    <h1>Fingerprint checklist</h1>
+    <p class="lede">Snapshot common signals. Compare host vs Multilogin profile. Not a ban oracle.</p>
+    <div class="note" id="out">Click run.</div>
+    <p class="cta-row">
+      <button class="btn primary" id="run" type="button">Run checklist</button>
+      <a class="btn ghost" href="/tools/webgl-check/">WebGL detail</a>
+      <a class="btn ghost" href="https://t.me/antidetect_automation_bot?start=aa_fpcheck">Deal</a>
+    </p>
+    <h2>Ops tips</h2>
+    <ul>
+      <li>Timezone/language should match proxy geo story</li>
+      <li>Platform string shouldn’t contradict OS spoof settings</li>
+      <li>Re-check after every major profile template change</li>
+    </ul>
+  </article>
+  <footer class="foot"><p><a href="/tools/">← Tools</a></p></footer>
+  <script>
+    document.getElementById('run').onclick = function () {
+      var s = [];
+      s.push('UA: ' + navigator.userAgent);
+      s.push('Language: ' + navigator.language + ' | languages=' + (navigator.languages || []).join(','));
+      s.push('Timezone: ' + Intl.DateTimeFormat().resolvedOptions().timeZone);
+      s.push('Platform: ' + navigator.platform);
+      s.push('Hardware concurrency: ' + (navigator.hardwareConcurrency || '?'));
+      s.push('Device memory: ' + (navigator.deviceMemory || '?'));
+      s.push('Max touch points: ' + (navigator.maxTouchPoints || 0));
+      s.push('Cookie enabled: ' + navigator.cookieEnabled);
+      s.push('Screen: ' + screen.width + 'x' + screen.height + ' @' + (window.devicePixelRatio || 1));
+      s.push('Online: ' + navigator.onLine);
+      document.getElementById('out').innerHTML = '<pre style="white-space:pre-wrap;margin:0">' +
+        s.map(function (x) { return x.replace(/[<>&]/g, function (c) { return ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]); }); }).join('\n') +
+        '</pre>';
+    };
+  </script>
+</body>
+</html>

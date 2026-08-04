@@ -1,0 +1,12 @@
+name: Content / SEO idea
+description: Suggest a guide, compare, or tool page
+title: "[content] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Idea
+      description: Keyword intent + outline. Affiliate-safe (no spam tactics).
+    validations:
+      required: true

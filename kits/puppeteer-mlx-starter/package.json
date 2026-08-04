@@ -1,0 +1,8 @@
+{
+  "name": "puppeteer-mlx-starter",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": { "start": "node index.mjs" },
+  "dependencies": { "puppeteer-core": "^23.0.0" }
+}

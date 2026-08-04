@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cookies &amp; sessions in Multilogin profiles</title>
+  <meta name="description" content="How to think about cookies, sessions, and profile isolation in Multilogin antidetect workflows. Practical ops notes." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/guides/cookies-sessions/" />
+  <meta property="og:title" content="Cookies & sessions in Multilogin" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/guides/cookies-sessions/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/guides/playwright-mlx/">Playwright</a>
+      <a href="/guides/cookies-sessions/">Cookies</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Guide</p>
+    <h1>Cookies &amp; sessions</h1>
+    <p class="lede">Treat each Multilogin profile as one identity store. Mixing warmed cookies across unrelated accounts defeats isolation.</p>
+    <h2>Rules of thumb</h2>
+    <ul>
+      <li>One profile → one long-lived session narrative</li>
+      <li>Export/import cookies only with matching proxy geo + fingerprint era</li>
+      <li>After proxy changes, expect re-auth; don’t force old cookies blindly</li>
+      <li>Automate with Playwright only after manual warm looks normal</li>
+    </ul>
+    <h2>Related</h2>
+    <p><a href="/guides/playwright-mlx/">Playwright + MLX</a> · <a href="/tools/webgl-check/">WebGL check</a> · <a href="/errors/mlx-automation/">API errors</a></p>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_cookies">Deal desk</a>
+    </p>
+    <div class="note">Affiliate disclosure applies.</div>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>

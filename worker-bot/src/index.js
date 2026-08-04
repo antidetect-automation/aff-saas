@@ -8,11 +8,14 @@ const LINKS = {
   compare: `${HUB}/vs/adspower/`,
   gologin: `${HUB}/vs/gologin/`,
   dolphin: `${HUB}/vs/dolphin-anty/`,
+  hidemium: `${HUB}/vs/hidemium/`,
   guide: `${HUB}/guides/playwright-mlx/`,
   postman: `${HUB}/guides/postman-mlx/`,
+  cookies: `${HUB}/guides/cookies-sessions/`,
   tools: `${HUB}/tools/`,
   webgl: `${HUB}/tools/webgl-check/`,
   proxy: `${HUB}/tools/proxy-format/`,
+  fpcheck: `${HUB}/tools/fingerprint-checklist/`,
   errors: `${HUB}/errors/mlx-automation/`,
   faq: `${HUB}/faq/`,
   sitemap: `${HUB}/sitemap.xml`,
@@ -287,13 +290,14 @@ async function handleUpdate(env, update) {
   if (text.startsWith("/tools") || text.startsWith("/webgl") || text.startsWith("/proxy")) {
     await tg(env, "sendMessage", {
       chat_id: chatId,
-      text: `Free tools (client-side):\n• WebGL: ${LINKS.webgl}\n• Proxy format: ${LINKS.proxy}\n• Hub: ${LINKS.tools}`,
+      text: `Free tools (client-side):\n• WebGL: ${LINKS.webgl}\n• Fingerprint checklist: ${LINKS.fpcheck}\n• Proxy format: ${LINKS.proxy}`,
       reply_markup: {
         inline_keyboard: [
           [
             { text: "WebGL", url: LINKS.webgl },
-            { text: "Proxy", url: LINKS.proxy },
+            { text: "Checklist", url: LINKS.fpcheck },
           ],
+          [{ text: "Proxy", url: LINKS.proxy }],
         ],
       },
     });
@@ -308,6 +312,7 @@ async function handleUpdate(env, update) {
           [{ text: "vs AdsPower", url: LINKS.compare }],
           [{ text: "vs GoLogin", url: LINKS.gologin }],
           [{ text: "vs Dolphin Anty", url: LINKS.dolphin }],
+          [{ text: "vs Hidemium", url: LINKS.hidemium }],
         ],
       },
     });

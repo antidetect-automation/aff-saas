@@ -1,28 +1,35 @@
 # antidetect-automation
 
-> Multilogin X hub: deals, tools, guides, use-cases.
-
 ## Money
 - https://antidetect-automation.github.io/deal/
 - https://t.me/antidetect_automation_bot — SAAS50 / MIN50
 
-## Tools (free, client-side)
+## Tools
+- https://antidetect-automation.github.io/tools/
 - https://antidetect-automation.github.io/tools/webgl-check/
+- https://antidetect-automation.github.io/tools/fingerprint-checklist/
 - https://antidetect-automation.github.io/tools/proxy-format/
 
 ## Guides
 - https://antidetect-automation.github.io/guides/playwright-mlx/
 - https://antidetect-automation.github.io/guides/postman-mlx/
+- https://antidetect-automation.github.io/guides/cookies-sessions/
+- https://antidetect-automation.github.io/errors/mlx-automation/
 - https://antidetect-automation.github.io/faq/
 
-## Compare / use-cases
+## Compare
 - https://antidetect-automation.github.io/vs/adspower/
 - https://antidetect-automation.github.io/vs/gologin/
+- https://antidetect-automation.github.io/vs/dolphin-anty/
+- https://antidetect-automation.github.io/vs/hidemium/
+
+## Use-cases
 - https://antidetect-automation.github.io/use-cases/ads-multi-account/
 - https://antidetect-automation.github.io/use-cases/ecommerce-warmup/
+- https://antidetect-automation.github.io/use-cases/cloud-phone/
 
-## Source / kits
-- https://github.com/antidetect-automation/aff-saas
+## Kits
+- https://github.com/antidetect-automation/playwright-mlx-starter
 - https://github.com/antidetect-automation/aff-saas/tree/main/kits
 
 Affiliate disclosure: commission possible via Multilogin codes. Not official support.
