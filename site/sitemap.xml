@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://antidetect-automation.github.io/</loc><priority>1.0</priority></url>
   <url><loc>https://antidetect-automation.github.io/about/</loc><priority>0.7</priority></url>
-  <url><loc>https://antidetect-automation.github.io/deal/</loc><priority>0.95</priority></url>
-  <url><loc>https://antidetect-automation.github.io/errors/cdp-attach/</loc><priority>0.88</priority></url>
+  <url><loc>https://antidetect-automation.github.io/deal/</loc><priority>0.96</priority></url>
+  <url><loc>https://antidetect-automation.github.io/errors/cdp-attach/</loc><priority>0.90</priority></url>
   <url><loc>https://antidetect-automation.github.io/errors/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/errors/mlx-automation/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/errors/proxy-mlx/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/errors/token-auth/</loc><priority>0.88</priority></url>
-  <url><loc>https://antidetect-automation.github.io/faq/</loc><priority>0.9</priority></url>
+  <url><loc>https://antidetect-automation.github.io/faq/</loc><priority>0.91</priority></url>
   <url><loc>https://antidetect-automation.github.io/glossary/</loc><priority>0.7</priority></url>
   <url><loc>https://antidetect-automation.github.io/guides/api-auth-mlx/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/guides/cookies-sessions/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/guides/</loc><priority>0.88</priority></url>
-  <url><loc>https://antidetect-automation.github.io/guides/playwright-mlx/</loc><priority>0.88</priority></url>
+  <url><loc>https://antidetect-automation.github.io/guides/playwright-mlx/</loc><priority>0.92</priority></url>
   <url><loc>https://antidetect-automation.github.io/guides/postman-mlx/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/guides/profile-warmup/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/guides/puppeteer-mlx/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/guides/selenium-mlx/</loc><priority>0.88</priority></url>
-  <url><loc>https://antidetect-automation.github.io/pricing/</loc><priority>0.95</priority></url>
+  <url><loc>https://antidetect-automation.github.io/pricing/</loc><priority>0.96</priority></url>
   <url><loc>https://antidetect-automation.github.io/start/</loc><priority>0.95</priority></url>
   <url><loc>https://antidetect-automation.github.io/tools/dns-webrtc-check/</loc><priority>0.9</priority></url>
   <url><loc>https://antidetect-automation.github.io/tools/fingerprint-checklist/</loc><priority>0.9</priority></url>
@@ -33,21 +33,21 @@
   <url><loc>https://antidetect-automation.github.io/use-cases/ecommerce-warmup/</loc><priority>0.8</priority></url>
   <url><loc>https://antidetect-automation.github.io/use-cases/scraping-isolation/</loc><priority>0.8</priority></url>
   <url><loc>https://antidetect-automation.github.io/use-cases/social-multi-account/</loc><priority>0.8</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/adspower/</loc><priority>0.92</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/adspower/</loc><priority>0.93</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/bitbrowser/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/blink/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/dolphin-anty/</loc><priority>0.92</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/blink/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/dolphin-anty/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/gologin/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/hidemium/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/incogniton/</loc><priority>0.92</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/hidemium/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/incogniton/</loc><priority>0.55</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/kameleo/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/linken-sphere/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/morelogin/</loc><priority>0.92</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/kameleo/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/linken-sphere/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/morelogin/</loc><priority>0.55</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/octo-browser/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/undetectable/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/vision/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/vmlogin/</loc><priority>0.92</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/undetectable/</loc><priority>0.88</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/vision/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/vmlogin/</loc><priority>0.55</priority></url>
   <url><loc>https://antidetect-automation.github.io/sitemap.xml</loc><priority>0.7</priority></url>
   <url><loc>https://antidetect-automation.github.io/feed.xml</loc><priority>0.7</priority></url>
   <url><loc>https://antidetect-automation.github.io/llms.txt</loc><priority>0.7</priority></url>

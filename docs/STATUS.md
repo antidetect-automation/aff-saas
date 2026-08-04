@@ -1,17 +1,19 @@
 # Project status
 
-Updated: 2026-08-04 (editorial quality pass)
+Updated: 2026-08-04 — **repo freeze + quality SEO**
 
-## Focus now
-Writing quality for ranking — human voice on money + compare pages, fewer template “AI” patterns.
+## Hard lock
+**No new GitHub repositories.** Existing set only (profile, github.io, aff-saas, existing PW/PP kit mirrors). Selenium/Postman stay in `aff-saas/kits/`.
 
-## Rewritten this pass
-- `/pricing/`, `/deal/`, `/faq/`, hub lede
-- `/vs/` hub (no star chart)
-- Deep essays: AdsPower, GoLogin, Octo, BitBrowser
-- Playwright guide opener + long-form CSS
+## Focus
+Topical authority via excellent copy on priority URLs — not inventory growth.
 
-## Manual remaining
-1. Publish `content/` drafts with the same voice
-2. BotFather `/setuserpic`
-3. GSC verify + sitemap submit
+## Recent
+- Architecture / SEO / CONTRIBUTING / Cursor rule: freeze repos, quality-first
+- Essay rewrites: Dolphin Anty, Undetectable, About (E-E-A-T)
+- Prior essays: pricing, deal, FAQ, AdsPower, GoLogin, Octo, BitBrowser
+
+## Owner manual
+1. GSC verify + sitemap submit
+2. Publish ≤3 Dev.to pieces (pricing, AdsPower, Playwright) — stop there at first
+3. BotFather `/setuserpic`

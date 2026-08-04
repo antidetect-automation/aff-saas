@@ -1,0 +1,19 @@
+---
+description: Repo freeze + quality SEO only — no new GitHub repositories
+alwaysApply: true
+---
+
+# antidetect-automation lock
+
+## Never
+- Create new GitHub repositories under this org (public or “for SEO”)
+- Split kits into new repos (Selenium/Postman stay in `aff-saas/kits/`)
+- Add thin doorway `/vs/*` pages that only swap competitor names
+- Use `pages.dev` as a second public brand site
+- Mass DM, fake stars, spam issues/PRs
+
+## Always
+- Work in existing repos only: `aff-saas` (source), `*.github.io` (publish), profile README, existing `playwright-mlx-starter` / `puppeteer-mlx-starter`
+- Prefer rewriting the priority URLs: `/pricing/`, `/deal/`, `/vs/adspower/`, `/guides/playwright-mlx/`, `/errors/cdp-attach/`, `/faq/`
+- Human editorial voice; affiliate disclosure on money pages; no “undetectable” claims
+- See `docs/ARCHITECTURE.md` and `docs/SEO.md`
