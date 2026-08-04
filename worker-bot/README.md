@@ -1,28 +1,23 @@
 # aa-telegram-bot
 
-Cloudflare Worker webhook for `@antidetect_automation_bot`.
+Cloudflare Worker for `@antidetect_automation_bot`.
 
-## Secrets
+## Runtime mode: cron long-poll
 
-```bash
-npx wrangler secret put BOT_TOKEN
-npx wrangler secret put WEBHOOK_SECRET
-npx wrangler secret put STATS_KEY   # optional
-```
+This account’s `*.workers.dev` / `*.pages.dev` inbound TLS was failing (handshake failure) for both local clients and Telegram webhooks. The bot therefore uses:
+
+- **Cron:** `* * * * *` → Worker calls Telegram `getUpdates`
+- **No webhook required**
+
+Secrets (already set on CF): `BOT_TOKEN`, optional `WEBHOOK_SECRET`, `STATS_KEY`.
 
 ## Deploy
 
 ```bash
-npx wrangler kv namespace create LEADS
-npx wrangler kv namespace create LEADS --preview
-# paste ids into wrangler.toml, then:
+cd worker-bot
 npx wrangler deploy
 ```
 
-## Webhook
+## Manual test
 
-```bash
-curl -s "https://api.telegram.org/bot$BOT_TOKEN/setWebhook" \
-  -d "url=https://<worker>.workers.dev/webhook" \
-  -d "secret_token=$WEBHOOK_SECRET"
-```
+Open https://t.me/antidetect_automation_bot?start=aa_home — within ~1 minute cron should answer.
