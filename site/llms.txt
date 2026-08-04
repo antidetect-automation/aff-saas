@@ -1,6 +1,7 @@
 # antidetect-automation
 
-## Money
+## Money / start
+- https://antidetect-automation.github.io/start/
 - https://antidetect-automation.github.io/deal/
 - https://t.me/antidetect_automation_bot — SAAS50 / MIN50
 
@@ -22,14 +23,17 @@
 - https://antidetect-automation.github.io/vs/gologin/
 - https://antidetect-automation.github.io/vs/dolphin-anty/
 - https://antidetect-automation.github.io/vs/hidemium/
+- https://antidetect-automation.github.io/vs/incogniton/
 
 ## Use-cases
 - https://antidetect-automation.github.io/use-cases/ads-multi-account/
 - https://antidetect-automation.github.io/use-cases/ecommerce-warmup/
 - https://antidetect-automation.github.io/use-cases/cloud-phone/
+- https://antidetect-automation.github.io/use-cases/crypto-airdrop/
 
 ## Kits
 - https://github.com/antidetect-automation/playwright-mlx-starter
+- https://github.com/antidetect-automation/puppeteer-mlx-starter
 - https://github.com/antidetect-automation/aff-saas/tree/main/kits
 
 Affiliate disclosure: commission possible via Multilogin codes. Not official support.

@@ -9,15 +9,20 @@ const LINKS = {
   gologin: `${HUB}/vs/gologin/`,
   dolphin: `${HUB}/vs/dolphin-anty/`,
   hidemium: `${HUB}/vs/hidemium/`,
+  incogniton: `${HUB}/vs/incogniton/`,
   guide: `${HUB}/guides/playwright-mlx/`,
   postman: `${HUB}/guides/postman-mlx/`,
   cookies: `${HUB}/guides/cookies-sessions/`,
+  start: `${HUB}/start/`,
   tools: `${HUB}/tools/`,
   webgl: `${HUB}/tools/webgl-check/`,
   proxy: `${HUB}/tools/proxy-format/`,
   fpcheck: `${HUB}/tools/fingerprint-checklist/`,
   errors: `${HUB}/errors/mlx-automation/`,
   faq: `${HUB}/faq/`,
+  kits: `https://github.com/antidetect-automation/aff-saas/tree/main/kits`,
+  kitPw: `https://github.com/antidetect-automation/playwright-mlx-starter`,
+  kitPu: `https://github.com/antidetect-automation/puppeteer-mlx-starter`,
   sitemap: `${HUB}/sitemap.xml`,
 };
 
@@ -163,7 +168,8 @@ async function sendHelp(env, chatId) {
       "/guide — Playwright + Multilogin X",
       "/postman — Postman starter",
       "/tools — WebGL + proxy tools",
-      "/compare — vs AdsPower / GoLogin / Dolphin",
+      "/compare — competitor comparisons",
+      "/kits — Playwright / Puppeteer starters",
       "/errors — automation troubleshooting",
       "/faq — FAQ page",
       "/ask <question> — Workers AI FAQ",
@@ -313,9 +319,29 @@ async function handleUpdate(env, update) {
           [{ text: "vs GoLogin", url: LINKS.gologin }],
           [{ text: "vs Dolphin Anty", url: LINKS.dolphin }],
           [{ text: "vs Hidemium", url: LINKS.hidemium }],
+          [{ text: "vs Incogniton", url: LINKS.incogniton }],
         ],
       },
     });
+    return;
+  }
+  if (text.startsWith("/kits") || text.startsWith("/starter")) {
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: "Open-source starters:",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "Playwright kit", url: LINKS.kitPw }],
+          [{ text: "Puppeteer kit", url: LINKS.kitPu }],
+          [{ text: "All kits (aff-saas)", url: LINKS.kits }],
+          [{ text: "Onboarding", url: LINKS.start }],
+        ],
+      },
+    });
+    return;
+  }
+  if (text.startsWith("/onboarding") || text === "/begin") {
+    await sendLink(env, chatId, "Start here:", LINKS.start);
     return;
   }
   if (text.startsWith("/errors")) {
@@ -352,6 +378,35 @@ async function handleUpdate(env, update) {
       await sendHelp(env, chatId);
     }
   }
+}
+
+async function ensureBotMeta(env) {
+  if (!env.BOT_TOKEN) return { ok: false };
+  const commands = [
+    { command: "start", description: "Welcome + deal desk" },
+    { command: "deal", description: "Coupon page SAAS50 / MIN50" },
+    { command: "saas50", description: "Browser coupon" },
+    { command: "min50", description: "Cloud Phone coupon" },
+    { command: "guide", description: "Playwright + MLX guide" },
+    { command: "postman", description: "Postman kit" },
+    { command: "tools", description: "Free tools" },
+    { command: "compare", description: "Competitor comparisons" },
+    { command: "kits", description: "Playwright / Puppeteer starters" },
+    { command: "onboarding", description: "Start here path" },
+    { command: "errors", description: "Automation troubleshooting" },
+    { command: "faq", description: "FAQ" },
+    { command: "ask", description: "Ask AI FAQ" },
+    { command: "help", description: "Command list" },
+  ];
+  const cmds = await tg(env, "setMyCommands", { commands });
+  const short = await tg(env, "setMyShortDescription", {
+    short_description: "Multilogin guides + SAAS50 / MIN50 deal desk",
+  });
+  const desc = await tg(env, "setMyDescription", {
+    description:
+      "antidetect-automation: guides, kits, and Multilogin coupons SAAS50 (browser) / MIN50 (cloud phone). Affiliate-supported; not official Multilogin Support.",
+  });
+  return { ok: !!(cmds.ok && short.ok && desc.ok), cmds, short, desc };
 }
 
 async function pollTelegram(env) {
@@ -396,6 +451,15 @@ export default {
         bot: BOT_PUBLIC,
         features: ["webhook", "cron-fallback", "d1", "kv", "workers-ai"],
       });
+    }
+
+    if (url.pathname === "/setup-bot") {
+      const key = url.searchParams.get("key");
+      if (!env.STATS_KEY || key !== env.STATS_KEY) {
+        return new Response("unauthorized", { status: 401 });
+      }
+      const meta = await ensureBotMeta(env);
+      return Response.json(meta);
     }
 
     if (url.pathname === "/stats") {

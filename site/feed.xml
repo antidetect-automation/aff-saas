@@ -4,9 +4,30 @@
   <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-04T00:00:00Z</updated>
+  <updated>2026-08-04T18:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
+  <entry>
+    <title>Start here — Multilogin onboarding</title>
+    <link href="https://antidetect-automation.github.io/start/" />
+    <id>https://antidetect-automation.github.io/start/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Onboarding path from hub → bot → SAAS50 / MIN50.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin vs Incogniton</title>
+    <link href="https://antidetect-automation.github.io/vs/incogniton/" />
+    <id>https://antidetect-automation.github.io/vs/incogniton/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Free-profile Incogniton vs Multilogin X automation and Cloud Phone.</summary>
+  </entry>
+  <entry>
+    <title>Crypto / airdrop ops</title>
+    <link href="https://antidetect-automation.github.io/use-cases/crypto-airdrop/" />
+    <id>https://antidetect-automation.github.io/use-cases/crypto-airdrop/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Multi-wallet hygiene with Multilogin profiles — no spam farm advice.</summary>
+  </entry>
   <entry>
     <title>Multilogin coupons SAAS50 / MIN50</title>
     <link href="https://antidetect-automation.github.io/deal/" />
