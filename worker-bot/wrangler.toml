@@ -1,0 +1,13 @@
+name = "aa-telegram-bot"
+main = "src/index.js"
+compatibility_date = "2026-07-01"
+workers_dev = true
+account_id = "44bc4c025421375e599a08b06cce356a"
+
+[[kv_namespaces]]
+binding = "LEADS"
+id = "e52151440e8f46818392747fe24b0224"
+preview_id = "7961d16c73f7424f8062c73efea2b33b"
+
+[triggers]
+crons = ["* * * * *"]

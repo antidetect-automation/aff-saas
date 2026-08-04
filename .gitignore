@@ -1,0 +1,15 @@
+node_modules/
+.wrangler/
+dist/
+.dev.vars
+.env
+.env.*
+!.env.example
+*.pem
+.DS_Store
+.cloudflare/
+wrangler.toml.bak
+
+.dev.vars
+/tmp/
+*.env

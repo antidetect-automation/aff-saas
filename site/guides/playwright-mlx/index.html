@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Playwright + Multilogin X — starter guide</title>
+  <meta name="description" content="Start a Multilogin X profile and attach Playwright over CDP. Practical ops guide with optional deal CTA." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/guides/playwright-mlx/" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/deal/">Deal</a>
+      <a href="/vs/adspower/">vs AdsPower</a>
+      <a href="/guides/playwright-mlx/">Playwright</a>
+    </nav>
+  </header>
+
+  <article>
+    <p class="eyebrow">Guide</p>
+    <h1>Playwright + Multilogin X</h1>
+    <p class="lede">Pattern: authenticate to Multilogin X API → start profile → connect Playwright to the profile’s CDP endpoint → automate → stop profile.</p>
+
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>Multilogin X account + automation token</li>
+      <li>Node.js 18+ and Playwright</li>
+      <li>Proxy assigned to the profile when required by your target</li>
+    </ul>
+
+    <h2>Flow (conceptual)</h2>
+    <pre><code>1. POST /user/signin  (or refresh token flow)
+2. POST start profile by UUID
+3. Read remote debugger / Selenium port from response
+4. playwright.chromium.connectOverCDP(wsOrHttpEndpoint)
+5. Run your script
+6. Stop profile when done</code></pre>
+
+    <p>Exact paths and payloads change with Multilogin’s API revisions — always check their current Postman / docs:</p>
+    <ul>
+      <li><a href="https://multilogin.com/help/en_US/getting-started-with-multilogin-x-automation/multilogin-x-api-beginners-guide">MLX API beginners guide</a></li>
+      <li><a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">Postman collection</a></li>
+    </ul>
+
+    <h2>Ops tips</h2>
+    <ul>
+      <li>One profile ≈ one identity; don’t reuse warmed cookies across unrelated accounts</li>
+      <li>Human-like pacing beats faster scripts on strict sites</li>
+      <li>Log profile UUID + proxy lane for every run</li>
+    </ul>
+
+    <div class="note">
+      Need Multilogin first? Browser automation → <code>SAAS50</code>. Cloud Android workflows → <code>MIN50</code>.
+    </div>
+
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_playwright">Get codes on Telegram</a>
+      <a class="btn ghost" href="/deal/">Deal details</a>
+    </p>
+  </article>
+
+  <footer class="foot">
+    <p><strong>Affiliate disclosure:</strong> We may earn a commission from Multilogin purchases via our codes.</p>
+    <p><a href="/">← Hub</a></p>
+  </footer>
+</body>
+</html>
