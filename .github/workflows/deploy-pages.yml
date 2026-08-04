@@ -1,0 +1,37 @@
+name: Sync site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths: ["site/**", ".github/workflows/deploy-pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Push site/ to antidetect-automation.github.io
+        env:
+          TOKEN: ${{ secrets.PAGES_PUSH_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${TOKEN}" ]; then
+            echo "Set repo secret PAGES_PUSH_TOKEN (classic PAT with repo scope) to enable auto-sync."
+            echo "Manual sync still works from maintainer machine."
+            exit 0
+          fi
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -rf /tmp/gh-pages-deploy
+          git clone --depth 1 "https://x-access-token:${TOKEN}@github.com/antidetect-automation/antidetect-automation.github.io.git" /tmp/gh-pages-deploy
+          find /tmp/gh-pages-deploy -mindepth 1 -maxdepth 1 ! -name '.git' -exec rm -rf {} +
+          cp -R site/. /tmp/gh-pages-deploy/
+          cd /tmp/gh-pages-deploy
+          git add -A
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "chore: sync site from aff-saas"
+          git push origin HEAD:main

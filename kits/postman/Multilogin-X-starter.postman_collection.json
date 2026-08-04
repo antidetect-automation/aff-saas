@@ -1,0 +1,50 @@
+{
+  "info": {
+    "name": "Multilogin X — antidetect-automation starter",
+    "description": "Skeleton Postman collection. Replace requests with current Multilogin X API from official Postman/docs. CTA: https://antidetect-automation.github.io/guides/postman-mlx/",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://api.multilogin.com" },
+    { "key": "token", "value": "" },
+    { "key": "profileId", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "0. README — update paths from official docs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": "https://antidetect-automation.github.io/guides/postman-mlx/"
+      }
+    },
+    {
+      "name": "1. Sign in / refresh (placeholder)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+        },
+        "url": "{{baseUrl}}/user/signin"
+      }
+    },
+    {
+      "name": "2. Start profile (placeholder)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/profile/start?profileId={{profileId}}"
+      }
+    },
+    {
+      "name": "3. Stop profile (placeholder)",
+      "request": {
+        "method": "GET",
+        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+        "url": "{{baseUrl}}/profile/stop?profileId={{profileId}}"
+      }
+    }
+  ]
+}

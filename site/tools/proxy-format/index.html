@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Proxy pack formatter — socks5/http list converter</title>
+  <meta name="description" content="Free proxy list formatter: host:port:user:pass ↔ URLs. Client-side only. For Multilogin / antidetect ops." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://antidetect-automation.github.io/tools/proxy-format/" />
+  <meta property="og:title" content="Proxy pack formatter" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/tools/proxy-format/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/tools/webgl-check/">WebGL</a>
+      <a href="/tools/proxy-format/">Proxy format</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+
+  <article>
+    <p class="eyebrow">Free tool</p>
+    <h1>Proxy pack formatter</h1>
+    <p class="lede">Paste messy proxy lines; get clean <code>scheme://user:pass@host:port</code> or <code>host:port:user:pass</code>. Nothing is uploaded.</p>
+
+    <label for="scheme">Scheme</label>
+    <p>
+      <select id="scheme" class="btn ghost" style="background:#141b24;color:#e8eef6">
+        <option value="socks5">socks5</option>
+        <option value="http">http</option>
+        <option value="https">https</option>
+      </select>
+    </p>
+    <textarea id="inp" rows="8" style="width:100%;max-width:40rem;background:#0a0e13;color:#e8eef6;border:1px solid rgba(232,238,246,.12);border-radius:.4rem;padding:.75rem;font-family:ui-monospace,monospace" placeholder="host:port:user:pass&#10;user:pass@host:port&#10;socks5://user:pass@host:port"></textarea>
+    <p class="cta-row">
+      <button class="btn primary" id="go" type="button">Format → URL lines</button>
+      <button class="btn ghost" id="go2" type="button">Format → host:port:user:pass</button>
+      <a class="btn ghost" href="https://t.me/antidetect_automation_bot?start=aa_proxy">Multilogin deal</a>
+    </p>
+    <pre id="out" style="white-space:pre-wrap;background:rgba(0,0,0,.35);padding:1rem;border-radius:.4rem;border:1px solid rgba(232,238,246,.12)"></pre>
+
+    <div class="note"><strong>Affiliate disclosure:</strong> Multilogin purchase via our codes may earn us a commission. Pair good proxies with profile isolation — no tool is undetectable.</div>
+  </article>
+
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+  <script>
+    function parseLine(raw) {
+      raw = raw.trim();
+      if (!raw) return null;
+      var m = raw.match(/^(?:(socks5|http|https):\\/\\/)?(?:([^:@\\s]+):([^@\\s]+)@)?([^:\\s]+):(\\d+)$/i);
+      if (m) return { scheme: (m[1] || '').toLowerCase(), user: m[2] || '', pass: m[3] || '', host: m[4], port: m[5] };
+      var p = raw.split(':');
+      if (p.length === 4) return { scheme: '', user: p[2], pass: p[3], host: p[0], port: p[1] };
+      if (p.length === 2) return { scheme: '', user: '', pass: '', host: p[0], port: p[1] };
+      return null;
+    }
+    function run(asUrl) {
+      var scheme = document.getElementById('scheme').value;
+      var lines = document.getElementById('inp').value.split(/\\r?\\n/);
+      var out = [];
+      lines.forEach(function (line) {
+        var x = parseLine(line);
+        if (!x) return;
+        var s = x.scheme || scheme;
+        if (asUrl) {
+          out.push(x.user ? (s + '://' + encodeURIComponent(x.user) + ':' + encodeURIComponent(x.pass) + '@' + x.host + ':' + x.port)
+            : (s + '://' + x.host + ':' + x.port));
+        } else {
+          out.push(x.user ? (x.host + ':' + x.port + ':' + x.user + ':' + x.pass) : (x.host + ':' + x.port));
+        }
+      });
+      document.getElementById('out').textContent = out.join('\\n') || '(no valid lines)';
+    }
+    document.getElementById('go').onclick = function () { run(true); };
+    document.getElementById('go2').onclick = function () { run(false); };
+  </script>
+</body>
+</html>

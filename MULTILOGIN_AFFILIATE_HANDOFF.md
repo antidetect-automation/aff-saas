@@ -13,7 +13,7 @@ Main objective:
 
 ## Core Funnel
 Primary bot:
-- `https://t.me/Multilogin_Scripts_Bot`
+- `https://t.me/antidetect_automation_bot`
 
 Coupons:
 - `SAAS50` = Multilogin Antidetect Browser, 50% lifetime
@@ -131,3 +131,7 @@ I want you to help me execute the Multilogin affiliate growth system based on th
 The assistant does not automatically share long-term memory across devices unless the context is present in the workspace, pasted into chat, or referenced from a file like this one.
 
 This file is the portable memory handoff.
+
+
+## Execution status
+See [docs/STATUS.md](docs/STATUS.md) for live gap analysis vs this handoff.

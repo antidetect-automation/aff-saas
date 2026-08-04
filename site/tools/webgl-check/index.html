@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WebGL / fingerprint leak checker — antidetect-automation</title>
+  <meta name="description" content="Free client-side WebGL renderer and basic fingerprint signals checker. No upload. Multilogin ops hub." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://antidetect-automation.github.io/tools/webgl-check/" />
+  <meta property="og:title" content="WebGL leak checker" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/tools/webgl-check/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/tools/webgl-check/">WebGL</a>
+      <a href="/tools/proxy-format/">Proxy format</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+
+  <article>
+    <p class="eyebrow">Free tool</p>
+    <h1>WebGL / fingerprint snapshot</h1>
+    <p class="lede">Runs entirely in your browser. Useful as a quick sanity check before scaling Multilogin profiles — not a ban guarantee.</p>
+
+    <div class="note" id="out">Click <strong>Run check</strong> to read WebGL + basic signals.</div>
+    <canvas id="c" width="1" height="1" style="display:none"></canvas>
+
+    <p class="cta-row">
+      <button class="btn primary" id="run" type="button">Run check</button>
+      <a class="btn ghost" href="https://t.me/antidetect_automation_bot?start=aa_webgl">Get Multilogin deal</a>
+    </p>
+
+    <h2>How to use with Multilogin</h2>
+    <ol>
+      <li>Open this page inside the Multilogin profile (or compare host vs profile).</li>
+      <li>Note renderer / vendor strings and timezone/language mismatches.</li>
+      <li>Fix proxy geo + profile fingerprint settings before warm-up.</li>
+    </ol>
+    <p><strong>Affiliate disclosure:</strong> we may earn a commission via Multilogin codes. Not Multilogin Support.</p>
+  </article>
+
+  <footer class="foot"><p><a href="/">← Hub</a> · <a href="/tools/proxy-format/">Proxy formatter</a></p></footer>
+  <script>
+    document.getElementById('run').onclick = function () {
+      var canvas = document.getElementById('c');
+      var gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      var lines = [];
+      lines.push('UA: ' + navigator.userAgent);
+      lines.push('Lang: ' + navigator.language);
+      lines.push('TZ: ' + Intl.DateTimeFormat().resolvedOptions().timeZone);
+      lines.push('Cores: ' + (navigator.hardwareConcurrency || '?'));
+      lines.push('Platform: ' + navigator.platform);
+      if (!gl) {
+        lines.push('WebGL: not available');
+      } else {
+        var dbg = gl.getExtension('WEBGL_debug_renderer_info');
+        lines.push('WebGL vendor: ' + (dbg ? gl.getParameter(dbg.UNMASKED_VENDOR_WEBGL) : gl.getParameter(gl.VENDOR)));
+        lines.push('WebGL renderer: ' + (dbg ? gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) : gl.getParameter(gl.RENDERER)));
+      }
+      document.getElementById('out').innerHTML = '<pre style="white-space:pre-wrap;margin:0">' + lines.map(function (l) {
+        return l.replace(/[<>&]/g, function (c) { return ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]); });
+      }).join('\\n') + '</pre>';
+    };
+  </script>
+</body>
+</html>
