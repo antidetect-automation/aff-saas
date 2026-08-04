@@ -4,9 +4,30 @@
   <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-04T23:00:00Z</updated>
+  <updated>2026-08-05T00:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
+  <entry>
+    <title>Multilogin vs MoreLogin</title>
+    <link href="https://antidetect-automation.github.io/vs/morelogin/" />
+    <id>https://antidetect-automation.github.io/vs/morelogin/</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <summary>Premium Multilogin X vs value-tier MoreLogin entry.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin X API auth</title>
+    <link href="https://antidetect-automation.github.io/guides/api-auth-mlx/" />
+    <id>https://antidetect-automation.github.io/guides/api-auth-mlx/</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <summary>Sign-in, tokens, and safe secret handling before CDP.</summary>
+  </entry>
+  <entry>
+    <title>DNS / WebRTC leak snapshot</title>
+    <link href="https://antidetect-automation.github.io/tools/dns-webrtc-check/" />
+    <id>https://antidetect-automation.github.io/tools/dns-webrtc-check/</id>
+    <updated>2026-08-05T00:00:00Z</updated>
+    <summary>Client-side ICE candidate sanity check for Multilogin profiles.</summary>
+  </entry>
   <entry>
     <title>Multilogin vs Linken Sphere</title>
     <link href="https://antidetect-automation.github.io/vs/linken-sphere/" />

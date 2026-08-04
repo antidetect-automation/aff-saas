@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multilogin X token / auth errors — troubleshooting</title>
+  <meta name="description" content="Fix Multilogin X API token and sign-in failures: expired tokens, wrong host, rate limits, refresh flows." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/errors/token-auth/" />
+  <meta property="og:title" content="Multilogin X token / auth errors" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/errors/token-auth/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/errors/mlx-automation/">API</a>
+      <a href="/errors/token-auth/">Token</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Troubleshooting</p>
+    <h1>Token / auth errors</h1>
+    <p class="lede">If start-profile always 401/403, fix auth before touching fingerprints or proxies.</p>
+    <table>
+      <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
+      <tbody>
+        <tr><td>401 / unauthorized</td><td>Token expired; re-run sign-in / refresh per current MLX docs</td></tr>
+        <tr><td>403 / forbidden</td><td>Wrong workspace / automation permission / revoked token</td></tr>
+        <tr><td>Intermittent auth fails</td><td>Race: reuse one token across parallel workers without refresh lock</td></tr>
+        <tr><td>Works in Postman, fails in script</td><td>Header name casing, base URL environment mismatch</td></tr>
+      </tbody>
+    </table>
+    <h2>Next</h2>
+    <ul>
+      <li><a href="/guides/api-auth-mlx/">API auth guide</a></li>
+      <li><a href="/guides/postman-mlx/">Postman kit</a></li>
+      <li><a href="/errors/cdp-attach/">CDP attach errors</a></li>
+    </ul>
+    <div class="note">Never commit tokens. Affiliate disclosure applies. Not Multilogin Support.</div>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_token">Deal desk</a>
+      <a class="btn ghost" href="/errors/mlx-automation/">General API errors</a>
+    </p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>

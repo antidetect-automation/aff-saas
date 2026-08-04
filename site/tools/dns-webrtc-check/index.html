@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DNS / WebRTC leak snapshot — antidetect-automation</title>
+  <meta name="description" content="Free client-side DNS and WebRTC ICE candidate snapshot for Multilogin proxy leak checks. No upload." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/tools/dns-webrtc-check/" />
+  <meta property="og:title" content="DNS / WebRTC leak snapshot" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/tools/dns-webrtc-check/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/tools/">Tools</a>
+      <a href="/tools/dns-webrtc-check/">DNS / WebRTC</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Free tool</p>
+    <h1>DNS / WebRTC snapshot</h1>
+    <p class="lede">Run inside a Multilogin profile. Compare local ICE candidates vs expected proxy geo. Not a complete leak lab — a quick sanity check.</p>
+    <div class="note" id="out">Click <strong>Run check</strong>.</div>
+    <p class="cta-row">
+      <button class="btn primary" id="run" type="button">Run check</button>
+      <a class="btn ghost" href="https://t.me/antidetect_automation_bot?start=aa_dns_webrtc">Get Multilogin deal</a>
+    </p>
+    <h2>How to read it</h2>
+    <ul>
+      <li>Unexpected host/LAN candidates can mean WebRTC is exposing non-proxy paths</li>
+      <li>Fix profile WebRTC policy + proxy first; re-test</li>
+      <li>Also run <a href="/tools/timezone-locale/">TZ</a> and <a href="/tools/webgl-check/">WebGL</a></li>
+    </ul>
+    <p><strong>Affiliate disclosure:</strong> commission possible via Multilogin codes.</p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a> · <a href="/errors/proxy-mlx/">Proxy errors</a></p></footer>
+  <script>
+    document.getElementById('run').onclick = async function () {
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]); }); }
+      var lines = [];
+      lines.push('UA: ' + navigator.userAgent);
+      lines.push('timezone: ' + Intl.DateTimeFormat().resolvedOptions().timeZone);
+      lines.push('--- WebRTC ICE ---');
+      try {
+        var pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+        pc.createDataChannel('aa');
+        var candidates = [];
+        pc.onicecandidate = function (e) {
+          if (e.candidate && e.candidate.candidate) candidates.push(e.candidate.candidate);
+        };
+        var offer = await pc.createOffer();
+        await pc.setLocalDescription(offer);
+        await new Promise(function (r) { setTimeout(r, 1500); });
+        pc.close();
+        if (!candidates.length) lines.push('(no ICE candidates collected — blocked or slow)');
+        candidates.slice(0, 12).forEach(function (c) { lines.push(c); });
+      } catch (e) {
+        lines.push('WebRTC error: ' + e);
+      }
+      lines.push('--- DNS note ---');
+      lines.push('Browser JS cannot list system DNS servers. Compare ICE + external IP sites inside the profile.');
+      document.getElementById('out').innerHTML = '<pre style="white-space:pre-wrap;margin:0">' + lines.map(esc).join('\n') + '</pre>';
+    };
+  </script>
+</body>
+</html>

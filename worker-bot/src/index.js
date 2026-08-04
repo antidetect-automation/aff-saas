@@ -14,7 +14,10 @@ const LINKS = {
   undetectable: `${HUB}/vs/undetectable/`,
   octo: `${HUB}/vs/octo-browser/`,
   linken: `${HUB}/vs/linken-sphere/`,
+  morelogin: `${HUB}/vs/morelogin/`,
+  guidesHub: `${HUB}/guides/`,
   guide: `${HUB}/guides/playwright-mlx/`,
+  apiAuth: `${HUB}/guides/api-auth-mlx/`,
   puppeteer: `${HUB}/guides/puppeteer-mlx/`,
   selenium: `${HUB}/guides/selenium-mlx/`,
   postman: `${HUB}/guides/postman-mlx/`,
@@ -27,12 +30,16 @@ const LINKS = {
   fpcheck: `${HUB}/tools/fingerprint-checklist/`,
   uach: `${HUB}/tools/ua-ch-check/`,
   tz: `${HUB}/tools/timezone-locale/`,
+  dns: `${HUB}/tools/dns-webrtc-check/`,
+  errorsHub: `${HUB}/errors/`,
   errors: `${HUB}/errors/mlx-automation/`,
   proxyErr: `${HUB}/errors/proxy-mlx/`,
   cdpErr: `${HUB}/errors/cdp-attach/`,
+  tokenErr: `${HUB}/errors/token-auth/`,
   faq: `${HUB}/faq/`,
   glossary: `${HUB}/glossary/`,
   scrape: `${HUB}/use-cases/scraping-isolation/`,
+  social: `${HUB}/use-cases/social-multi-account/`,
   kits: `https://github.com/antidetect-automation/aff-saas/tree/main/kits`,
   kitPw: `https://github.com/antidetect-automation/playwright-mlx-starter`,
   kitPu: `https://github.com/antidetect-automation/puppeteer-mlx-starter`,
@@ -179,14 +186,15 @@ async function sendHelp(env, chatId) {
       "/saas50 — browser code",
       "/min50 — cloud phone code",
       "/guide — Playwright + Multilogin X",
+      "/auth — Multilogin X API auth",
       "/puppeteer — Puppeteer + Multilogin X",
       "/selenium — Selenium + Multilogin X",
       "/postman — Postman starter",
       "/warmup — profile warm-up checklist",
-      "/tools — WebGL + proxy + UA + TZ tools",
+      "/tools — free client-side tools",
       "/compare — competitor comparisons",
       "/kits — Playwright / Puppeteer starters",
-      "/errors — automation + proxy + CDP",
+      "/errors — API / token / CDP / proxy",
       "/glossary — ops vocabulary",
       "/faq — FAQ page",
       "/ask <question> — Workers AI FAQ",
@@ -306,6 +314,14 @@ async function handleUpdate(env, update) {
     await sendLink(env, chatId, "Playwright + Multilogin X guide:", LINKS.guide);
     return;
   }
+  if (text.startsWith("/auth") || text.startsWith("/signin")) {
+    await sendLink(env, chatId, "Multilogin X API auth:", LINKS.apiAuth);
+    return;
+  }
+  if (text.startsWith("/guides")) {
+    await sendLink(env, chatId, "Guides hub:", LINKS.guidesHub);
+    return;
+  }
   if (text.startsWith("/puppeteer")) {
     await sendLink(env, chatId, "Puppeteer + Multilogin X guide:", LINKS.puppeteer);
     return;
@@ -332,7 +348,9 @@ async function handleUpdate(env, update) {
     text.startsWith("/proxy") ||
     text.startsWith("/ua") ||
     text.startsWith("/tz") ||
-    text.startsWith("/timezone")
+    text.startsWith("/timezone") ||
+    text.startsWith("/dns") ||
+    text.startsWith("/webrtc")
   ) {
     await tg(env, "sendMessage", {
       chat_id: chatId,
@@ -345,12 +363,13 @@ async function handleUpdate(env, update) {
           ],
           [
             { text: "TZ / locale", url: LINKS.tz },
-            { text: "Proxy", url: LINKS.proxy },
+            { text: "DNS / WebRTC", url: LINKS.dns },
           ],
           [
+            { text: "Proxy", url: LINKS.proxy },
             { text: "Checklist", url: LINKS.fpcheck },
-            { text: "Tools hub", url: LINKS.tools },
           ],
+          [{ text: "Tools hub", url: LINKS.tools }],
         ],
       },
     });
@@ -363,14 +382,23 @@ async function handleUpdate(env, update) {
       reply_markup: {
         inline_keyboard: [
           [{ text: "All compares", url: LINKS.vsHub }],
-          [{ text: "vs AdsPower", url: LINKS.compare }],
-          [{ text: "vs GoLogin", url: LINKS.gologin }],
-          [{ text: "vs Dolphin Anty", url: LINKS.dolphin }],
-          [{ text: "vs Hidemium", url: LINKS.hidemium }],
-          [{ text: "vs Incogniton", url: LINKS.incogniton }],
-          [{ text: "vs Undetectable", url: LINKS.undetectable }],
-          [{ text: "vs Octo Browser", url: LINKS.octo }],
-          [{ text: "vs Linken Sphere", url: LINKS.linken }],
+          [
+            { text: "AdsPower", url: LINKS.compare },
+            { text: "GoLogin", url: LINKS.gologin },
+          ],
+          [
+            { text: "Dolphin", url: LINKS.dolphin },
+            { text: "Hidemium", url: LINKS.hidemium },
+          ],
+          [
+            { text: "Incogniton", url: LINKS.incogniton },
+            { text: "Undetectable", url: LINKS.undetectable },
+          ],
+          [
+            { text: "Octo", url: LINKS.octo },
+            { text: "Linken", url: LINKS.linken },
+          ],
+          [{ text: "MoreLogin", url: LINKS.morelogin }],
         ],
       },
     });
@@ -384,8 +412,9 @@ async function handleUpdate(env, update) {
         inline_keyboard: [
           [{ text: "Playwright kit", url: LINKS.kitPw }],
           [{ text: "Puppeteer kit", url: LINKS.kitPu }],
+          [{ text: "API auth", url: LINKS.apiAuth }],
           [{ text: "Selenium guide", url: LINKS.selenium }],
-          [{ text: "All kits (aff-saas)", url: LINKS.kits }],
+          [{ text: "All kits", url: LINKS.kits }],
           [{ text: "Onboarding", url: LINKS.start }],
         ],
       },
@@ -402,7 +431,9 @@ async function handleUpdate(env, update) {
       text: "Troubleshooting:",
       reply_markup: {
         inline_keyboard: [
-          [{ text: "API / auth errors", url: LINKS.errors }],
+          [{ text: "Error desk", url: LINKS.errorsHub }],
+          [{ text: "API errors", url: LINKS.errors }],
+          [{ text: "Token auth", url: LINKS.tokenErr }],
           [{ text: "CDP attach", url: LINKS.cdpErr }],
           [{ text: "Proxy errors", url: LINKS.proxyErr }],
         ],
@@ -450,6 +481,7 @@ async function ensureBotMeta(env) {
     { command: "saas50", description: "Browser coupon" },
     { command: "min50", description: "Cloud Phone coupon" },
     { command: "guide", description: "Playwright + MLX guide" },
+    { command: "auth", description: "MLX API authentication" },
     { command: "puppeteer", description: "Puppeteer + MLX guide" },
     { command: "selenium", description: "Selenium + MLX guide" },
     { command: "postman", description: "Postman kit" },
@@ -458,7 +490,7 @@ async function ensureBotMeta(env) {
     { command: "compare", description: "Competitor comparisons" },
     { command: "kits", description: "Playwright / Puppeteer starters" },
     { command: "onboarding", description: "Start here path" },
-    { command: "errors", description: "API / CDP / proxy troubleshooting" },
+    { command: "errors", description: "API / token / CDP / proxy" },
     { command: "glossary", description: "Ops vocabulary" },
     { command: "faq", description: "FAQ" },
     { command: "ask", description: "Ask AI FAQ" },
