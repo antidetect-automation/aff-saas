@@ -19,12 +19,14 @@ Codes: `SAAS50` (browser) · `MIN50` (cloud phone)
 | Sitemap | https://antidetect-automation.github.io/sitemap.xml |
 | llms.txt | https://antidetect-automation.github.io/llms.txt |
 
-### Repos
+### Repos (keep 3 — do not merge)
 | Repo | Role |
 |------|------|
-| [antidetect-automation.github.io](https://github.com/antidetect-automation/antidetect-automation.github.io) | **Live site** (GitHub Pages) |
-| [aff-saas](https://github.com/antidetect-automation/aff-saas) | Source monorepo (site + Telegram Worker) |
-| [antidetect-automation](https://github.com/antidetect-automation/antidetect-automation) | Profile README |
+| [antidetect-automation](https://github.com/antidetect-automation/antidetect-automation) | **Profile README** (GitHub profile door) — not the website |
+| [antidetect-automation.github.io](https://github.com/antidetect-automation/antidetect-automation.github.io) | **Published website only** (what Google indexes) |
+| [aff-saas](https://github.com/antidetect-automation/aff-saas) | **Source of truth** — `site/` + `worker-bot/` + drafts |
+
+Full rationale: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 
 ### Stack (100% free tier)
 - **GitHub Pages** — sole public website (`antidetect-automation.github.io`)
