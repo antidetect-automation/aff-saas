@@ -13,8 +13,10 @@ const LINKS = {
   incogniton: `${HUB}/vs/incogniton/`,
   undetectable: `${HUB}/vs/undetectable/`,
   octo: `${HUB}/vs/octo-browser/`,
+  linken: `${HUB}/vs/linken-sphere/`,
   guide: `${HUB}/guides/playwright-mlx/`,
   puppeteer: `${HUB}/guides/puppeteer-mlx/`,
+  selenium: `${HUB}/guides/selenium-mlx/`,
   postman: `${HUB}/guides/postman-mlx/`,
   cookies: `${HUB}/guides/cookies-sessions/`,
   warmup: `${HUB}/guides/profile-warmup/`,
@@ -24,9 +26,13 @@ const LINKS = {
   proxy: `${HUB}/tools/proxy-format/`,
   fpcheck: `${HUB}/tools/fingerprint-checklist/`,
   uach: `${HUB}/tools/ua-ch-check/`,
+  tz: `${HUB}/tools/timezone-locale/`,
   errors: `${HUB}/errors/mlx-automation/`,
   proxyErr: `${HUB}/errors/proxy-mlx/`,
+  cdpErr: `${HUB}/errors/cdp-attach/`,
   faq: `${HUB}/faq/`,
+  glossary: `${HUB}/glossary/`,
+  scrape: `${HUB}/use-cases/scraping-isolation/`,
   kits: `https://github.com/antidetect-automation/aff-saas/tree/main/kits`,
   kitPw: `https://github.com/antidetect-automation/playwright-mlx-starter`,
   kitPu: `https://github.com/antidetect-automation/puppeteer-mlx-starter`,
@@ -174,12 +180,14 @@ async function sendHelp(env, chatId) {
       "/min50 — cloud phone code",
       "/guide — Playwright + Multilogin X",
       "/puppeteer — Puppeteer + Multilogin X",
+      "/selenium — Selenium + Multilogin X",
       "/postman — Postman starter",
       "/warmup — profile warm-up checklist",
-      "/tools — WebGL + proxy + UA tools",
+      "/tools — WebGL + proxy + UA + TZ tools",
       "/compare — competitor comparisons",
       "/kits — Playwright / Puppeteer starters",
-      "/errors — automation + proxy troubleshooting",
+      "/errors — automation + proxy + CDP",
+      "/glossary — ops vocabulary",
       "/faq — FAQ page",
       "/ask <question> — Workers AI FAQ",
       "/help — this message",
@@ -302,15 +310,30 @@ async function handleUpdate(env, update) {
     await sendLink(env, chatId, "Puppeteer + Multilogin X guide:", LINKS.puppeteer);
     return;
   }
+  if (text.startsWith("/selenium")) {
+    await sendLink(env, chatId, "Selenium + Multilogin X guide:", LINKS.selenium);
+    return;
+  }
   if (text.startsWith("/warmup") || text.startsWith("/warm")) {
     await sendLink(env, chatId, "Profile warm-up checklist:", LINKS.warmup);
+    return;
+  }
+  if (text.startsWith("/glossary") || text.startsWith("/terms")) {
+    await sendLink(env, chatId, "Ops glossary:", LINKS.glossary);
     return;
   }
   if (text.startsWith("/postman")) {
     await sendLink(env, chatId, "Postman + Multilogin X:", LINKS.postman);
     return;
   }
-  if (text.startsWith("/tools") || text.startsWith("/webgl") || text.startsWith("/proxy") || text.startsWith("/ua")) {
+  if (
+    text.startsWith("/tools") ||
+    text.startsWith("/webgl") ||
+    text.startsWith("/proxy") ||
+    text.startsWith("/ua") ||
+    text.startsWith("/tz") ||
+    text.startsWith("/timezone")
+  ) {
     await tg(env, "sendMessage", {
       chat_id: chatId,
       text: "Free tools (client-side):",
@@ -321,10 +344,13 @@ async function handleUpdate(env, update) {
             { text: "UA / CH", url: LINKS.uach },
           ],
           [
-            { text: "Checklist", url: LINKS.fpcheck },
+            { text: "TZ / locale", url: LINKS.tz },
             { text: "Proxy", url: LINKS.proxy },
           ],
-          [{ text: "Tools hub", url: LINKS.tools }],
+          [
+            { text: "Checklist", url: LINKS.fpcheck },
+            { text: "Tools hub", url: LINKS.tools },
+          ],
         ],
       },
     });
@@ -344,6 +370,7 @@ async function handleUpdate(env, update) {
           [{ text: "vs Incogniton", url: LINKS.incogniton }],
           [{ text: "vs Undetectable", url: LINKS.undetectable }],
           [{ text: "vs Octo Browser", url: LINKS.octo }],
+          [{ text: "vs Linken Sphere", url: LINKS.linken }],
         ],
       },
     });
@@ -357,6 +384,7 @@ async function handleUpdate(env, update) {
         inline_keyboard: [
           [{ text: "Playwright kit", url: LINKS.kitPw }],
           [{ text: "Puppeteer kit", url: LINKS.kitPu }],
+          [{ text: "Selenium guide", url: LINKS.selenium }],
           [{ text: "All kits (aff-saas)", url: LINKS.kits }],
           [{ text: "Onboarding", url: LINKS.start }],
         ],
@@ -374,7 +402,8 @@ async function handleUpdate(env, update) {
       text: "Troubleshooting:",
       reply_markup: {
         inline_keyboard: [
-          [{ text: "API / CDP errors", url: LINKS.errors }],
+          [{ text: "API / auth errors", url: LINKS.errors }],
+          [{ text: "CDP attach", url: LINKS.cdpErr }],
           [{ text: "Proxy errors", url: LINKS.proxyErr }],
         ],
       },
@@ -422,13 +451,15 @@ async function ensureBotMeta(env) {
     { command: "min50", description: "Cloud Phone coupon" },
     { command: "guide", description: "Playwright + MLX guide" },
     { command: "puppeteer", description: "Puppeteer + MLX guide" },
+    { command: "selenium", description: "Selenium + MLX guide" },
     { command: "postman", description: "Postman kit" },
     { command: "warmup", description: "Profile warm-up checklist" },
     { command: "tools", description: "Free tools" },
     { command: "compare", description: "Competitor comparisons" },
     { command: "kits", description: "Playwright / Puppeteer starters" },
     { command: "onboarding", description: "Start here path" },
-    { command: "errors", description: "Automation + proxy troubleshooting" },
+    { command: "errors", description: "API / CDP / proxy troubleshooting" },
+    { command: "glossary", description: "Ops vocabulary" },
     { command: "faq", description: "FAQ" },
     { command: "ask", description: "Ask AI FAQ" },
     { command: "help", description: "Command list" },

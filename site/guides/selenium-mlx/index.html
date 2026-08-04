@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Selenium + Multilogin X — starter guide</title>
+  <meta name="description" content="Attach Selenium to a Multilogin X profile. Prefer Playwright for CDP; Selenium path when your stack requires it." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/guides/selenium-mlx/" />
+  <meta property="og:title" content="Selenium + Multilogin X starter guide" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/guides/selenium-mlx/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/guides/playwright-mlx/">Playwright</a>
+      <a href="/guides/selenium-mlx/">Selenium</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Guide</p>
+    <h1>Selenium + Multilogin X</h1>
+    <p class="lede">Prefer Playwright or Puppeteer for CDP. Use Selenium when your existing suite requires it.</p>
+    <h2>Flow</h2>
+    <pre><code>1. Authenticate to Multilogin X API
+2. Start profile by UUID
+3. Read debugger / Selenium address from start response
+4. Point Selenium remote/debugger options at that endpoint
+5. Run suite → stop profile</code></pre>
+    <p>Hosts and field names change — verify against Multilogin’s current Postman collection.</p>
+    <h2>Kit</h2>
+    <ul>
+      <li><a href="https://github.com/antidetect-automation/aff-saas/tree/main/kits/selenium-mlx-starter">selenium-mlx-starter</a> (monorepo)</li>
+      <li>CDP troubleshoot: <a href="/errors/cdp-attach/">CDP attach errors</a></li>
+    </ul>
+    <div class="note">Browser automation → <code>SAAS50</code>. Affiliate disclosure applies.</div>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_selenium">Get Multilogin deal</a>
+      <a class="btn ghost" href="/guides/playwright-mlx/">Prefer Playwright</a>
+    </p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>

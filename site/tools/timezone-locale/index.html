@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Timezone / locale checker — antidetect-automation</title>
+  <meta name="description" content="Free client-side timezone, locale, and Intl snapshot for Multilogin proxy geo alignment. No upload." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/tools/timezone-locale/" />
+  <meta property="og:title" content="Timezone / locale checker" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/tools/timezone-locale/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/tools/">Tools</a>
+      <a href="/tools/timezone-locale/">TZ / locale</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Free tool</p>
+    <h1>Timezone / locale snapshot</h1>
+    <p class="lede">Open inside a Multilogin profile. Confirm TZ + language match the proxy exit country before warm-up.</p>
+    <div class="note" id="out">Click <strong>Run check</strong>.</div>
+    <p class="cta-row">
+      <button class="btn primary" id="run" type="button">Run check</button>
+      <a class="btn ghost" href="https://t.me/antidetect_automation_bot?start=aa_tz_locale">Get Multilogin deal</a>
+    </p>
+    <h2>Related</h2>
+    <ul>
+      <li><a href="/tools/ua-ch-check/">UA / Client Hints</a></li>
+      <li><a href="/tools/webgl-check/">WebGL snapshot</a></li>
+      <li><a href="/guides/profile-warmup/">Warm-up checklist</a></li>
+    </ul>
+    <p><strong>Affiliate disclosure:</strong> commission possible via Multilogin codes.</p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+  <script>
+    document.getElementById('run').onclick = function () {
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]); }); }
+      var tz = Intl.DateTimeFormat().resolvedOptions();
+      var lines = [
+        'timezone: ' + tz.timeZone,
+        'locale (resolved): ' + tz.locale,
+        'calendar: ' + tz.calendar,
+        'numberingSystem: ' + tz.numberingSystem,
+        'navigator.language: ' + navigator.language,
+        'navigator.languages: ' + (navigator.languages || []).join(', '),
+        'Date string: ' + new Date().toString(),
+        'toLocaleString: ' + new Date().toLocaleString(),
+        'offset minutes: ' + new Date().getTimezoneOffset()
+      ];
+      try {
+        lines.push('Intl.DisplayNames region sample: ' + new Intl.DisplayNames([navigator.language], { type: 'region' }).of('US'));
+      } catch (e) {
+        lines.push('DisplayNames: n/a');
+      }
+      document.getElementById('out').innerHTML = '<pre style="white-space:pre-wrap;margin:0">' + lines.map(esc).join('\n') + '</pre>';
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Scraping with Multilogin — use-case notes</title>
+  <meta name="description" content="Responsible multi-account scraping with Multilogin X: isolation, pacing, proxies — not spam or ToS evasion advice." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/use-cases/scraping-isolation/" />
+  <meta property="og:title" content="Scraping isolation with Multilogin" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/use-cases/scraping-isolation/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/use-cases/scraping-isolation/">Scraping</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Use-case</p>
+    <h1>Scraping with profile isolation</h1>
+    <p class="lede">Treat each Multilogin profile as one identity lane. This page is about isolation hygiene — not bypassing site ToS or CAPTCHA farms.</p>
+    <h2>Ops pattern</h2>
+    <ol>
+      <li>One profile ↔ one proxy sticky lane ↔ one cookie jar</li>
+      <li>Warm slowly — see <a href="/guides/profile-warmup/">warmup checklist</a></li>
+      <li>Automate with <a href="/guides/playwright-mlx/">Playwright</a>; stop profile when idle</li>
+      <li>Log UUID + proxy geo for every failure class</li>
+    </ol>
+    <h2>Do not</h2>
+    <ul>
+      <li>Blast thousands of cold profiles at once</li>
+      <li>Reuse warmed sessions across unrelated personas</li>
+      <li>Expect “undetectable” outcomes from tools alone</li>
+    </ul>
+    <div class="note">Follow target sites’ terms. Affiliate disclosure applies for Multilogin codes.</div>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_uc_scraping">Get SAAS50</a>
+      <a class="btn ghost" href="/errors/proxy-mlx/">Proxy troubleshooting</a>
+    </p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>

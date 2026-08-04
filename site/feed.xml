@@ -4,9 +4,30 @@
   <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-04T22:00:00Z</updated>
+  <updated>2026-08-04T23:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
+  <entry>
+    <title>Multilogin vs Linken Sphere</title>
+    <link href="https://antidetect-automation.github.io/vs/linken-sphere/" />
+    <id>https://antidetect-automation.github.io/vs/linken-sphere/</id>
+    <updated>2026-08-04T23:00:00Z</updated>
+    <summary>Multilogin X API automation vs Linken Sphere browser farms.</summary>
+  </entry>
+  <entry>
+    <title>CDP attach errors</title>
+    <link href="https://antidetect-automation.github.io/errors/cdp-attach/" />
+    <id>https://antidetect-automation.github.io/errors/cdp-attach/</id>
+    <updated>2026-08-04T23:00:00Z</updated>
+    <summary>Fix Playwright/Puppeteer CDP connect failures on Multilogin X.</summary>
+  </entry>
+  <entry>
+    <title>Timezone / locale checker</title>
+    <link href="https://antidetect-automation.github.io/tools/timezone-locale/" />
+    <id>https://antidetect-automation.github.io/tools/timezone-locale/</id>
+    <updated>2026-08-04T23:00:00Z</updated>
+    <summary>Client-side TZ/locale snapshot for proxy geo alignment.</summary>
+  </entry>
   <entry>
     <title>Multilogin vs Undetectable</title>
     <link href="https://antidetect-automation.github.io/vs/undetectable/" />

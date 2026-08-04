@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multilogin CDP attach errors — troubleshooting</title>
+  <meta name="description" content="Fix Playwright/Puppeteer CDP connect failures on Multilogin X: debugger URL, race on start, WebSocket vs HTTP endpoint." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/errors/cdp-attach/" />
+  <meta property="og:title" content="Multilogin CDP attach errors" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/errors/cdp-attach/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/errors/mlx-automation/">API</a>
+      <a href="/errors/cdp-attach/">CDP</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Troubleshooting</p>
+    <h1>CDP attach errors</h1>
+    <p class="lede">Most connect fails are timing or wrong debugger URL — not “fingerprint broken.”</p>
+    <table>
+      <thead><tr><th>Error pattern</th><th>Likely cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>ECONNREFUSED / timeout</td><td>Profile not fully started</td><td>Await start response; short retry loop</td></tr>
+        <tr><td>Invalid browser endpoint</td><td>HTTP vs WS mismatch</td><td>Match Playwright <code>connectOverCDP</code> / Puppeteer <code>browserURL</code> to docs</td></tr>
+        <tr><td>Session closed immediately</td><td>Stop raced your script</td><td>Keep profile alive until script finishes</td></tr>
+        <tr><td>Works once, fails later</td><td>Stale token / rate limits</td><td>Refresh X API auth; see <a href="/errors/mlx-automation/">API errors</a></td></tr>
+      </tbody>
+    </table>
+    <h2>Guides</h2>
+    <ul>
+      <li><a href="/guides/playwright-mlx/">Playwright + Multilogin X</a></li>
+      <li><a href="/guides/puppeteer-mlx/">Puppeteer + Multilogin X</a></li>
+      <li><a href="/guides/selenium-mlx/">Selenium + Multilogin X</a></li>
+    </ul>
+    <div class="note">Affiliate disclosure applies. Not Multilogin Support.</div>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_cdp">Deal desk</a>
+      <a class="btn ghost" href="/errors/proxy-mlx/">Proxy errors</a>
+    </p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>
