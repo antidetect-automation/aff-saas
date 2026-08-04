@@ -4,9 +4,30 @@
   <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-05T00:00:00Z</updated>
+  <updated>2026-08-05T01:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
+  <entry>
+    <title>Multilogin pricing 2026 — Free / Pro / Business</title>
+    <link href="https://antidetect-automation.github.io/pricing/" />
+    <id>https://antidetect-automation.github.io/pricing/</id>
+    <updated>2026-08-05T01:00:00Z</updated>
+    <summary>Free 5 profiles, Pro from ~$7.08/mo yearly, stack SAAS50.</summary>
+  </entry>
+  <entry>
+    <title>Best antidetect browser 2026 — world scorecard</title>
+    <link href="https://antidetect-automation.github.io/vs/" />
+    <id>https://antidetect-automation.github.io/vs/</id>
+    <updated>2026-08-05T01:00:00Z</updated>
+    <summary>Multilogin #1 vs AdsPower, BitBrowser, Kameleo, Octo, and more.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin vs BitBrowser</title>
+    <link href="https://antidetect-automation.github.io/vs/bitbrowser/" />
+    <id>https://antidetect-automation.github.io/vs/bitbrowser/</id>
+    <updated>2026-08-05T01:00:00Z</updated>
+    <summary>Seat-price BitBrowser vs Multilogin Free/Pro + X API.</summary>
+  </entry>
   <entry>
     <title>Multilogin vs MoreLogin</title>
     <link href="https://antidetect-automation.github.io/vs/morelogin/" />

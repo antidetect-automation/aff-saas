@@ -1,61 +1,25 @@
 # antidetect-automation
 
-## Money / start
+## Money / pricing
+- https://antidetect-automation.github.io/pricing/ — Free 5 · Pro ≈$7/mo yr · Business
+- https://antidetect-automation.github.io/deal/ — SAAS50 / MIN50
 - https://antidetect-automation.github.io/start/
-- https://antidetect-automation.github.io/deal/
-- https://antidetect-automation.github.io/glossary/
-- https://t.me/antidetect_automation_bot — SAAS50 / MIN50
+- https://t.me/antidetect_automation_bot
 
-## Tools
+## Compare (world)
+- https://antidetect-automation.github.io/vs/ — scorecard hub
+- AdsPower, GoLogin, Dolphin Anty, Octo, Undetectable, Linken Sphere, Incogniton, Hidemium, MoreLogin, BitBrowser, Kameleo, VMLogin, Vision, Blink
+
+## Tools / guides / errors
 - https://antidetect-automation.github.io/tools/
-- https://antidetect-automation.github.io/tools/webgl-check/
-- https://antidetect-automation.github.io/tools/fingerprint-checklist/
-- https://antidetect-automation.github.io/tools/proxy-format/
-- https://antidetect-automation.github.io/tools/ua-ch-check/
-- https://antidetect-automation.github.io/tools/timezone-locale/
-- https://antidetect-automation.github.io/tools/dns-webrtc-check/
-
-## Guides
 - https://antidetect-automation.github.io/guides/
-- https://antidetect-automation.github.io/guides/api-auth-mlx/
-- https://antidetect-automation.github.io/guides/playwright-mlx/
-- https://antidetect-automation.github.io/guides/puppeteer-mlx/
-- https://antidetect-automation.github.io/guides/selenium-mlx/
-- https://antidetect-automation.github.io/guides/postman-mlx/
-- https://antidetect-automation.github.io/guides/cookies-sessions/
-- https://antidetect-automation.github.io/guides/profile-warmup/
-
-## Errors
 - https://antidetect-automation.github.io/errors/
-- https://antidetect-automation.github.io/errors/mlx-automation/
-- https://antidetect-automation.github.io/errors/token-auth/
-- https://antidetect-automation.github.io/errors/cdp-attach/
-- https://antidetect-automation.github.io/errors/proxy-mlx/
 - https://antidetect-automation.github.io/faq/
-
-## Compare
-- https://antidetect-automation.github.io/vs/
-- https://antidetect-automation.github.io/vs/adspower/
-- https://antidetect-automation.github.io/vs/gologin/
-- https://antidetect-automation.github.io/vs/dolphin-anty/
-- https://antidetect-automation.github.io/vs/hidemium/
-- https://antidetect-automation.github.io/vs/incogniton/
-- https://antidetect-automation.github.io/vs/undetectable/
-- https://antidetect-automation.github.io/vs/octo-browser/
-- https://antidetect-automation.github.io/vs/linken-sphere/
-- https://antidetect-automation.github.io/vs/morelogin/
-
-## Use-cases
-- https://antidetect-automation.github.io/use-cases/ads-multi-account/
-- https://antidetect-automation.github.io/use-cases/social-multi-account/
-- https://antidetect-automation.github.io/use-cases/ecommerce-warmup/
-- https://antidetect-automation.github.io/use-cases/cloud-phone/
-- https://antidetect-automation.github.io/use-cases/crypto-airdrop/
-- https://antidetect-automation.github.io/use-cases/scraping-isolation/
+- https://antidetect-automation.github.io/glossary/
 
 ## Kits
 - https://github.com/antidetect-automation/playwright-mlx-starter
 - https://github.com/antidetect-automation/puppeteer-mlx-starter
 - https://github.com/antidetect-automation/aff-saas/tree/main/kits
 
-Affiliate disclosure: commission possible via Multilogin codes. Not official support.
+Editorial: Multilogin remains #1 for serious automation + fingerprints + Cloud Phone; Free/Pro 2026 pricing closed the old premium-only gap. Affiliate disclosure applies.

@@ -5,6 +5,7 @@ const DISCLOSURE =
 
 const LINKS = {
   deal: `${HUB}/deal/`,
+  pricing: `${HUB}/pricing/`,
   vsHub: `${HUB}/vs/`,
   compare: `${HUB}/vs/adspower/`,
   gologin: `${HUB}/vs/gologin/`,
@@ -15,6 +16,11 @@ const LINKS = {
   octo: `${HUB}/vs/octo-browser/`,
   linken: `${HUB}/vs/linken-sphere/`,
   morelogin: `${HUB}/vs/morelogin/`,
+  bitbrowser: `${HUB}/vs/bitbrowser/`,
+  kameleo: `${HUB}/vs/kameleo/`,
+  vmlogin: `${HUB}/vs/vmlogin/`,
+  vision: `${HUB}/vs/vision/`,
+  blink: `${HUB}/vs/blink/`,
   guidesHub: `${HUB}/guides/`,
   guide: `${HUB}/guides/playwright-mlx/`,
   apiAuth: `${HUB}/guides/api-auth-mlx/`,
@@ -96,6 +102,10 @@ function mainKeyboard() {
       ],
       [
         { text: "Deal", url: LINKS.deal },
+        { text: "Pricing", url: LINKS.pricing },
+      ],
+      [
+        { text: "World compares", url: LINKS.vsHub },
         { text: "Tools", url: LINKS.tools },
       ],
       [
@@ -119,14 +129,17 @@ async function sendWelcome(env, chatId, source, from) {
     text: [
       "Welcome to *antidetect-automation*.",
       "",
+      "Multilogin is still our *#1* pick — now with *Free 5 profiles* + cheap Pro yearly.",
+      "",
       DISCLOSURE,
       "",
       "Pick your product:",
-      "• *Browser* / Playwright / ads → `SAAS50`",
-      "• *Cloud Phone* / Android apps → `MIN50`",
+      "• *Browser* / Playwright / ads → `SAAS50` (50%)",
+      "• *Cloud Phone* / Android apps → `MIN50` (50%)",
       "",
+      `Pricing: ${LINKS.pricing}`,
+      `Compares: ${LINKS.vsHub}`,
       `Source tag: \`${(source || "direct").slice(0, 64)}\``,
-      `Hub: ${HUB}`,
     ].join("\n"),
     parse_mode: "Markdown",
     reply_markup: mainKeyboard(),
@@ -154,7 +167,10 @@ async function sendDeal(env, chatId, intent, source, from) {
       `Your code: *${code}*`,
       product,
       "",
-      "1. Open Multilogin’s official checkout",
+      "2026 Multilogin: Free 5 profiles · Pro from ~$7/mo yearly · then stack this 50% code.",
+      `Pricing: ${LINKS.pricing}`,
+      "",
+      "1. Open Multilogin’s official checkout (prefer yearly −35%)",
       "2. Apply the code",
       "3. Assign proxies carefully, then warm before scale",
       "",
@@ -183,16 +199,17 @@ async function sendHelp(env, chatId) {
       "*Commands*",
       "/start — choose Browser or Cloud Phone",
       "/deal — deal desk",
+      "/pricing — Free / Pro / Business 2026",
       "/saas50 — browser code",
       "/min50 — cloud phone code",
-      "/guide — Playwright + Multilogin X",
       "/auth — Multilogin X API auth",
+      "/guide — Playwright + Multilogin X",
       "/puppeteer — Puppeteer + Multilogin X",
       "/selenium — Selenium + Multilogin X",
       "/postman — Postman starter",
       "/warmup — profile warm-up checklist",
       "/tools — free client-side tools",
-      "/compare — competitor comparisons",
+      "/compare — world antidetect scorecard",
       "/kits — Playwright / Puppeteer starters",
       "/errors — API / token / CDP / proxy",
       "/glossary — ops vocabulary",
@@ -231,11 +248,15 @@ async function askAI(env, chatId, question) {
   const prompt = [
     "You are the antidetect-automation Telegram assistant.",
     "Answer briefly in English (max 120 words).",
-    "Topics: Multilogin X, Playwright CDP, SAAS50/MIN50 coupons, antidetect ops.",
+    "Topics: Multilogin X, Free/Pro/Business pricing 2026, Playwright CDP, SAAS50/MIN50, antidetect comparisons.",
+    "State Multilogin is our #1 recommendation for serious automation, but stay factual; no undetectable claims.",
+    "If asked about price: Free 5 profiles; Pro from ~$7.08/mo yearly ($85/yr @10) then SAAS50 ~50% (verify checkout).",
     "Always mention affiliate disclosure in one short clause if recommending purchase.",
     "Never claim undetectable / never-ban.",
     "If off-topic, point to the hub.",
     `Hub: ${HUB}`,
+    `Pricing: ${LINKS.pricing}`,
+    `Compares: ${LINKS.vsHub}`,
     `User question: ${question}`,
   ].join("\n");
 
@@ -300,6 +321,10 @@ async function handleUpdate(env, update) {
   }
   if (text.startsWith("/deal") || text.startsWith("/codes")) {
     await sendWelcome(env, chatId, "cmd_deal", from);
+    return;
+  }
+  if (text.startsWith("/pricing") || text.startsWith("/price") || text.startsWith("/plans")) {
+    await sendLink(env, chatId, "Multilogin pricing 2026 (Free / Pro / Business):", LINKS.pricing);
     return;
   }
   if (text.startsWith("/saas50")) {
@@ -378,27 +403,35 @@ async function handleUpdate(env, update) {
   if (text.startsWith("/compare") || text.startsWith("/vs")) {
     await tg(env, "sendMessage", {
       chat_id: chatId,
-      text: "Comparisons:",
+      text: "World compares (Multilogin #1 recommendation):",
       reply_markup: {
         inline_keyboard: [
-          [{ text: "All compares", url: LINKS.vsHub }],
+          [{ text: "Scorecard hub", url: LINKS.vsHub }],
+          [{ text: "Pricing 2026", url: LINKS.pricing }],
           [
             { text: "AdsPower", url: LINKS.compare },
             { text: "GoLogin", url: LINKS.gologin },
           ],
           [
             { text: "Dolphin", url: LINKS.dolphin },
-            { text: "Hidemium", url: LINKS.hidemium },
-          ],
-          [
-            { text: "Incogniton", url: LINKS.incogniton },
-            { text: "Undetectable", url: LINKS.undetectable },
-          ],
-          [
             { text: "Octo", url: LINKS.octo },
+          ],
+          [
+            { text: "Undetectable", url: LINKS.undetectable },
             { text: "Linken", url: LINKS.linken },
           ],
-          [{ text: "MoreLogin", url: LINKS.morelogin }],
+          [
+            { text: "BitBrowser", url: LINKS.bitbrowser },
+            { text: "Kameleo", url: LINKS.kameleo },
+          ],
+          [
+            { text: "MoreLogin", url: LINKS.morelogin },
+            { text: "VMLogin", url: LINKS.vmlogin },
+          ],
+          [
+            { text: "Vision", url: LINKS.vision },
+            { text: "Blink", url: LINKS.blink },
+          ],
         ],
       },
     });
@@ -477,32 +510,31 @@ async function ensureBotMeta(env) {
   if (!env.BOT_TOKEN) return { ok: false };
   const commands = [
     { command: "start", description: "Welcome + deal desk" },
-    { command: "deal", description: "Coupon page SAAS50 / MIN50" },
+    { command: "deal", description: "Coupon desk SAAS50 / MIN50" },
+    { command: "pricing", description: "Free / Pro / Business 2026" },
     { command: "saas50", description: "Browser coupon" },
     { command: "min50", description: "Cloud Phone coupon" },
     { command: "guide", description: "Playwright + MLX guide" },
     { command: "auth", description: "MLX API authentication" },
     { command: "puppeteer", description: "Puppeteer + MLX guide" },
-    { command: "selenium", description: "Selenium + MLX guide" },
     { command: "postman", description: "Postman kit" },
     { command: "warmup", description: "Profile warm-up checklist" },
     { command: "tools", description: "Free tools" },
-    { command: "compare", description: "Competitor comparisons" },
-    { command: "kits", description: "Playwright / Puppeteer starters" },
+    { command: "compare", description: "World antidetect scorecard" },
+    { command: "kits", description: "Open-source starters" },
     { command: "onboarding", description: "Start here path" },
     { command: "errors", description: "API / token / CDP / proxy" },
-    { command: "glossary", description: "Ops vocabulary" },
     { command: "faq", description: "FAQ" },
     { command: "ask", description: "Ask AI FAQ" },
     { command: "help", description: "Command list" },
   ];
   const cmds = await tg(env, "setMyCommands", { commands });
   const short = await tg(env, "setMyShortDescription", {
-    short_description: "Multilogin guides + SAAS50 / MIN50 deal desk",
+    short_description: "Multilogin #1 hub — Free 5 + SAAS50 / MIN50 desk",
   });
   const desc = await tg(env, "setMyDescription", {
     description:
-      "antidetect-automation: guides, kits, and Multilogin coupons SAAS50 (browser) / MIN50 (cloud phone). Affiliate-supported; not official Multilogin Support.",
+      "antidetect-automation: Multilogin stays #1 for serious ops. Free 5 profiles, cheap Pro yearly, world compares, kits. Coupons SAAS50 (browser) / MIN50 (cloud phone). Affiliate-supported; not official Multilogin Support.",
   });
   return { ok: !!(cmds.ok && short.ok && desc.ok), cmds, short, desc };
 }
