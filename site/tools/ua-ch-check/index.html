@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UA / Client Hints checker — antidetect-automation</title>
+  <meta name="description" content="Free client-side User-Agent and Client Hints snapshot for Multilogin profile sanity checks. No upload." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/tools/ua-ch-check/" />
+  <meta property="og:title" content="UA / Client Hints checker" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/tools/ua-ch-check/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/tools/">Tools</a>
+      <a href="/tools/ua-ch-check/">UA / CH</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Free tool</p>
+    <h1>UA / Client Hints snapshot</h1>
+    <p class="lede">Compare what your Multilogin profile advertises vs what you expect for that persona. Client-side only.</p>
+    <div class="note" id="out">Click <strong>Run check</strong>.</div>
+    <p class="cta-row">
+      <button class="btn primary" id="run" type="button">Run check</button>
+      <a class="btn ghost" href="https://t.me/antidetect_automation_bot?start=aa_ua_ch">Get Multilogin deal</a>
+    </p>
+    <h2>What to look for</h2>
+    <ul>
+      <li>UA brand string vs platform (Windows/macOS/Android)</li>
+      <li>Client Hints brands / fullVersionList consistency</li>
+      <li>Language + timezone matching proxy geo</li>
+    </ul>
+    <p><strong>Affiliate disclosure:</strong> commission possible via Multilogin codes.</p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a> · <a href="/tools/webgl-check/">WebGL</a></p></footer>
+  <script>
+    document.getElementById('run').onclick = async function () {
+      var lines = [];
+      function esc(s) { return String(s).replace(/[<>&]/g, function (c) { return ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c]); }); }
+      lines.push('UA: ' + navigator.userAgent);
+      lines.push('platform: ' + navigator.platform);
+      lines.push('language: ' + navigator.language);
+      lines.push('languages: ' + (navigator.languages || []).join(', '));
+      lines.push('timezone: ' + Intl.DateTimeFormat().resolvedOptions().timeZone);
+      if (navigator.userAgentData) {
+        lines.push('mobile: ' + navigator.userAgentData.mobile);
+        lines.push('platform (CH): ' + navigator.userAgentData.platform);
+        lines.push('brands: ' + JSON.stringify(navigator.userAgentData.brands || []));
+        try {
+          var high = await navigator.userAgentData.getHighEntropyValues([
+            'architecture', 'bitness', 'model', 'platformVersion', 'fullVersionList', 'uaFullVersion'
+          ]);
+          lines.push('architecture: ' + high.architecture);
+          lines.push('bitness: ' + high.bitness);
+          lines.push('model: ' + (high.model || '(empty)'));
+          lines.push('platformVersion: ' + high.platformVersion);
+          lines.push('uaFullVersion: ' + high.uaFullVersion);
+          lines.push('fullVersionList: ' + JSON.stringify(high.fullVersionList || []));
+        } catch (e) {
+          lines.push('highEntropy: error ' + e);
+        }
+      } else {
+        lines.push('userAgentData: not available in this browser');
+      }
+      document.getElementById('out').innerHTML = '<pre style="white-space:pre-wrap;margin:0">' + lines.map(esc).join('\n') + '</pre>';
+    };
+  </script>
+</body>
+</html>

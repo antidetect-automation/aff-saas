@@ -4,9 +4,37 @@
   <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-04T18:00:00Z</updated>
+  <updated>2026-08-04T22:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
+  <entry>
+    <title>Multilogin vs Undetectable</title>
+    <link href="https://antidetect-automation.github.io/vs/undetectable/" />
+    <id>https://antidetect-automation.github.io/vs/undetectable/</id>
+    <updated>2026-08-04T22:00:00Z</updated>
+    <summary>X API automation vs Undetectable configuration depth.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin vs Octo Browser</title>
+    <link href="https://antidetect-automation.github.io/vs/octo-browser/" />
+    <id>https://antidetect-automation.github.io/vs/octo-browser/</id>
+    <updated>2026-08-04T22:00:00Z</updated>
+    <summary>Premium Multilogin X vs Octo media-buying workflows.</summary>
+  </entry>
+  <entry>
+    <title>Puppeteer + Multilogin X</title>
+    <link href="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
+    <id>https://antidetect-automation.github.io/guides/puppeteer-mlx/</id>
+    <updated>2026-08-04T22:00:00Z</updated>
+    <summary>Attach Puppeteer over CDP to Multilogin X profiles.</summary>
+  </entry>
+  <entry>
+    <title>UA / Client Hints checker</title>
+    <link href="https://antidetect-automation.github.io/tools/ua-ch-check/" />
+    <id>https://antidetect-automation.github.io/tools/ua-ch-check/</id>
+    <updated>2026-08-04T22:00:00Z</updated>
+    <summary>Client-side UA and Client Hints snapshot for profile sanity checks.</summary>
+  </entry>
   <entry>
     <title>Start here — Multilogin onboarding</title>
     <link href="https://antidetect-automation.github.io/start/" />

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multilogin proxy errors — troubleshooting</title>
+  <meta name="description" content="Fix Multilogin proxy failures: auth format, geo mismatch, timeouts, sticky session tips for antidetect ops." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/errors/proxy-mlx/" />
+  <meta property="og:title" content="Multilogin proxy errors" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/errors/proxy-mlx/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/errors/mlx-automation/">API errors</a>
+      <a href="/errors/proxy-mlx/">Proxy</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Troubleshooting</p>
+    <h1>Multilogin proxy errors</h1>
+    <p class="lede">Most “fingerprint” failures are proxy format, auth, or geo mismatch. Fix the lane before touching more spoof knobs.</p>
+    <h2>Symptoms → checks</h2>
+    <table>
+      <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
+      <tbody>
+        <tr><td>Profile won’t start / network error</td><td>Host:port, user:pass encoding, protocol (http/socks5)</td></tr>
+        <tr><td>Captcha / soft blocks immediately</td><td>IP reputation, datacenter vs residential, sticky vs rotating</td></tr>
+        <tr><td>Locale inconsistencies</td><td>Proxy exit country vs profile timezone / language</td></tr>
+        <tr><td>Works manually, fails in scripts</td><td>Race starting profile before proxy is up; shorter timeouts</td></tr>
+      </tbody>
+    </table>
+    <h2>Tools</h2>
+    <ul>
+      <li><a href="/tools/proxy-format/">Proxy pack formatter</a> — normalize host lists</li>
+      <li><a href="/tools/fingerprint-checklist/">Fingerprint checklist</a></li>
+      <li><a href="/errors/mlx-automation/">MLX API / CDP errors</a></li>
+    </ul>
+    <div class="note">We may earn a commission via Multilogin codes. Not official Multilogin Support.</div>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_proxy">Deal desk</a>
+      <a class="btn ghost" href="/tools/proxy-format/">Format proxies</a>
+    </p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>

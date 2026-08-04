@@ -1,31 +1,21 @@
 # Project status vs original plan
 
-Updated: 2026-08-04 (v0.4.0 upgrade)
+Updated: 2026-08-04 (v0.5.0 upgrade)
 
-## Handoff Top 10
+## Handoff Top 10 — complete
 
-| # | Asset | Status |
-|---|--------|--------|
-| 1 | Playwright starter kit | Done — `kits/` + repo `playwright-mlx-starter` |
-| 2 | Postman kit | Done |
-| 3 | WebGL checker | Done — `/tools/webgl-check/` |
-| 4 | Proxy formatter | Done — `/tools/proxy-format/` |
-| 5 | Telegram intent onboarding | Done + `/kits` `/onboarding` |
-| 6 | Source-aware deep links | Done |
-| 7 | Troubleshooting factory | Done — `/errors/mlx-automation/` + FAQ + drafts |
-| 8 | Use-case landings | Done — ads / ecommerce / cloud-phone / crypto |
-| 9 | Hub SSOT | Done — aff-saas → github.io |
-| 10 | Evergreen Actions | Done — Pages sync workflow |
+Plus SERP expansion beyond original plan.
 
-## Extra shipped beyond original plan
-- Compares: AdsPower, GoLogin, Dolphin Anty, Hidemium, Incogniton
-- Puppeteer + Selenium kits (Selenium in monorepo)
-- `/start/` onboarding, site.webmanifest, CONTRIBUTING
-- Workers AI `/ask`, D1 leads, webhook realtime
-- IndexNow, Atom feed, llms.txt, FAQ schema
-- Syndication pack in `content/`
+## v0.5.0 extras
+- Compare hub `/vs/` + Undetectable + Octo Browser
+- Guides: Puppeteer MLX, profile warm-up
+- Errors: proxy troubleshooting
+- Tool: UA / Client Hints checker
+- Bot: `/puppeteer` `/warmup` expanded `/compare` `/tools` `/errors`
+- Pages sync preserves github.io Actions workflow
 
 ## Manual remaining
 1. Publish Dev.to/Hashnode from `content/`
 2. BotFather `/setuserpic`
 3. Google Search Console sitemap submit
+4. Sync `github-profile/README.md` → org profile README repo if needed

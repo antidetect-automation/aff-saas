@@ -5,20 +5,27 @@ const DISCLOSURE =
 
 const LINKS = {
   deal: `${HUB}/deal/`,
+  vsHub: `${HUB}/vs/`,
   compare: `${HUB}/vs/adspower/`,
   gologin: `${HUB}/vs/gologin/`,
   dolphin: `${HUB}/vs/dolphin-anty/`,
   hidemium: `${HUB}/vs/hidemium/`,
   incogniton: `${HUB}/vs/incogniton/`,
+  undetectable: `${HUB}/vs/undetectable/`,
+  octo: `${HUB}/vs/octo-browser/`,
   guide: `${HUB}/guides/playwright-mlx/`,
+  puppeteer: `${HUB}/guides/puppeteer-mlx/`,
   postman: `${HUB}/guides/postman-mlx/`,
   cookies: `${HUB}/guides/cookies-sessions/`,
+  warmup: `${HUB}/guides/profile-warmup/`,
   start: `${HUB}/start/`,
   tools: `${HUB}/tools/`,
   webgl: `${HUB}/tools/webgl-check/`,
   proxy: `${HUB}/tools/proxy-format/`,
   fpcheck: `${HUB}/tools/fingerprint-checklist/`,
+  uach: `${HUB}/tools/ua-ch-check/`,
   errors: `${HUB}/errors/mlx-automation/`,
+  proxyErr: `${HUB}/errors/proxy-mlx/`,
   faq: `${HUB}/faq/`,
   kits: `https://github.com/antidetect-automation/aff-saas/tree/main/kits`,
   kitPw: `https://github.com/antidetect-automation/playwright-mlx-starter`,
@@ -166,11 +173,13 @@ async function sendHelp(env, chatId) {
       "/saas50 — browser code",
       "/min50 — cloud phone code",
       "/guide — Playwright + Multilogin X",
+      "/puppeteer — Puppeteer + Multilogin X",
       "/postman — Postman starter",
-      "/tools — WebGL + proxy tools",
+      "/warmup — profile warm-up checklist",
+      "/tools — WebGL + proxy + UA tools",
       "/compare — competitor comparisons",
       "/kits — Playwright / Puppeteer starters",
-      "/errors — automation troubleshooting",
+      "/errors — automation + proxy troubleshooting",
       "/faq — FAQ page",
       "/ask <question> — Workers AI FAQ",
       "/help — this message",
@@ -289,21 +298,33 @@ async function handleUpdate(env, update) {
     await sendLink(env, chatId, "Playwright + Multilogin X guide:", LINKS.guide);
     return;
   }
+  if (text.startsWith("/puppeteer")) {
+    await sendLink(env, chatId, "Puppeteer + Multilogin X guide:", LINKS.puppeteer);
+    return;
+  }
+  if (text.startsWith("/warmup") || text.startsWith("/warm")) {
+    await sendLink(env, chatId, "Profile warm-up checklist:", LINKS.warmup);
+    return;
+  }
   if (text.startsWith("/postman")) {
     await sendLink(env, chatId, "Postman + Multilogin X:", LINKS.postman);
     return;
   }
-  if (text.startsWith("/tools") || text.startsWith("/webgl") || text.startsWith("/proxy")) {
+  if (text.startsWith("/tools") || text.startsWith("/webgl") || text.startsWith("/proxy") || text.startsWith("/ua")) {
     await tg(env, "sendMessage", {
       chat_id: chatId,
-      text: `Free tools (client-side):\n• WebGL: ${LINKS.webgl}\n• Fingerprint checklist: ${LINKS.fpcheck}\n• Proxy format: ${LINKS.proxy}`,
+      text: "Free tools (client-side):",
       reply_markup: {
         inline_keyboard: [
           [
             { text: "WebGL", url: LINKS.webgl },
-            { text: "Checklist", url: LINKS.fpcheck },
+            { text: "UA / CH", url: LINKS.uach },
           ],
-          [{ text: "Proxy", url: LINKS.proxy }],
+          [
+            { text: "Checklist", url: LINKS.fpcheck },
+            { text: "Proxy", url: LINKS.proxy },
+          ],
+          [{ text: "Tools hub", url: LINKS.tools }],
         ],
       },
     });
@@ -315,11 +336,14 @@ async function handleUpdate(env, update) {
       text: "Comparisons:",
       reply_markup: {
         inline_keyboard: [
+          [{ text: "All compares", url: LINKS.vsHub }],
           [{ text: "vs AdsPower", url: LINKS.compare }],
           [{ text: "vs GoLogin", url: LINKS.gologin }],
           [{ text: "vs Dolphin Anty", url: LINKS.dolphin }],
           [{ text: "vs Hidemium", url: LINKS.hidemium }],
           [{ text: "vs Incogniton", url: LINKS.incogniton }],
+          [{ text: "vs Undetectable", url: LINKS.undetectable }],
+          [{ text: "vs Octo Browser", url: LINKS.octo }],
         ],
       },
     });
@@ -345,7 +369,16 @@ async function handleUpdate(env, update) {
     return;
   }
   if (text.startsWith("/errors")) {
-    await sendLink(env, chatId, "MLX automation troubleshooting:", LINKS.errors);
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: "Troubleshooting:",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "API / CDP errors", url: LINKS.errors }],
+          [{ text: "Proxy errors", url: LINKS.proxyErr }],
+        ],
+      },
+    });
     return;
   }
   if (text.startsWith("/faq")) {
@@ -388,12 +421,14 @@ async function ensureBotMeta(env) {
     { command: "saas50", description: "Browser coupon" },
     { command: "min50", description: "Cloud Phone coupon" },
     { command: "guide", description: "Playwright + MLX guide" },
+    { command: "puppeteer", description: "Puppeteer + MLX guide" },
     { command: "postman", description: "Postman kit" },
+    { command: "warmup", description: "Profile warm-up checklist" },
     { command: "tools", description: "Free tools" },
     { command: "compare", description: "Competitor comparisons" },
     { command: "kits", description: "Playwright / Puppeteer starters" },
     { command: "onboarding", description: "Start here path" },
-    { command: "errors", description: "Automation troubleshooting" },
+    { command: "errors", description: "Automation + proxy troubleshooting" },
     { command: "faq", description: "FAQ" },
     { command: "ask", description: "Ask AI FAQ" },
     { command: "help", description: "Command list" },

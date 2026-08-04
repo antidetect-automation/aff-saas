@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile warm-up for Multilogin — practical checklist</title>
+  <meta name="description" content="How to warm Multilogin profiles safely: cookies, pace, proxy geo, fingerprint checks — before scaling automation." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/guides/profile-warmup/" />
+  <meta property="og:title" content="Multilogin profile warm-up checklist" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/guides/profile-warmup/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/guides/profile-warmup/">Warmup</a>
+      <a href="/tools/fingerprint-checklist/">Checklist</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Guide</p>
+    <h1>Profile warm-up checklist</h1>
+    <p class="lede">Warming is about consistency, not speed. A cold profile + automated burst is a common failure mode.</p>
+    <ol>
+      <li>Assign a sticky residential/mobile proxy that matches the persona’s geo.</li>
+      <li>Align timezone, language, and WebRTC/DNS expectations with that geo.</li>
+      <li>Snapshot fingerprints with <a href="/tools/webgl-check/">WebGL</a> + <a href="/tools/ua-ch-check/">UA / Client Hints</a>.</li>
+      <li>Browse a few benign sites manually or with slow automation; persist cookies/sessions.</li>
+      <li>Only then run your real target workflow — still with human-like pacing.</li>
+    </ol>
+    <h2>Do not</h2>
+    <ul>
+      <li>Reuse one cookie jar across unrelated accounts</li>
+      <li>Rotate proxies mid-session without a freeze-thaw plan</li>
+      <li>Claim or chase “undetectable” setups</li>
+    </ul>
+    <div class="note">Affiliate disclosure applies for Multilogin codes <code>SAAS50</code> / <code>MIN50</code>.</div>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_warmup">Get deal on Telegram</a>
+      <a class="btn ghost" href="/guides/cookies-sessions/">Cookies guide</a>
+    </p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+</body>
+</html>

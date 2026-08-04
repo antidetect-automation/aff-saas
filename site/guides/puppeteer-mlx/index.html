@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Puppeteer + Multilogin X API — starter guide</title>
+  <meta name="description" content="Attach Puppeteer to a Multilogin X profile over CDP. Practical automation guide for antidetect browser farms." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
+  <meta property="og:title" content="Puppeteer + Multilogin X — starter guide" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"Puppeteer + Multilogin X starter guide","url":"https://antidetect-automation.github.io/guides/puppeteer-mlx/","author":{"@type":"Organization","name":"antidetect-automation"}}
+  </script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/guides/playwright-mlx/">Playwright</a>
+      <a href="/guides/puppeteer-mlx/">Puppeteer</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article>
+    <p class="eyebrow">Guide</p>
+    <h1>Puppeteer + Multilogin X</h1>
+    <p class="lede">Same core loop as Playwright: sign in to Multilogin X → start profile → connect Puppeteer via CDP → automate → stop profile.</p>
+    <h2>Flow</h2>
+    <pre><code>1. Authenticate to Multilogin X API
+2. Start profile by UUID
+3. Read debugger / CDP endpoint from start response
+4. puppeteer.connect({ browserURL or browserWSEndpoint })
+5. Run your script
+6. Stop profile</code></pre>
+    <p>Exact host paths change — verify against current <a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">Postman collection</a>.</p>
+    <h2>Starter kit</h2>
+    <ul>
+      <li><a href="https://github.com/antidetect-automation/puppeteer-mlx-starter">puppeteer-mlx-starter</a></li>
+      <li>Prefer <a href="/guides/playwright-mlx/">Playwright guide</a> if you are starting greenfield</li>
+    </ul>
+    <h2>Common fails</h2>
+    <ul>
+      <li>Connecting before the profile is fully started</li>
+      <li>Wrong local vs remote debugger URL</li>
+      <li>Proxy geo ≠ profile timezone/language</li>
+    </ul>
+    <div class="note">Browser automation → <code>SAAS50</code>. See <a href="/errors/mlx-automation/">automation errors</a> and <a href="/errors/proxy-mlx/">proxy errors</a>.</div>
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_puppeteer">Get Multilogin deal</a>
+      <a class="btn ghost" href="https://github.com/antidetect-automation/puppeteer-mlx-starter">Open kit</a>
+    </p>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a> · <a href="/guides/profile-warmup/">Warmup</a></p></footer>
+</body>
+</html>

@@ -10,20 +10,27 @@
 - https://antidetect-automation.github.io/tools/webgl-check/
 - https://antidetect-automation.github.io/tools/fingerprint-checklist/
 - https://antidetect-automation.github.io/tools/proxy-format/
+- https://antidetect-automation.github.io/tools/ua-ch-check/
 
 ## Guides
 - https://antidetect-automation.github.io/guides/playwright-mlx/
+- https://antidetect-automation.github.io/guides/puppeteer-mlx/
 - https://antidetect-automation.github.io/guides/postman-mlx/
 - https://antidetect-automation.github.io/guides/cookies-sessions/
+- https://antidetect-automation.github.io/guides/profile-warmup/
 - https://antidetect-automation.github.io/errors/mlx-automation/
+- https://antidetect-automation.github.io/errors/proxy-mlx/
 - https://antidetect-automation.github.io/faq/
 
 ## Compare
+- https://antidetect-automation.github.io/vs/
 - https://antidetect-automation.github.io/vs/adspower/
 - https://antidetect-automation.github.io/vs/gologin/
 - https://antidetect-automation.github.io/vs/dolphin-anty/
 - https://antidetect-automation.github.io/vs/hidemium/
 - https://antidetect-automation.github.io/vs/incogniton/
+- https://antidetect-automation.github.io/vs/undetectable/
+- https://antidetect-automation.github.io/vs/octo-browser/
 
 ## Use-cases
 - https://antidetect-automation.github.io/use-cases/ads-multi-account/

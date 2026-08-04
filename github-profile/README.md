@@ -9,11 +9,11 @@ English Multilogin X & antidetect browser ops hub.
 ### Destinations
 | | |
 |--|--|
-| Deal | [Coupons](https://antidetect-automation.github.io/deal/) |
-| Tools | [WebGL · Proxy · Checklist](https://antidetect-automation.github.io/tools/) |
-| Guides | [Playwright](https://antidetect-automation.github.io/guides/playwright-mlx/) · [Postman](https://antidetect-automation.github.io/guides/postman-mlx/) · [Cookies](https://antidetect-automation.github.io/guides/cookies-sessions/) |
-| Compare | [AdsPower](https://antidetect-automation.github.io/vs/adspower/) · [GoLogin](https://antidetect-automation.github.io/vs/gologin/) · [Dolphin](https://antidetect-automation.github.io/vs/dolphin-anty/) · [Hidemium](https://antidetect-automation.github.io/vs/hidemium/) |
-| Kits | [Playwright](https://github.com/antidetect-automation/playwright-mlx-starter) · [aff-saas source](https://github.com/antidetect-automation/aff-saas) |
+| Deal | [Coupons](https://antidetect-automation.github.io/deal/) · [Start](https://antidetect-automation.github.io/start/) |
+| Tools | [WebGL · Proxy · UA/CH · Checklist](https://antidetect-automation.github.io/tools/) |
+| Guides | [Playwright](https://antidetect-automation.github.io/guides/playwright-mlx/) · [Puppeteer](https://antidetect-automation.github.io/guides/puppeteer-mlx/) · [Warmup](https://antidetect-automation.github.io/guides/profile-warmup/) · [Postman](https://antidetect-automation.github.io/guides/postman-mlx/) |
+| Compare | [Hub](https://antidetect-automation.github.io/vs/) · [Undetectable](https://antidetect-automation.github.io/vs/undetectable/) · [Octo](https://antidetect-automation.github.io/vs/octo-browser/) · [AdsPower](https://antidetect-automation.github.io/vs/adspower/) |
+| Kits | [Playwright](https://github.com/antidetect-automation/playwright-mlx-starter) · [Puppeteer](https://github.com/antidetect-automation/puppeteer-mlx-starter) · [aff-saas](https://github.com/antidetect-automation/aff-saas) |
 
 This repo is the **GitHub profile README only** — not the website.
 
