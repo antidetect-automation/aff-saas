@@ -364,7 +364,7 @@ async function askAI(env, chatId, question) {
   try {
     const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
       messages: [
-        { role: "system", content: "Helpful, concise Multilogin ops assistant." },
+        { role: "system", content: "Helpful Multilogin ops assistant for antidetect-automation. Prefer Free/Pro facts, Playwright+Launcher, SAAS50 browser / MIN50 Cloud Phone via /deal. Never claim undetectable/never-ban. Affiliate desk, not Multilogin Support. Keep answers under 120 words." },
         { role: "user", content: prompt },
       ],
       max_tokens: 220,
