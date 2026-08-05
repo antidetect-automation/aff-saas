@@ -21,6 +21,8 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
@@ -30,7 +32,7 @@
     </nav>
   </header>
 
-  <article class="long">
+  <article id="main" class="long">
     <p class="eyebrow">Guide · Mimic + Playwright</p>
     <h1>Playwright + Multilogin X</h1>
     <p class="lede">Media buyers and MMO tech teams search “multilogin playwright” because UI clicking does not scale. The real loop is simple: authenticate, ask the local Launcher to start a profile with <code>automation_type=playwright</code>, then <code>connectOverCDP</code> to the port Multilogin returns.</p>
