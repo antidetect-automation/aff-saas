@@ -28,11 +28,13 @@ Chỉ ghi **sau khi** `sendMessage` thành công → lỗi Telegram sẽ retry h
 **Exact only:** `https://multilogin.com?a_aid=saas`  
 Do **not** add `/`, `/pricing`, or other path — partner tracking breaks.
 
-## Telegram “SEO”
+## Telegram “SEO” + CTA
 
 - Keyword-rich first lines (Multilogin, antidetect, Facebook ads, Cloud Phone…)
-- Niche hashtags at end (`#multilogin` `#facebookads` `#cloudphone` `#SAAS50` … by topic)
-- Buttons: bot codes + exact aff URL + hub
+- Niche hashtags at end (`#multilogin` `#facebookads` `#cloudphone` …) — **never** `#SAAS50` / `#MIN50` (codes are CTA, not tags)
+- Footer: exclusive ~50% deal — SAAS50 (browser) / MIN50 (Cloud Phone) → bot → Multilogin checkout
+- Buttons: `Get 50% — SAAS50 / MIN50` + `Open Multilogin · apply code` + hub
+- **Do not** paste legalese / `a_aid=` jargon on channel posts (disclosure lives on hub `/deal/` and `/about/`)
 
 Also set channel **username / description / pinned** with those keywords — hashtags alone không đủ.
 

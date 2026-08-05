@@ -76,11 +76,12 @@ function parseRssItems(xml) {
 
 function nicheHashtags(item) {
   const blob = `${item.title} ${(item.categories || []).join(" ")}`.toLowerCase();
+  // Discovery tags only — never put coupon codes in hashtags
   const tags = new Set(["#multilogin", "#antidetect", "#antidetectbrowser", "#multiaccount"]);
   const map = [
     [/facebook|meta|bm\b/, ["#facebookads", "#metaads", "#mediabuying"]],
     [/google\s*ads|mcc/, ["#googleads", "#ppcm"]],
-    [/cloud\s*phone|android/, ["#cloudphone", "#androidfarm", "#MIN50"]],
+    [/cloud\s*phone|android/, ["#cloudphone", "#androidfarm"]],
     [/playwright|puppeteer|selenium|automation|cdp|api/, ["#playwright", "#browserautomation", "#mlxapi"]],
     [/prox/, ["#proxy", "#residentialproxy"]],
     [/cookie|warmup|warm-up|session/, ["#profilewarmup", "#cookies"]],
@@ -91,7 +92,6 @@ function nicheHashtags(item) {
   for (const [re, hs] of map) {
     if (re.test(blob)) hs.forEach((h) => tags.add(h));
   }
-  tags.add("#SAAS50");
   return [...tags].slice(0, 12).join(" ");
 }
 
@@ -104,12 +104,13 @@ function topicOk(item) {
 async function writeCommentary(env, item) {
   const tags = nicheHashtags(item);
   const system = [
-    "You write Telegram channel posts for antidetect-automation, a Multilogin affiliate desk.",
+    "You write Telegram channel posts for antidetect-automation, a Multilogin partner desk.",
     "ORIGINAL ops commentary only. Never mirror Multilogin’s blog wording or structure.",
     "Never promise free Multilogin trials, free forever seats, undetectable, or never-ban.",
-    "Facts you MAY state: Free plan = 5 profiles (no API); Pro needed for API; coupons SAAS50 (browser) and MIN50 (Cloud Phone) via OUR Telegram bot.",
+    "Facts you MAY state: Free plan = 5 profiles (no API); Pro needed for API.",
+    "Deal facts: our exclusive desk codes SAAS50 (browser) and MIN50 (Cloud Phone) each unlock ~50% off at Multilogin checkout — get them only via our Telegram bot.",
     "Telegram SEO: first line must include Multilogin + a niche keyword (ads, Cloud Phone, Playwright, proxy, affiliate).",
-    "No URLs in body. Buttons carry links. No “read the Multilogin blog” / source links.",
+    "No URLs in body. Buttons carry links. No Multilogin blog source links. Never invent hashtags beyond the final line we give you. Never put SAAS50 or MIN50 inside hashtags.",
   ].join(" ");
 
   const prompt = [
@@ -120,8 +121,8 @@ async function writeCommentary(env, item) {
     "2) Blank line.",
     "3) 2 sentences: why media-buyers / multi-account desks care (our desk voice).",
     "4) Exactly 3 bullets starting with • (proxy, warmup/cookies, browser vs Cloud Phone or API/Pro).",
-    "5) CTA: message our Telegram bot for SAAS50 or MIN50, then open Multilogin via our partner button.",
-    "6) Final line EXACTLY:",
+    "5) Strong CTA (1–2 sentences): tap the bot for exclusive 50% codes — SAAS50 for Antidetect Browser, MIN50 for Cloud Phone — then open Multilogin with the partner button to apply at checkout.",
+    "6) Final line EXACTLY (hashtags only, no coupon codes):",
     tags,
     "",
     "Inspiration title only (do not rewrite their article):",
@@ -144,11 +145,11 @@ async function writeCommentary(env, item) {
       "",
       "Free marketing pages and free tiers are different things. For money lanes, pick the product that matches the surface (Android app vs Chromium), then isolate profiles properly.",
       "",
-      "• Cloud Phone path → ask our bot for MIN50",
-      "• Browser / ads / Playwright → SAAS50 (Pro if you need API)",
+      "• Cloud Phone / Android → exclusive MIN50 (~50% off)",
+      "• Browser / ads / Playwright → exclusive SAAS50 (~50% off; Pro if you need API)",
       "• Sticky proxy + warmup before spend",
       "",
-      "Get codes on Telegram, then Multilogin via our partner button.",
+      "Tap the bot for your exclusive 50% code, then open Multilogin on the partner button and apply it at checkout.",
       "",
       tags,
     ].join("\n");
@@ -235,26 +236,26 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
         "",
         "Multilogin published a relevant ops post. We write our own desk notes — not reprints.",
         "",
-        "• Browser automation / ads lanes → coupon SAAS50",
-        "• Cloud Phone / Android lanes → coupon MIN50",
+        "• Browser / ads lanes → exclusive SAAS50 (~50% off)",
+        "• Cloud Phone / Android → exclusive MIN50 (~50% off)",
         "",
-        "Open the Telegram bot for codes, then check hub pricing before you scale.",
+        "Tap the bot for your exclusive 50% code, then open Multilogin on the partner button.",
       ].join("\n");
     }
 
     const tags = nicheHashtags(item);
-    let postBody = body.slice(0, 1200);
+    let postBody = body.slice(0, 1400);
     if (!postBody.includes("#multilogin")) postBody = `${postBody}\n\n${tags}`;
 
+    // No legalese / a_aid jargon on channel — offer first. Soft note lives on hub /deal.
     const msg = [
       postBody,
       "",
       "———",
-      `Bot codes: ${BOT}?start=aa_digest`,
-      `Multilogin: ${AFF}`,
-      `Hub: ${HUB}/deal/`,
-      "",
-      "Affiliate disclosure: SAAS50 / MIN50 / a_aid=saas may earn a commission. Not Multilogin Support.",
+      "🔥 Exclusive desk deal: ~50% off Multilogin",
+      "• Browser → code SAAS50",
+      "• Cloud Phone → code MIN50",
+      "Tap the bot → grab your code → open Multilogin → paste at checkout.",
     ].join("\n");
 
     let tg;
@@ -262,12 +263,12 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
       tg = await tgSend(env, chatId, msg, {
         inline_keyboard: [
           [
-            { text: "📲 SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
-            { text: "Multilogin", url: AFF },
+            { text: "🔥 Get 50% — SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
+            { text: "Open Multilogin · apply code", url: AFF },
           ],
           [
-            { text: "Deal desk", url: `${HUB}/deal/` },
-            { text: "Pricing notes", url: `${HUB}/pricing/` },
+            { text: "How the deal works", url: `${HUB}/deal/` },
+            { text: "Pricing math", url: `${HUB}/pricing/` },
           ],
         ],
       });
