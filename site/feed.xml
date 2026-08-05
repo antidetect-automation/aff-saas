@@ -8,6 +8,13 @@
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
   <entry>
+    <title>Free Multilogin ops tools hub</title>
+    <link href="https://antidetect-automation.github.io/tools/" />
+    <id>https://antidetect-automation.github.io/tools/</id>
+    <updated>2026-08-04T21:00:00Z</updated>
+    <summary>Client-side WebGL, proxy formatter, fingerprint checklist — no upload.</summary>
+  </entry>
+  <entry>
     <title>Multilogin Cloud Phone — MIN50 path</title>
     <link href="https://antidetect-automation.github.io/use-cases/cloud-phone/" />
     <id>https://antidetect-automation.github.io/use-cases/cloud-phone/</id>

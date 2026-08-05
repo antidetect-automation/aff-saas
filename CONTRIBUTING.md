@@ -23,3 +23,11 @@ Thanks for helping antidetect-automation stay useful (not spammy).
 - Kit README clarity (no new repos)
 
 Open an issue first for large ideas: use the Content template.
+
+## Pre-ship checks
+```bash
+python3 scripts/quality_check.py
+bash scripts/sync_github_io.sh
+cd worker-bot && npm run deploy
+python3 scripts/indexnow_ping.py
+```
