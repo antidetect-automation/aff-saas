@@ -1,9 +1,12 @@
+import { latestDigests, runMlxBlogDigest } from "./mlxDigest.js";
+
 const HUB = "https://antidetect-automation.github.io";
 const BOT_PUBLIC = "https://t.me/antidetect_automation_bot";
 const DISCLOSURE =
   "Affiliate disclosure: if you buy Multilogin with our codes/links, we may earn a commission. We are not Multilogin Support.";
 
 const MLX_PLANS = "https://multilogin.com/pricing";
+
 
 const LINKS = {
   deal: `${HUB}/deal/`,
@@ -315,6 +318,7 @@ async function sendHelp(env, chatId) {
       "/glossary — ops vocabulary",
       "/faq — FAQ page",
       "/ask <question> — Workers AI FAQ",
+      "/digest — latest Multilogin blog desk notes",
       "/help — this message",
       "",
       `Bot: ${BOT_PUBLIC}`,
@@ -640,6 +644,39 @@ async function handleUpdate(env, update) {
     await sendLink(env, chatId, "FAQ:", LINKS.faq);
     return;
   }
+  if (text.startsWith("/digest")) {
+    const rows = await latestDigests(env, 3);
+    if (!rows.length) {
+      await tg(env, "sendMessage", {
+        chat_id: chatId,
+        text: "No desk notes yet — cron will pull Multilogin’s RSS and write commentary here. Or wait for the next hourly pass.",
+      });
+      return;
+    }
+    const lines = ["Latest Multilogin desk notes (commentary + source link)", ""];
+    for (const r of rows) {
+      lines.push(`• ${r.title || ""}`);
+      lines.push((r.body || "").slice(0, 280));
+      lines.push(`Source: ${r.source}`);
+      lines.push("");
+    }
+    lines.push(DISCLOSURE);
+    lines.push(`Deal: ${LINKS.deal}`);
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: lines.join("\n").slice(0, 3900),
+      disable_web_page_preview: true,
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: "Deal SAAS50 / MIN50", url: LINKS.deal },
+            { text: "Pricing", url: LINKS.pricing },
+          ],
+        ],
+      },
+    });
+    return;
+  }
   if (text.startsWith("/ask")) {
     const q = text.replace(/^\/ask(@\w+)?\s*/i, "").trim();
     if (!q) {
@@ -768,6 +805,7 @@ async function ensureBotMeta(env) {
     { command: "faq", description: "FAQ" },
     { command: "glossary", description: "Ops glossary" },
     { command: "ask", description: "Ask AI FAQ" },
+    { command: "digest", description: "Latest Multilogin blog desk notes" },
     { command: "help", description: "Command list" },
   ];
   const cmds = await tg(env, "setMyCommands", { commands });
@@ -824,6 +862,12 @@ export default {
         } catch (e) {
           console.error("bot meta", e);
         }
+        try {
+          // Hourly budget inside runMlxBlogDigest (KV digest:last_hour)
+          await runMlxBlogDigest(env, { limit: 2 });
+        } catch (e) {
+          console.error("mlx digest", e);
+        }
       })()
     );
   },
@@ -836,8 +880,23 @@ export default {
         ok: true,
         hub: HUB,
         bot: BOT_PUBLIC,
-        features: ["webhook", "cron-fallback", "d1", "kv", "workers-ai"],
+        features: ["webhook", "cron-fallback", "d1", "kv", "workers-ai", "mlx-blog-digest"],
       });
+    }
+
+    if (url.pathname === "/run-digest") {
+      const key = url.searchParams.get("key");
+      if (!env.STATS_KEY || key !== env.STATS_KEY) {
+        return new Response("unauthorized", { status: 401 });
+      }
+      const force = url.searchParams.get("force") === "1";
+      const result = await runMlxBlogDigest(env, { force, limit: 3 });
+      return Response.json(result);
+    }
+
+    if (url.pathname === "/digests") {
+      const rows = await latestDigests(env, 10);
+      return Response.json({ ok: true, items: rows });
     }
 
     if (url.pathname === "/setup-bot") {
