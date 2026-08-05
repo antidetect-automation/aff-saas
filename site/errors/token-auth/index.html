@@ -9,10 +9,15 @@
   <meta property="og:title" content="Token / auth errors" />
   <meta property="og:url" content="https://antidetect-automation.github.io/errors/token-auth/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <meta property="og:description" content="MD5 sign-in, 30-minute Bearer, Free has no API." />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"TechArticle","headline":"Multilogin API token errors","url":"https://antidetect-automation.github.io/errors/token-auth/","dateModified":"2026-08-04"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Errors","item":"https://antidetect-automation.github.io/errors/"},{"@type":"ListItem","position":3,"name":"Token auth","item":"https://antidetect-automation.github.io/errors/token-auth/"}]}
   </script>
 </head>
 <body>
@@ -45,6 +50,26 @@
       <li>Follow <a href="/guides/api-auth-mlx/">API auth</a>; store token in env, never git.</li>
       <li>Then start profile — <a href="/guides/mlx-api/">API map</a>.</li>
     </ol>
+
+
+    <h2>What a good sign-in looks like</h2>
+    <pre><code>POST https://api.multilogin.com/user/signin
+Content-Type: application/json
+
+{ "email": "you@example.com", "password": "&lt;md5 hex of password&gt;" }
+
+→ data.token  (help text: ~30 minutes)</code></pre>
+    <p>Hash the password the way Multilogin’s official samples do — do not invent base64. Confirm with Postman before rewriting Node.</p>
+
+    <h2>After you have a token</h2>
+    <ul>
+      <li>Pass <code>Authorization: Bearer {token}</code> to Launcher <code>https://launcher.mlx.yt:45001/...</code> start calls.</li>
+      <li>On 401 mid-job: re-signin or refresh; don’t rotate proxy settings as a “fix.”</li>
+      <li>CDP timeouts that appear after ~30 minutes are often dead tokens — <a href="/errors/cdp-attach/">CDP desk</a>.</li>
+    </ul>
+
+    <h2>Ads desks</h2>
+    <p>Auth failures during peak ad ops look like “Playwright died.” Check token age first, then proxy. Lanes: <a href="/use-cases/facebook-ads/">Facebook</a> · <a href="/use-cases/google-ads/">Google</a>.</p>
 
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_token">Get Multilogin deal</a>

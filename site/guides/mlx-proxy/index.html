@@ -11,6 +11,9 @@
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://antidetect-automation.github.io/guides/"},{"@type":"ListItem","position":3,"name":"Proxy","item":"https://antidetect-automation.github.io/guides/mlx-proxy/"}]}
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -41,7 +44,17 @@
     <h2>When automation joins</h2>
     <p>Start via Launcher with your automation type, then attach CDP (<a href="/guides/playwright-mlx/">Playwright</a>). If connect works but every site smells datacenter, you don’t have a CDP bug — you have an IP reputation problem. See <a href="/errors/proxy-mlx/">proxy troubleshooting</a>.</p>
 
-    <p class="cta-row">
+    
+    <h2>Sticky vs rotating</h2>
+    <p>Ads and social money lanes want <strong>sticky</strong> residential/mobile exit IPs that match profile TZ. Rotating proxies for sign-up spam are a different product — don’t mix them into the same Multilogin profile.</p>
+    <ul>
+      <li>Match country / city to the story the account already tells.</li>
+      <li>One proxy credential tree per money lane; clone carefully.</li>
+      <li>Test leak surfaces in-profile: <a href="/tools/dns-webrtc-check/">DNS/WebRTC</a> · <a href="/tools/proxy-format/">proxy format</a>.</li>
+    </ul>
+    <h2>When CDP works but every site says “datacenter”</h2>
+    <p>That’s proxy quality, not Puppeteer. Fix credentials / provider first — <a href="/errors/proxy-mlx/">proxy error desk</a>.</p>
+<p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_proxy">SAAS50 / MIN50</a>
       <a class="btn ghost" href="/use-cases/ads-multi-account/">Ads use-case</a>
     </p>

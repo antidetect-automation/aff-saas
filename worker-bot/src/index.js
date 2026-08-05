@@ -264,7 +264,7 @@ async function sendHelp(env, chatId) {
     text: [
       "*Commands*",
       "/start — choose Browser or Cloud Phone",
-      "/deal — deal desk",
+      "/deal — SAAS50 / MIN50 chooser",
       "/pricing — Free / Pro / Business 2026",
       "/saas50 — browser code",
       "/min50 — cloud phone code",
