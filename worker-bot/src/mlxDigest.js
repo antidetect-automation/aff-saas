@@ -137,17 +137,20 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
 
   const items = parseRssItems(xml).filter(topicOk);
   const created = [];
+  const errors = [];
   for (const item of items) {
     if (created.length >= limit) break;
     const seenKey = `digest:seen:${item.guid}`;
-    if (await env.LEADS.get(seenKey)) continue;
+    if (!force && (await env.LEADS.get(seenKey))) continue;
 
     let body;
     try {
       body = await writeCommentary(env, item);
     } catch (e) {
       console.error("digest ai", e);
-      continue;
+      errors.push({ title: item.title, error: String(e) });
+      // still publish a stub so the pipeline is observable
+      body = `${item.title}\n\nMultilogin published a related post. Commentary AI was busy — read the source, then grab SAAS50 / MIN50 on our deal desk if you need browser or Cloud Phone seats.\n\nHub: ${HUB}/deal/`;
     }
 
     const record = {
@@ -190,18 +193,22 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
     ].join("\n");
 
     if (env.DIGEST_CHAT_ID) {
-      await tgSend(env, env.DIGEST_CHAT_ID, msg, {
-        inline_keyboard: [
-          [
-            { text: "Read Multilogin", url: item.link },
-            { text: "SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
+      try {
+        await tgSend(env, env.DIGEST_CHAT_ID, msg, {
+          inline_keyboard: [
+            [
+              { text: "Read Multilogin", url: item.link },
+              { text: "SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
+            ],
+            [
+              { text: "Pricing", url: `${HUB}/pricing/` },
+              { text: "Deal", url: `${HUB}/deal/` },
+            ],
           ],
-          [
-            { text: "Pricing", url: `${HUB}/pricing/` },
-            { text: "Deal", url: `${HUB}/deal/` },
-          ],
-        ],
-      });
+        });
+      } catch (e) {
+        errors.push({ title: item.title, notify: String(e) });
+      }
     }
 
     created.push({ title: item.title, link: item.link });
@@ -210,10 +217,10 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
   await env.LEADS.put("digest:last_hour", hourKey);
   await env.LEADS.put(
     "digest:last_run",
-    JSON.stringify({ at: new Date().toISOString(), created: created.length })
+    JSON.stringify({ at: new Date().toISOString(), created: created.length, errors })
   );
 
-  return { ok: true, created, scanned: items.length };
+  return { ok: true, created, scanned: items.length, errors };
 }
 
 export async function latestDigests(env, n = 5) {
