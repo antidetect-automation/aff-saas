@@ -71,7 +71,7 @@ async function writeCommentary(env, item) {
     "Write plain text paragraphs only.",
   ].join("\n");
 
-  const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+  const result = await env.AI.run("@cf/meta/llama-3.2-3b-instruct", {
     messages: [
       {
         role: "system",
@@ -217,7 +217,7 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
   await env.LEADS.put("digest:last_hour", hourKey);
   await env.LEADS.put(
     "digest:last_run",
-    JSON.stringify({ at: new Date().toISOString(), created: created.length, errors })
+    JSON.stringify({ at: new Date().toISOString(), created: created.length, errors: errors.length })
   );
 
   return { ok: true, created, scanned: items.length, errors };

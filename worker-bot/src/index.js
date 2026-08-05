@@ -368,7 +368,7 @@ async function askAI(env, chatId, question) {
   ].join("\n");
 
   try {
-    const result = await env.AI.run("@cf/meta/llama-3.1-8b-instruct", {
+    const result = await env.AI.run("@cf/meta/llama-3.2-3b-instruct", {
       messages: [
         { role: "system", content: "Helpful Multilogin ops assistant for antidetect-automation. Prefer Free/Pro facts, Playwright+Launcher, SAAS50 browser / MIN50 Cloud Phone via /deal. Never claim undetectable/never-ban. Affiliate desk, not Multilogin Support. Keep answers under 120 words." },
         { role: "user", content: prompt },

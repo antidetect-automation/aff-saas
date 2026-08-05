@@ -8,7 +8,7 @@
 | Cron Triggers (`* * * * *`) | Fallback poll if webhook drops |
 | KV (`LEADS`) | Counters + mode/offset |
 | D1 (`aa-leads`) | Lead event log |
-| Workers AI (`@cf/meta/llama-3.1-8b-instruct`) | `/ask` FAQ |
+| Workers AI (`@cf/meta/llama-3.2-3b-instruct`) | `/ask` FAQ |
 | Secrets | `BOT_TOKEN`, `WEBHOOK_SECRET`, `STATS_KEY` |
 
 **Public site stays** https://antidetect-automation.github.io/ only (no pages.dev).
