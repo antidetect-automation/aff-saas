@@ -13,6 +13,8 @@ Source of truth for site HTML + Cloudflare Telegram Worker. **No pages.dev.**
 | multilogin vs adspower | https://antidetect-automation.github.io/vs/adspower/ |
 | multilogin vs gologin | https://antidetect-automation.github.io/vs/gologin/ |
 | multilogin playwright | https://antidetect-automation.github.io/guides/playwright-mlx/ |
+| multilogin api | https://antidetect-automation.github.io/guides/mlx-api/ |
+| facebook ads multilogin | https://antidetect-automation.github.io/use-cases/facebook-ads/ |
 | about / disclosure | https://antidetect-automation.github.io/about/ |
 
 ### Repos (keep 3)

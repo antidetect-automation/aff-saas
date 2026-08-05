@@ -36,6 +36,7 @@ const LINKS = {
   fbAds: `${HUB}/use-cases/facebook-ads/`,
   gAds: `${HUB}/use-cases/google-ads/`,
   affiliate: `${HUB}/use-cases/affiliate/`,
+  cloudPhone: `${HUB}/use-cases/cloud-phone/`,
   start: `${HUB}/start/`,
   tools: `${HUB}/tools/`,
   webgl: `${HUB}/tools/webgl-check/`,
@@ -352,6 +353,10 @@ async function handleUpdate(env, update) {
   }
   if (text.startsWith("/min50") || text.startsWith("/phone") || text.startsWith("/cloud")) {
     await sendDeal(env, chatId, "phone", "cmd_min50", from);
+    return;
+  }
+  if (text.startsWith("/cloudphone") || text.startsWith("/android")) {
+    await sendLink(env, chatId, "Cloud Phone use-case (MIN50):", LINKS.cloudPhone);
     return;
   }
   if (text.startsWith("/guide") || text.startsWith("/playwright")) {

@@ -1,7 +1,7 @@
 {
   "name": "antidetect-automation",
-  "short_name": "AA Hub",
-  "description": "Multilogin guides, tools, and deal desk",
+  "short_name": "AA Multilogin",
+  "description": "Multilogin ads, API, Playwright guides and SAAS50/MIN50 deal desk",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0c1117",
