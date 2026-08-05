@@ -5,7 +5,8 @@ const BOT_PUBLIC = "https://t.me/antidetect_automation_bot";
 const DISCLOSURE =
   "Affiliate disclosure: if you buy Multilogin with our codes/links, we may earn a commission. We are not Multilogin Support.";
 
-const MLX_PLANS = "https://multilogin.com/pricing";
+const MLX_PLANS = "https://multilogin.com/pricing?a_aid=saas";
+const MLX_AFF = "https://multilogin.com/?a_aid=saas";
 
 
 const LINKS = {
@@ -234,7 +235,7 @@ async function sendDeal(env, chatId, intent, source, from) {
       inline_keyboard: [
         [
           { text: "Multilogin plans", url: MLX_PLANS },
-          { text: "Pricing notes", url: LINKS.pricing },
+          { text: "Open Multilogin", url: MLX_AFF },
         ],
         [
           { text: "Deal page", url: LINKS.deal },
@@ -277,7 +278,7 @@ async function sendDealDesk(env, chatId, source, from) {
         ],
         [
           { text: "Multilogin plans", url: MLX_PLANS },
-          { text: "Deal page", url: LINKS.deal },
+          { text: "Open Multilogin", url: MLX_AFF },
         ],
       ],
     },

@@ -25,7 +25,9 @@ Chỉ ghi **sau khi** `sendMessage` thành công → lỗi Telegram sẽ retry h
 
 ## Prompt định hướng
 
-Commentary gốc (không copy Multilogin) → CTA Telegram `SAAS50`/`MIN50` + hub pricing/deal + Playwright/Facebook khi hợp topic.
+Commentary gốc (không copy Multilogin) → CTA Telegram `SAAS50`/`MIN50` + hub + **affiliate** `https://multilogin.com/?a_aid=saas`.
+
+**Không** đưa link bài blog Multilogin ra channel (tránh mất click aff). URL gốc chỉ lưu KV để dedupe.
 
 ## Manual
 
