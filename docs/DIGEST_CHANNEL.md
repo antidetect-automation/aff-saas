@@ -23,11 +23,18 @@ Bot **phải là admin** channel ( quyền Post messages ).
 KV key: `digest:posted:<normalized-url>`  
 Chỉ ghi **sau khi** `sendMessage` thành công → lỗi Telegram sẽ retry hôm sau, không mất slot “đã post ảo”.
 
-## Prompt định hướng
+## Affiliate URL (LOCKED)
 
-Commentary gốc (không copy Multilogin) → CTA Telegram `SAAS50`/`MIN50` + hub + **affiliate** `https://multilogin.com/?a_aid=saas`.
+**Exact only:** `https://multilogin.com?a_aid=saas`  
+Do **not** add `/`, `/pricing`, or other path — partner tracking breaks.
 
-**Không** đưa link bài blog Multilogin ra channel (tránh mất click aff). URL gốc chỉ lưu KV để dedupe.
+## Telegram “SEO”
+
+- Keyword-rich first lines (Multilogin, antidetect, Facebook ads, Cloud Phone…)
+- Niche hashtags at end (`#multilogin` `#facebookads` `#cloudphone` `#SAAS50` … by topic)
+- Buttons: bot codes + exact aff URL + hub
+
+Also set channel **username / description / pinned** with those keywords — hashtags alone không đủ.
 
 ## Manual
 
