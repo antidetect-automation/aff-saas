@@ -1,22 +1,27 @@
 # Project status
 
-Updated: 2026-08-04 (overnight auto upgrade)
+Updated: 2026-08-04 overnight auto-upgrade (shipped)
 
 ## Hard lock
-No new GitHub repositories. One public site: github.io. SSOT: aff-saas.
+No new GitHub repositories. One public site: `antidetect-automation.github.io`. SSOT: `aff-saas`.
 
-## Live
-- Hub + ads/API heroes deepened (FB/Google/affiliate/ads-multi, warmup, cookies, CDP/token/proxy errors, FAQ)
-- Telegram Worker with Ads/API keyboard + welcome links
-- Kits: PW/PP/Selenium Launcher Mode B; mirrors pushed for PW/PP
-- IndexNow script: `scripts/indexnow_ping.py`
-- Hashnode publisher ready (needs Pro); Dev.to dead until new account
+## Shipped this night
+- Deep ads/ops: FB, Google, affiliate, ads-multi, warmup, cookies
+- Error desks: CDP, token, proxy + FAQ schema expansion
+- Bot welcome/AI → ads + API map; Worker redeployed
+- IndexNow batch (`scripts/indexnow_ping.py`) — 200
+- `scripts/sync_github_io.sh` for Pages sync
+- Kit Mode B already mirrored (PW/PP); Selenium stays monorepo
+- Syndicate packs ready under `content/published/`
 
-## Blocked on owner (cannot auto)
-1. GSC verify + sitemap submit
-2. New Dev.to API key or Hashnode Pro
+## Live check
+Hub, ads, API, errors, start → HTTP 200. Worker `/health` ok.
+
+## Cannot auto (owner wake-up)
+1. Google Search Console → submit sitemap
+2. New Dev.to account + API key **or** Hashnode Pro → run publish scripts
 3. BotFather `/setuserpic`
-4. Multilogin cart screenshot refresh if prices move
+4. Re-verify Multilogin cart prices if screenshots age
 
-## North star
-Operator-trusted Multilogin hub (pricing + AdsPower + Playwright + FB ads) → Telegram SAAS50/MIN50.
+## Avoid
+New repos, pages.dev, thin `/vs/*` spam, undetectable claims.
