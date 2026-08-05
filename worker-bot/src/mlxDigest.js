@@ -104,30 +104,30 @@ function topicOk(item) {
 async function writeCommentary(env, item) {
   const tags = nicheHashtags(item);
   const system = [
-    "You write Telegram channel posts for antidetect-automation (Multilogin affiliate desk).",
-    "100% original commentary. Never copy Multilogin blog text. No undetectable/never-ban claims.",
-    "Optimize for Telegram search: put high-intent niche keywords in the FIRST two lines",
-    "(examples: Multilogin, antidetect browser, Facebook ads multi account, Cloud Phone, Playwright CDP).",
-    "Do NOT invent URLs. Do NOT mention Multilogin blog source links.",
-    "Push CTAs: Telegram bot for SAAS50/MIN50 codes + partner Multilogin link a_aid=saas (buttons handle links).",
+    "You write Telegram channel posts for antidetect-automation, a Multilogin affiliate desk.",
+    "ORIGINAL ops commentary only. Never mirror Multilogin’s blog wording or structure.",
+    "Never promise free Multilogin trials, free forever seats, undetectable, or never-ban.",
+    "Facts you MAY state: Free plan = 5 profiles (no API); Pro needed for API; coupons SAAS50 (browser) and MIN50 (Cloud Phone) via OUR Telegram bot.",
+    "Telegram SEO: first line must include Multilogin + a niche keyword (ads, Cloud Phone, Playwright, proxy, affiliate).",
+    "No URLs in body. Buttons carry links. No “read the Multilogin blog” / source links.",
   ].join(" ");
 
   const prompt = [
-    "Telegram post, English, 120–160 words, plain text.",
+    "Write a Telegram post in English, 110–150 words.",
     "",
-    "Line 1: keyword-rich headline (not clickbait) including Multilogin + niche term from the topic.",
-    "Line 2: blank",
-    "Then HOOK 1–2 sentences with searchable phrases (ads desk, multi-account, antidetect, Cloud Phone, API).",
-    "Then 3 lines starting with • practical ops tips.",
-    "Then CTA: get SAAS50 (browser) or MIN50 (Cloud Phone) on our Telegram bot; use our Multilogin partner link for signup.",
-    "LAST LINE must be exactly these hashtags (copy as-is):",
+    "FORMAT:",
+    "1) Headline line with keywords (Multilogin + niche).",
+    "2) Blank line.",
+    "3) 2 sentences: why media-buyers / multi-account desks care (our desk voice).",
+    "4) Exactly 3 bullets starting with • (proxy, warmup/cookies, browser vs Cloud Phone or API/Pro).",
+    "5) CTA: message our Telegram bot for SAAS50 or MIN50, then open Multilogin via our partner button.",
+    "6) Final line EXACTLY:",
     tags,
     "",
-    "Do not add other hashtags. Do not paste URLs in body.",
-    "",
-    `Topic (inspiration): ${item.title}`,
-    `Tags: ${item.categories.join(", ") || "n/a"}`,
-    `Blurb (do not quote): ${item.summary}`,
+    "Inspiration title only (do not rewrite their article):",
+    item.title,
+    `Categories: ${item.categories.join(", ") || "n/a"}`,
+    `Loose context (do not quote): ${item.summary.slice(0, 280)}`,
   ].join("\n");
 
   const result = await env.AI.run("@cf/meta/llama-3.2-3b-instruct", {
@@ -135,20 +135,20 @@ async function writeCommentary(env, item) {
       { role: "system", content: system },
       { role: "user", content: prompt },
     ],
-    max_tokens: 420,
+    max_tokens: 400,
   });
   let text =
     (typeof result === "string" ? result : result?.response || "") ||
     [
-      `Multilogin antidetect tip: ${item.title}`,
+      `Multilogin Cloud Phone vs browser — desk note`,
       "",
-      "Ads and multi-account desks lose money on bad proxy/warmup — not on missing a blog reprint.",
+      "Free marketing pages and free tiers are different things. For money lanes, pick the product that matches the surface (Android app vs Chromium), then isolate profiles properly.",
       "",
-      "• Browser / ads / Playwright → SAAS50 on our bot",
-      "• Cloud Phone / Android → MIN50",
-      "• Confirm Pro if you need API before farming",
+      "• Cloud Phone path → ask our bot for MIN50",
+      "• Browser / ads / Playwright → SAAS50 (Pro if you need API)",
+      "• Sticky proxy + warmup before spend",
       "",
-      "Grab codes on Telegram, then open Multilogin via our partner link.",
+      "Get codes on Telegram, then Multilogin via our partner button.",
       "",
       tags,
     ].join("\n");
