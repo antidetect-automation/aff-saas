@@ -102,19 +102,19 @@ function finalizePostBody(raw, tags) {
     .replace(/#MIN50\b/gi, "MIN50")
     .trim();
   const lines = t.split("\n");
-  while (lines.length) {
-    const last = lines[lines.length - 1].trim();
-    if (!last) {
-      lines.pop();
-      continue;
-    }
-    if (/^(#[a-z0-9_]+\b\s*)+$/i.test(last)) {
-      lines.pop();
+  let cut = lines.length;
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const s = lines[i].trim();
+    if (!s) continue;
+    // hashtag-only line (discovery tags AI may invent)
+    if (/^#[\w]+(?:\s+#[\w]+)*$/i.test(s)) {
+      cut = i;
       continue;
     }
     break;
   }
-  return `${lines.join("\n").trim()}\n\n${tags}`.slice(0, 1400);
+  t = lines.slice(0, cut).join("\n").trim();
+  return `${t}\n\n${tags}`.slice(0, 1400);
 }
 
 function topicOk(item) {
@@ -124,7 +124,6 @@ function topicOk(item) {
 }
 
 async function writeCommentary(env, item) {
-  const tags = nicheHashtags(item);
   const system = [
     "You write Telegram channel posts for antidetect-automation, a Multilogin partner desk.",
     "ORIGINAL ops commentary only. Never mirror Multilogin’s blog wording or structure.",
@@ -132,7 +131,7 @@ async function writeCommentary(env, item) {
     "Facts you MAY state: Free plan = 5 profiles (no API); Pro needed for API.",
     "Deal facts: our exclusive desk codes SAAS50 (browser) and MIN50 (Cloud Phone) each unlock ~50% off at Multilogin checkout — get them only via our Telegram bot.",
     "Telegram SEO: first line must include Multilogin + a niche keyword (ads, Cloud Phone, Playwright, proxy, affiliate).",
-    "No URLs in body. Buttons carry links. No Multilogin blog source links. Never invent hashtags beyond the final line we give you. Never put SAAS50 or MIN50 inside hashtags.",
+    "No URLs in body. No hashtag lines (we add them later). Never invent #SAAS50 or #MIN50.",
   ].join(" ");
 
   const prompt = [
@@ -144,8 +143,7 @@ async function writeCommentary(env, item) {
     "3) 2 sentences: why media-buyers / multi-account desks care (our desk voice).",
     "4) Exactly 3 bullets starting with • (proxy, warmup/cookies, browser vs Cloud Phone or API/Pro).",
     "5) Strong CTA (1–2 sentences): tap the bot for exclusive 50% codes — SAAS50 for Antidetect Browser, MIN50 for Cloud Phone — then open Multilogin with the partner button to apply at checkout.",
-    "6) Final line EXACTLY (hashtags only, no coupon codes):",
-    tags,
+    "6) STOP. Do not write hashtags.",
     "",
     "Inspiration title only (do not rewrite their article):",
     item.title,
@@ -172,8 +170,6 @@ async function writeCommentary(env, item) {
       "• Sticky proxy + warmup before spend",
       "",
       "Tap the bot for your exclusive 50% code, then open Multilogin on the partner button and apply it at checkout.",
-      "",
-      tags,
     ].join("\n");
   text = String(text).trim();
   // Tags applied once in runMlxBlogDigest via finalizePostBody
