@@ -27,6 +27,22 @@ npx wrangler deploy
 
 Get chat id: message the bot, then check `/stats?key=` or any update logger. Or use `@userinfobot`.
 
+## Search engines (auto after digest → github.io)
+
+Google **does not** support IndexNow. Stack we automate:
+
+1. **Update `site/sitemap.xml`** in the same GitHub commit as the new digest page → GSC sitemap crawl finds it.
+2. **IndexNow** (Bing / Yandex / partners) for the new URL + `/digest/` + sitemap — immediate + retry each cron minute until the page is live.
+3. **Google sitemap ping** (`google.com/ping?sitemap=…`) — soft signal only.
+
+Manual:
+```
+GET /indexnow?key=STATS_KEY&url=https://antidetect-automation.github.io/digest/.../
+GET /indexnow?key=STATS_KEY   # flush pending queue
+```
+
+One-time GSC: property `antidetect-automation.github.io` → Sitemaps → submit `https://antidetect-automation.github.io/sitemap.xml` (once). New URLs appear via sitemap updates after that.
+
 ## GitHub Pages auto-publish (after Telegram)
 
 After a successful channel `sendMessage`, the Worker calls `publishDigestToGithub`:

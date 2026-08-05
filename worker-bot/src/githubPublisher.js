@@ -291,6 +291,52 @@ async function ghJson(env, path, { method = "GET", body } = {}) {
   return data;
 }
 
+/** Decode utf-8 from GitHub Contents API base64. */
+function decodeGhContent(b64str) {
+  const bin = atob(String(b64str || "").replace(/\n/g, ""));
+  const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+/**
+ * Fetch a text file from the repo (main). Returns null if missing.
+ */
+export async function fetchRepoTextFile(env, path) {
+  const { owner, repo, branch } = cfg(env);
+  const clean = String(path || "").replace(/^\/+/, "");
+  try {
+    const data = await ghJson(
+      env,
+      `/repos/${owner}/${repo}/contents/${clean}?ref=${encodeURIComponent(branch)}`
+    );
+    if (!data?.content) return null;
+    return decodeGhContent(data.content);
+  } catch (e) {
+    if (e?.status === 404) return null;
+    throw e;
+  }
+}
+
+/**
+ * Ensure absolute page URL is listed in sitemap.xml (insert after digest hub if possible).
+ */
+export function upsertSitemapUrl(xml, pageUrl, day, priority = "0.82") {
+  const loc = String(pageUrl || "").replace(/\/?$/, "/");
+  if (!xml || !loc) return xml;
+  if (xml.includes(`<loc>${loc}</loc>`) || xml.includes(`<loc>${loc.replace(/\/$/, "")}</loc>`)) {
+    return xml;
+  }
+  const entry = `  <url><loc>${loc}</loc><lastmod>${day}</lastmod><priority>${priority}</priority></url>\n`;
+  const hub = "https://antidetect-automation.github.io/digest/";
+  if (xml.includes(`<loc>${hub}</loc>`)) {
+    return xml.replace(
+      new RegExp(`(<url><loc>${hub.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</loc>[\\s\\S]*?</url>\\n)`),
+      `$1${entry}`
+    );
+  }
+  return xml.replace("</urlset>", `${entry}</urlset>`);
+}
+
 function b64(str) {
   // Workers: btoa needs binary string; handle UTF-8
   const bytes = new TextEncoder().encode(str);
@@ -390,20 +436,36 @@ export async function publishDigestToGithub(env, { title, body, item }) {
 
   const mdPath = `content/digest/_posts/${slug}.md`;
   const htmlPath = `site/digest/${slug}/index.html`;
+  const pageUrl = `${HUB}/digest/${slug}/`;
 
   try {
+    const files = [
+      { path: mdPath, content: markdown },
+      { path: htmlPath, content: html },
+    ];
+
+    // Keep GSC sitemap current so Google can discover the URL without manual submit
+    try {
+      const sitemap = await fetchRepoTextFile(env, "site/sitemap.xml");
+      if (sitemap) {
+        const next = upsertSitemapUrl(sitemap, pageUrl, day);
+        if (next && next !== sitemap) {
+          files.push({ path: "site/sitemap.xml", content: next });
+        }
+      }
+    } catch (e) {
+      console.error("sitemap upsert", e);
+    }
+
     const result = await commitFiles(
       env,
-      [
-        { path: mdPath, content: markdown },
-        { path: htmlPath, content: html },
-      ],
+      files,
       `content(digest): ${slugBase.slice(0, 60)}`
     );
     return {
       ...result,
       slug,
-      url: `${HUB}/digest/${slug}/`,
+      url: pageUrl,
       markdown_path: mdPath,
       html_path: htmlPath,
     };

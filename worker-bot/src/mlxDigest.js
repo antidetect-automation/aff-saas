@@ -5,6 +5,7 @@
  * Dedupe forever by source URL in KV (digest:posted:*).
  */
 import { publishDigestToGithub } from "./githubPublisher.js";
+import { notifySearchEngines } from "./indexNow.js";
 
 const FEED = "https://multilogin.com/blog/feed";
 const HUB = "https://antidetect-automation.github.io";
@@ -338,6 +339,22 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
           }),
           { expirationTtl: 60 * 60 * 24 * 730 }
         );
+        // Index after Pages has a moment; also queue retry for next cron minute
+        await env.LEADS.put(
+          "digest:indexnow_pending",
+          JSON.stringify({
+            pageUrl: github.url,
+            tries: 0,
+            at: new Date().toISOString(),
+          }),
+          { expirationTtl: 60 * 60 * 24 }
+        );
+        try {
+          github.search = await notifySearchEngines(env, { pageUrl: github.url });
+        } catch (e) {
+          console.error("indexnow immediate", e);
+          github.search = { ok: false, error: String(e) };
+        }
       } else if (github?.error) {
         console.error("digest github", github.error);
         errors.push({ title: item.title, github: github.error });
@@ -375,6 +392,7 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
       github_url: github?.url || null,
       github_ok: Boolean(github?.ok),
       github_error: github?.error || github?.skipped || null,
+      search: github?.search || null,
     });
   }
 

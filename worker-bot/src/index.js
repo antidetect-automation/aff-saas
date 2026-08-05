@@ -1,4 +1,5 @@
 import { latestDigests, runMlxBlogDigest } from "./mlxDigest.js";
+import { flushPendingIndexNow, notifySearchEngines } from "./indexNow.js";
 
 const HUB = "https://antidetect-automation.github.io";
 const BOT_PUBLIC = "https://t.me/antidetect_automation_bot";
@@ -863,6 +864,11 @@ export default {
           console.error("bot meta", e);
         }
         try {
+          await flushPendingIndexNow(env);
+        } catch (e) {
+          console.error("indexnow flush", e);
+        }
+        try {
           // Once per UTC day inside runMlxBlogDigest (KV digest:last_day); 1 new post max
           await runMlxBlogDigest(env, { limit: 1 });
         } catch (e) {
@@ -880,8 +886,30 @@ export default {
         ok: true,
         hub: HUB,
         bot: BOT_PUBLIC,
-        features: ["webhook", "cron-fallback", "d1", "kv", "workers-ai", "mlx-blog-digest"],
+        features: [
+          "webhook",
+          "cron-fallback",
+          "d1",
+          "kv",
+          "workers-ai",
+          "mlx-blog-digest",
+          "indexnow",
+        ],
       });
+    }
+
+    if (url.pathname === "/indexnow") {
+      const key = url.searchParams.get("key");
+      if (!env.STATS_KEY || key !== env.STATS_KEY) {
+        return Response.json({ ok: false, error: "unauthorized" }, { status: 401 });
+      }
+      const pageUrl = url.searchParams.get("url") || "";
+      if (pageUrl) {
+        const search = await notifySearchEngines(env, { pageUrl });
+        return Response.json({ ok: true, search });
+      }
+      const flush = await flushPendingIndexNow(env);
+      return Response.json(flush);
     }
 
     if (url.pathname === "/run-digest") {

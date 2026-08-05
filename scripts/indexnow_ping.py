@@ -52,6 +52,7 @@ URLS = [
     f"{BASE}/errors/proxy-mlx/",
     f"{BASE}/errors/mlx-automation/",
     f"{BASE}/tools/",
+    f"{BASE}/digest/",
     f"{BASE}/sitemap.xml",
     f"{BASE}/llms.txt",
     f"{BASE}/feed.xml",
