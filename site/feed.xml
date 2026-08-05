@@ -119,4 +119,18 @@
     <updated>2026-08-05T14:00:00Z</updated>
     <summary>One profile one jar.</summary>
   </entry>
+  <entry>
+    <title>Google Ads + Multilogin</title>
+    <link href="https://antidetect-automation.github.io/use-cases/google-ads/" />
+    <id>https://antidetect-automation.github.io/use-cases/google-ads/</id>
+    <updated>2026-08-05T16:00:00Z</updated>
+    <summary>MCC lane isolation checklist.</summary>
+  </entry>
+  <entry>
+    <title>Cloud Phone MIN50 ops</title>
+    <link href="https://antidetect-automation.github.io/use-cases/cloud-phone/" />
+    <id>https://antidetect-automation.github.io/use-cases/cloud-phone/#ops</id>
+    <updated>2026-08-05T16:00:00Z</updated>
+    <summary>When MIN50 beats SAAS50.</summary>
+  </entry>
 </feed>

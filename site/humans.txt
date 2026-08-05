@@ -1,11 +1,8 @@
 /* TEAM */
-Owner: antidetect-automation
-Site: https://antidetect-automation.github.io/
-Telegram: https://t.me/antidetect_automation_bot
+Affiliate ops desk: antidetect-automation
+Contact: https://t.me/antidetect_automation_bot
 
 /* SITE */
-Standards: HTML, CSS
-Software: GitHub Pages, Cloudflare Workers
-Focus: Multilogin ops, ads isolation, API/Playwright guides
-Codes: SAAS50 (browser), MIN50 (cloud phone)
-Affiliate disclosure applies — not Multilogin Support.
+Standards: HTML5, JSON-LD
+Canonical: https://antidetect-automation.github.io/
+Codes: SAAS50 (browser) · MIN50 (Cloud Phone)

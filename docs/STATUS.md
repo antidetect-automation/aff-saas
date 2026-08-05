@@ -1,15 +1,15 @@
 # Project status
 
-Updated: 2026-08-05 overnight wave 18 (auto)
+Updated: 2026-08-05 overnight waves 18–19 (auto)
 
 ## Hard lock
 No new GitHub repos. github.io only public site. Worker = Telegram.
 
-## Wave 18
-- Breadcrumbs on all 6 tools + crypto hygiene page
-- Deepened Google Ads MCC checklist, Cloud Phone “wrong buy”, crypto refusal section
-- Bot quick bar: **Cloud Phone** + **Help**
-- Kit `.env.example` coupon / Mode B notes
+## Waves 18–19
+- Tool breadcrumbs; Google Ads / Cloud Phone / crypto depth
+- Bot: Cloud Phone + Help keys (welcome caption fixed)
+- Privacy page, humans.txt, feed Google/Cloud Phone entries
+- Kit .env.example Mode B notes
 
 ## Owner wake-up
 1. GSC submit sitemap
