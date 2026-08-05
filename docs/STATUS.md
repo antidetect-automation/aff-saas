@@ -16,6 +16,7 @@ Quality SEO on buyer queries (ads, Facebook, Google, affiliate, Multilogin API/P
 
 ## Owner manual
 1. GSC verify + sitemap submit (re-submit after this ship)
-2. Publish ≤3 Dev.to pieces (pricing, AdsPower, Playwright) — stop there at first
+2. ~~Publish ≤3 Dev.to~~ — **done** (pricing, AdsPower, Playwright) — see `content/SYNDICATION.md`
 3. BotFather `/setuserpic`
-4. Sync `site/` → github.io + deploy Worker if bot changed
+4. Optional: Hashnode token for mirror of the same 3
+5. **Rotate Dev.to API key** later (was pasted in chat); keep only in `.secrets/`

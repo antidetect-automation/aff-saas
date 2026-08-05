@@ -1,30 +1,22 @@
-# Syndication pack (publish manually)
+# Syndication pack
 
-Copy/paste to Dev.to, Hashnode, or Medium. Always keep disclosure + deep link.
+## Published on Dev.to (2026-08-04)
 
-## 1) Deal / coupon
-File: `devto-deal-draft.md`  
-CTA: `https://t.me/antidetect_automation_bot?start=devto_deal`
+| Article | URL | Canonical |
+|---------|-----|-----------|
+| Pricing 2026 | https://dev.to/antidetect-automatio/multilogin-pricing-2026-free-5-profiles-and-pro-from-7mo-57n4 | `/pricing/` |
+| vs AdsPower | https://dev.to/antidetect-automatio/multilogin-vs-adspower-in-2026-api-farms-vs-rpa-desks-3f6a | `/vs/adspower/` |
+| Playwright + MLX | https://dev.to/antidetect-automatio/playwright-multilogin-x-start-a-profile-and-connectovercdp-4j75 | `/guides/playwright-mlx/` |
 
-## 2) vs AdsPower
-File: `devto-vs-adspower-draft.md`  
-CTA: `...?start=devto_vs_adspower`
+Bodies in `content/published/`. API key lives in `.secrets/devto.env` (gitignored) — never commit.
 
-## 3) vs GoLogin
-File: `devto-vs-gologin-draft.md`  
-CTA: `...?start=devto_vs_gologin`
+Profile: https://dev.to/antidetect-automatio
 
-## 4) vs Dolphin (new)
-See `devto-vs-dolphin-draft.md`
+## Still manual / later
+- Hashnode (needs token)
+- GSC / Bing Webmaster sitemap submit
+- Medium (optional)
+- Further Dev.to only after these 3 get engagement
 
-## 5) Playwright attach
-Propose title: `Start Multilogin X + Playwright CDP in 2026`  
-Link: https://antidetect-automation.github.io/guides/playwright-mlx/  
-CTA: `...?start=devto_playwright`
-
-## 6) Free tools
-Title: `Free WebGL + proxy formatter for antidetect ops`  
-Link: https://antidetect-automation.github.io/tools/  
-CTA: `...?start=devto_tools`
-
-Tag suggestions: `multilogin`, `playwright`, `antidetect`, `browser-automation`, `proxy`
+## Draft inventory (unpublished)
+Deal, tools, GoLogin, Dolphin, Octo, Undetectable, Linken, MoreLogin, Hidemium, Incogniton — keep in `content/devto-*.md`.
