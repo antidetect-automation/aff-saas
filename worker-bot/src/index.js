@@ -138,6 +138,7 @@ function replyQuickBar() {
       [{ text: "Deal desk" }, { text: "Pricing" }],
       [{ text: "Playwright" }, { text: "API map" }],
       [{ text: "Errors" }, { text: "Ads desks" }],
+      [{ text: "Cloud Phone" }, { text: "Help" }],
     ],
     resize_keyboard: true,
     is_persistent: true,
@@ -180,7 +181,7 @@ async function sendWelcome(env, chatId, source, from) {
   // Persistent quick bar for return visits (second message keeps reply kb without wiping inline)
   await tg(env, "sendMessage", {
     chat_id: chatId,
-    text: "Quick bar ready — SAAS50 · MIN50 · Deal · Pricing · Playwright · API · Errors · Ads",
+    text: "Quick bar ready — SAAS50 · MIN50 · Deal · Pricing · Playwright · API · Errors · Ads · Cloud Phone · Help",
     reply_markup: replyQuickBar(),
     disable_web_page_preview: true,
   });
@@ -720,6 +721,14 @@ async function handleUpdate(env, update) {
         ],
       },
     });
+    return;
+  }
+  if (text === "Cloud Phone") {
+    await sendLink(env, chatId, "Cloud Phone use-case (ask /min50 for code):", LINKS.cloudPhone);
+    return;
+  }
+  if (text === "Help") {
+    await sendHelp(env, chatId);
     return;
   }
 
