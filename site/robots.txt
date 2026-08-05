@@ -3,3 +3,5 @@ Allow: /
 
 # Prefer indexing money + guide URLs; still allow all
 Sitemap: https://antidetect-automation.github.io/sitemap.xml
+
+# Thin long-tail /vs stubs use meta noindex,follow on-page; sitemap priority 0.30.

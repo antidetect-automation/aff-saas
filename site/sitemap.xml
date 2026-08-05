@@ -41,19 +41,19 @@
   <url><loc>https://antidetect-automation.github.io/use-cases/social-multi-account/</loc><priority>0.8</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/adspower/</loc><lastmod>2026-08-04</lastmod><priority>0.93</priority>
   <url><loc>https://antidetect-automation.github.io/vs/bitbrowser/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/blink/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/blink/</loc><priority>0.30</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/dolphin-anty/</loc><priority>0.88</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/gologin/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/hidemium/</loc><priority>0.55</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/incogniton/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/hidemium/</loc><priority>0.30</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/incogniton/</loc><priority>0.30</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/</loc><priority>0.92</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/kameleo/</loc><priority>0.55</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/linken-sphere/</loc><priority>0.55</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/morelogin/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/kameleo/</loc><priority>0.30</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/linken-sphere/</loc><priority>0.30</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/morelogin/</loc><priority>0.30</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/octo-browser/</loc><priority>0.92</priority></url>
   <url><loc>https://antidetect-automation.github.io/vs/undetectable/</loc><priority>0.88</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/vision/</loc><priority>0.55</priority></url>
-  <url><loc>https://antidetect-automation.github.io/vs/vmlogin/</loc><priority>0.55</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/vision/</loc><priority>0.30</priority></url>
+  <url><loc>https://antidetect-automation.github.io/vs/vmlogin/</loc><priority>0.30</priority></url>
   <url><loc>https://antidetect-automation.github.io/sitemap.xml</loc><priority>0.7</priority></url>
   <url><loc>https://antidetect-automation.github.io/feed.xml</loc><priority>0.7</priority></url>
   <url><loc>https://antidetect-automation.github.io/llms.txt</loc><priority>0.7</priority></url>

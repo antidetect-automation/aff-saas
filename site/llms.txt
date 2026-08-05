@@ -7,6 +7,8 @@
 - https://t.me/antidetect_automation_bot
 
 ## Compare (world)
+Deep essays (prefer these): AdsPower, GoLogin, Dolphin Anty, Octo, Undetectable, BitBrowser.
+Thin long-tail stubs are noindex on purpose.
 - https://antidetect-automation.github.io/vs/ — scorecard hub
 - AdsPower, GoLogin, Dolphin Anty, Octo, Undetectable, Linken Sphere, Incogniton, Hidemium, MoreLogin, BitBrowser, Kameleo, VMLogin, Vision, Blink
 

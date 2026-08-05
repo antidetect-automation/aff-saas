@@ -225,6 +225,7 @@ async function sendHelp(env, chatId) {
       "/postman — Postman starter",
       "/warmup — profile warm-up checklist",
       "/ads — ads / Facebook / Google / affiliate use-cases",
+      "/usecases — all use-cases hub",
       "/tools — free client-side tools",
       "/compare — world antidetect scorecard",
       "/kits — Playwright / Puppeteer starters",
@@ -420,6 +421,10 @@ async function handleUpdate(env, update) {
   }
   if (text.startsWith("/guides")) {
     await sendLink(env, chatId, "Guides hub:", LINKS.guidesHub);
+    return;
+  }
+  if (text.startsWith("/usecases") || text.startsWith("/usecase")) {
+    await sendLink(env, chatId, "Use-cases hub (ads / social / cloud phone):", LINKS.useCases);
     return;
   }
   if (text.startsWith("/puppeteer")) {
