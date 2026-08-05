@@ -20,3 +20,14 @@ Profile: https://dev.to/antidetect-automatio
 
 ## Draft inventory (unpublished)
 Deal, tools, GoLogin, Dolphin, Octo, Undetectable, Linken, MoreLogin, Hidemium, Incogniton — keep in `content/devto-*.md`.
+
+## Hashnode (blocked Aug 2026)
+
+- Token saved locally in `.secrets/hashnode.env` (gitignored)
+- Blog: https://antidetect-automation.hashnode.dev
+- Publication id: `6a71fe31e4e6b72e634f8d22`
+- Endpoint that works: `https://gql-beta.hashnode.com/`
+- **API writes require Hashnode Pro** on the publication (`createDraft` → FORBIDDEN without Pro)
+- Script ready: `python3 scripts/publish_hashnode.py` after Pro upgrade
+
+Dev.to account is gone (404); recreate + new API key if you want Forem again.
