@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0c1117" />
+  <meta name="theme-color" content="#050a0c" />
   <title>Playwright + Multilogin X — start profile over CDP</title>
   <meta name="description" content="Official Multilogin Launcher pattern: MD5 sign-in, start Mimic profile with automation_type=playwright, connectOverCDP to 127.0.0.1:port. For ads/MMO automation desks." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
@@ -28,13 +28,26 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="top">
-    <a class="brand" href="/">antidetect-automation</a>
-    <nav>
-      <a href="/guides/mlx-api/">API map</a>
-      <a href="/guides/playwright-mlx/">Playwright</a>
-      <a href="/deal/">Deal</a>
-    </nav>
+    <header class="site-header">
+    <div class="shell site-header__bar">
+      <a class="brand" href="/" aria-label="antidetect-automation home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">antidetect-automation</span>
+      </a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle__label">Menu</span>
+        <span class="nav-toggle__icon" aria-hidden="true"></span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-site-nav>
+        <a href="/pricing/">Pricing</a>
+        <a href="/deal/">Deal</a>
+        <a href="/digest/">Digest</a>
+        <a href="/vs/">Compare</a>
+        <a href="/guides/">Guides</a>
+        <a href="/use-cases/">Use cases</a>
+        <a class="site-nav__cta" href="https://t.me/antidetect_automation_bot?start=aa_nav">Get 50%</a>
+      </nav>
+    </div>
   </header>
 
   <article id="main" class="long">
@@ -112,9 +125,52 @@ await page.goto("https://example.com");</code></pre>
     </p>
   </article>
 
-  <footer class="foot">
-    <p><strong>Affiliate disclosure:</strong> We may earn a commission from Multilogin purchases via our codes.</p>
-    <p><a href="/">← Hub</a> · <a href="/guides/">Guides</a> · <a href="/guides/mlx-api/">API map</a></p>
+    <footer class="site-footer">
+    <div class="shell site-footer__grid">
+      <div class="site-footer__brand">
+        <a class="brand" href="/">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span class="brand__text">antidetect-automation</span>
+        </a>
+        <p>Multilogin partner desk for ads, API, and Cloud Phone ops. Independent hub — not Multilogin Support.</p>
+      </div>
+      <div>
+        <h2 class="site-footer__h">Money</h2>
+        <ul>
+          <li><a href="/deal/">Deal desk</a></li>
+          <li><a href="/pricing/">Pricing 2026</a></li>
+          <li><a href="https://t.me/antidetect_automation_bot?start=aa_foot">Telegram codes</a></li>
+          <li><a href="https://multilogin.com?a_aid=saas">Open Multilogin</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__h">Ops</h2>
+        <ul>
+          <li><a href="/guides/">Guides</a></li>
+          <li><a href="/vs/">Compare</a></li>
+          <li><a href="/use-cases/">Use cases</a></li>
+          <li><a href="/digest/">Digest</a></li>
+          <li><a href="/errors/">Error desk</a></li>
+          <li><a href="/tools/">Tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="site-footer__h">Meta</h2>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/privacy/">Privacy</a></li>
+          <li><a href="https://github.com/antidetect-automation">GitHub</a></li>
+          <li><a href="/sitemap.xml">Sitemap</a></li>
+          <li><a href="/feed.xml">Feed</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="shell site-footer__legal">
+      <p><strong>Affiliate disclosure:</strong> We may earn a commission if you buy Multilogin via our codes or links (<code>SAAS50</code> / <code>MIN50</code>).</p>
+      <p class="site-footer__copy">© antidetect-automation · partner desk</p>
+    </div>
   </footer>
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>

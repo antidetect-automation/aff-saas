@@ -1,25 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#050a0c" />
-  <title>Multilogin desk digests — antidetect-automation</title>
-  <meta name="description" content="Short Multilogin ops digests from our partner desk: ads, Cloud Phone, proxies, automation. SAAS50 / MIN50 deal CTAs." />
-  <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://antidetect-automation.github.io/digest/" />
-  <meta property="og:title" content="Multilogin desk digests" />
-  <meta property="og:description" content="Ops notes + exclusive ~50% desk codes SAAS50 / MIN50." />
-  <meta property="og:url" content="https://antidetect-automation.github.io/digest/" />
-  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
-  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="/assets/site.css" />
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
+#!/usr/bin/env python3
+"""Normalize site header/footer + inject site.js / theme-color across HTML pages."""
+from __future__ import annotations
+
+import re
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1] / "site"
+
+HEADER = """  <header class="site-header">
     <div class="shell site-header__bar">
       <a class="brand" href="/" aria-label="antidetect-automation home">
         <span class="brand__mark" aria-hidden="true"></span>
@@ -39,18 +27,9 @@
         <a class="site-nav__cta" href="https://t.me/antidetect_automation_bot?start=aa_nav">Get 50%</a>
       </nav>
     </div>
-  </header>
-  <article id="main" class="long">
-    <p class="eyebrow">Channel mirror</p>
-    <h1>Desk digests</h1>
-    <p class="lede">Daily Multilogin ops notes (not Multilogin blog reprints). New pages land here after the Telegram channel post — filename pattern <code>/digest/YYYY-MM-DD-slug/</code>.</p>
-    <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_digest">Get SAAS50 / MIN50</a>
-      <a class="btn ghost" href="https://multilogin.com?a_aid=saas">Open Multilogin</a>
-    </p>
-    <div class="note"><strong>Affiliate disclosure:</strong> we may earn a commission via Multilogin codes/links. Not Multilogin Support.</div>
-  </article>
-    <footer class="site-footer">
+  </header>"""
+
+FOOTER = """  <footer class="site-footer">
     <div class="shell site-footer__grid">
       <div class="site-footer__brand">
         <a class="brand" href="/">
@@ -96,6 +75,66 @@
       <p class="site-footer__copy">© antidetect-automation · partner desk</p>
     </div>
   </footer>
-  <script src="/assets/site.js" defer></script>
-</body>
-</html>
+  <script src="/assets/site.js" defer></script>"""
+
+
+def normalize(html: str) -> str:
+    # theme-color
+    html = re.sub(
+        r'<meta name="theme-color" content="[^"]*"\s*/?>',
+        '<meta name="theme-color" content="#050a0c" />',
+        html,
+        count=1,
+    )
+    if 'name="theme-color"' not in html:
+        html = html.replace(
+            '<meta name="viewport"',
+            '<meta name="theme-color" content="#050a0c" />\n  <meta name="viewport"',
+            1,
+        )
+
+    # Ensure site.js not duplicated later — strip old footer scripts first
+    html = re.sub(
+        r'\s*<script src="/assets/site\.js"[^>]*>\s*</script>\s*',
+        "\n",
+        html,
+    )
+
+    # Header: classic <header class="top">...</header> OR already site-header
+    html = re.sub(
+        r"<header class=\"(?:top|site-header)\">[\s\S]*?</header>",
+        HEADER,
+        html,
+        count=1,
+    )
+
+    # Footer: replace any foot / site-footer block before </body>
+    html = re.sub(
+        r"<footer class=\"(?:foot|site-footer)\">[\s\S]*?</footer>(?:\s*<script src=\"/assets/site\.js\"[^>]*>\s*</script>)?",
+        FOOTER,
+        html,
+        count=1,
+    )
+
+    return html
+
+
+def main() -> None:
+    files = sorted(ROOT.rglob("*.html"))
+    changed = 0
+    for path in files:
+        if "assets" in path.parts:
+            continue
+        raw = path.read_text(encoding="utf-8")
+        if "<body" not in raw:
+            continue
+        new = normalize(raw)
+        if new != raw:
+            path.write_text(new, encoding="utf-8")
+            changed += 1
+            print("updated", path.relative_to(ROOT))
+    print(f"done: {changed}/{len(files)} files")
+
+
+if __name__ == "__main__":
+    main()

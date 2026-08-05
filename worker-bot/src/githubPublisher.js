@@ -193,7 +193,7 @@ export function buildDigestHtml({ title, dateIso, body, slug }) {
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0c1117" />
+  <meta name="theme-color" content="#050a0c" />
   <title>${safeTitle} — antidetect-automation</title>
   <meta name="description" content="${desc}" />
   <meta name="robots" content="index,follow,max-image-preview:large" />
@@ -213,13 +213,26 @@ export function buildDigestHtml({ title, dateIso, body, slug }) {
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <header class="top">
-    <a class="brand" href="/">antidetect-automation</a>
-    <nav>
-      <a href="/digest/">Digest</a>
-      <a href="/deal/">Deal</a>
-      <a href="/pricing/">Pricing</a>
-    </nav>
+  <header class="site-header">
+    <div class="shell site-header__bar">
+      <a class="brand" href="/" aria-label="antidetect-automation home">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__text">antidetect-automation</span>
+      </a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+        <span class="nav-toggle__label">Menu</span>
+        <span class="nav-toggle__icon" aria-hidden="true"></span>
+      </button>
+      <nav class="site-nav" id="site-nav" data-site-nav>
+        <a href="/pricing/">Pricing</a>
+        <a href="/deal/">Deal</a>
+        <a href="/digest/">Digest</a>
+        <a href="/vs/">Compare</a>
+        <a href="/guides/">Guides</a>
+        <a href="/use-cases/">Use cases</a>
+        <a class="site-nav__cta" href="${BOT}?start=aa_nav">Get 50%</a>
+      </nav>
+    </div>
   </header>
   <article id="main" class="long">
     <p class="eyebrow">Desk digest · ${escapeHtml(date)}</p>
@@ -227,13 +240,21 @@ ${htmlBody}
     <div class="note">
       <strong>Multilogin desk deal (~50% off)</strong><br />
       Browser → <code>SAAS50</code> · Cloud Phone → <code>MIN50</code><br />
+      <span class="cta-row">
       <a class="btn primary" href="${BOT}?start=aa_digest">Get codes on Telegram</a>
       <a class="btn ghost" href="${AFF}">Open Multilogin</a>
       <a class="btn ghost" href="/deal/">How the deal works</a>
+      </span>
     </div>
     <p class="lede">Independent partner desk — not Multilogin Support. We may earn a commission via codes/links.</p>
   </article>
-  <footer class="foot"><p><a href="/digest/">All digests</a> · <a href="/">Hub</a></p></footer>
+  <footer class="site-footer">
+    <div class="shell site-footer__legal">
+      <p><a href="/digest/">All digests</a> · <a href="/deal/">Deal</a> · <a href="/">Hub</a></p>
+      <p class="site-footer__copy">© antidetect-automation · partner desk</p>
+    </div>
+  </footer>
+  <script src="/assets/site.js" defer></script>
 </body>
 </html>
 `;
