@@ -40,7 +40,13 @@ export async function submitIndexNow(env, urls) {
         headers: { "Content-Type": "application/json; charset=utf-8" },
         body: JSON.stringify(payload),
       });
-      results.push({ endpoint: ep, status: res.status, ok: res.status >= 200 && res.status < 300 });
+      results.push({
+        endpoint: ep,
+        status: res.status,
+        // 200/202 = accepted; 429 = rate-limited (retry via cron flush)
+        ok: res.status === 200 || res.status === 202,
+        retry: res.status === 429,
+      });
     } catch (e) {
       results.push({ endpoint: ep, ok: false, error: String(e) });
     }
@@ -48,6 +54,7 @@ export async function submitIndexNow(env, urls) {
 
   return {
     ok: results.some((r) => r.ok),
+    retry: results.some((r) => r.retry) && !results.some((r) => r.ok),
     key_used: key.slice(0, 6) + "…",
     urls: list,
     results,
@@ -124,6 +131,14 @@ export async function flushPendingIndexNow(env) {
   }
 
   const search = await notifySearchEngines(env, { pageUrl });
+  if (search?.indexnow?.retry && tries < 8) {
+    await env.LEADS.put(
+      "digest:indexnow_pending",
+      JSON.stringify({ ...pending, tries, last_check: new Date().toISOString(), reason: "429" }),
+      { expirationTtl: 60 * 60 * 24 }
+    );
+    return { ok: true, waiting_rate_limit: true, tries, pageUrl, search };
+  }
   await env.LEADS.put(
     "digest:indexnow_last",
     JSON.stringify({ pageUrl, search, at: new Date().toISOString(), tries, live }),
