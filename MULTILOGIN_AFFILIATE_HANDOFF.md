@@ -3,7 +3,8 @@
 ## Project Goal
 Build a zero-cost, highly automated affiliate growth system for the `Multilogin` niche using:
 - `Telegram Bot` as the central funnel
-- `Cloudflare Pages/Workers` for free utilities and landing pages
+- `GitHub Pages` for the public hub (only site)
+- `Cloudflare Workers` for the Telegram bot
 - `GitHub` and `GitHub Actions` for open-source distribution and automation
 
 Main objective:
@@ -34,7 +35,8 @@ The strategy should focus on:
 ## Recommended Distribution Engine
 Main platforms:
 - `GitHub` for starter kits, SDK wrappers, boilerplates, CLI tools, README-based conversion
-- `Cloudflare Pages/Workers` for free tools and SEO landing pages
+- `GitHub Pages` for SEO landing pages + free tools
+- `Cloudflare Workers` for Telegram bot
 - `Dev.to`, `Hashnode`, `Medium` for technical tutorials and troubleshooting posts
 - `Telegram` for onboarding, segmentation, coupon delivery, and follow-up
 

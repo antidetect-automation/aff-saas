@@ -609,6 +609,7 @@ async function ensureBotMeta(env) {
     { command: "onboarding", description: "Start here path" },
     { command: "errors", description: "API / token / CDP / proxy" },
     { command: "faq", description: "FAQ" },
+    { command: "glossary", description: "Ops glossary" },
     { command: "ask", description: "Ask AI FAQ" },
     { command: "help", description: "Command list" },
   ];

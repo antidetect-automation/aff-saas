@@ -26,6 +26,8 @@ Open an issue first for large ideas: use the Content template.
 
 ## Pre-ship checks
 ```bash
+bash scripts/ship.sh
+# or step-by-step:
 python3 scripts/rebuild_sitemap.py
 python3 scripts/quality_check.py
 bash scripts/sync_github_io.sh
