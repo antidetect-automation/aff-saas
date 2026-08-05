@@ -1,17 +1,21 @@
 # Project status
 
-Updated: 2026-08-05 overnight waves 18–19 (auto)
+Updated: 2026-08-05 Google-quality wave 20
 
-## Hard lock
-No new GitHub repos. github.io only public site. Worker = Telegram.
+## Goal
+Maximize Google checklist / CWV / helpful-content readiness (heuristic score in `scripts/google_quality_audit.py`).
 
-## Waves 18–19
-- Tool breadcrumbs; Google Ads / Cloud Phone / crypto depth
-- Bot: Cloud Phone + Help keys (welcome caption fixed)
-- Privacy page, humans.txt, feed Google/Cloud Phone entries
-- Kit .env.example Mode B notes
+## Wave 20
+- Compressed social image → `og.jpg` (~69KB; was ~1.4MB PNG)
+- CSS: contrast, focus-visible, 44px touch, reduced-motion
+- Home: Why #1 + Quick FAQ + FAQPage schema; CSS preload
+- Hubs deepened; pricing/deal FAQ schema; sitewide apple-touch + theme-color + robots
+- Privacy / security / humans already present; audit hooked into `ship.sh`
 
-## Owner wake-up
-1. GSC submit sitemap
-2. Dev.to or Hashnode Pro
-3. BotFather `/setuserpic`
+## Owner wake-up (still outside code)
+1. Confirm GSC ownership + submit sitemap
+2. CrUX/CWV field data appears after traffic (PSI lab ≠ ranking alone)
+3. Syndication / bot avatar
+
+## Score
+Run: `python3 scripts/google_quality_audit.py`

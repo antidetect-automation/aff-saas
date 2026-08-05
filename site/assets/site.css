@@ -171,3 +171,30 @@ article.long code {
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
 }
+
+/* Google / a11y / CWV polish */
+:root {
+  --muted: #b7c4d4; /* stronger contrast on dark bg (WCAG AA body) */
+}
+a:focus-visible,
+.btn:focus-visible,
+.skip-link:focus-visible {
+  outline: 2px solid var(--accent2);
+  outline-offset: 3px;
+}
+img, picture, video {
+  max-width: 100%;
+  height: auto;
+}
+@media (max-width: 640px) {
+  nav a, .btn {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+/* Prefer compositor-free paints; no layout-animating transforms on load */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

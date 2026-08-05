@@ -18,6 +18,7 @@ URLS = [
     f"{BASE}/faq/",
     f"{BASE}/start/",
     f"{BASE}/about/",
+    f"{BASE}/privacy/",
     f"{BASE}/glossary/",
     f"{BASE}/guides/",
     f"{BASE}/guides/mlx-api/",
