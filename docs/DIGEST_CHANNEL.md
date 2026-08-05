@@ -6,6 +6,19 @@
 
 Chỉ cân nhắc OpenAI/Anthropic trả phí nếu muốn giọng viết “đắt” hơn — không bắt buộc.
 
+## Sources (auto)
+
+1. **Multilogin** RSS `multilogin.com/blog/feed` (priority)
+2. **AdsPower** public sitemap `…/__sitemap__/en-US.xml` → `/blog/*` (fallback / `?source=adspower`)
+
+AI writes Multilogin-desk commentary (vs AdsPower when competitor). **No competitor URLs in CTAs** — button goes to our `/vs/adspower/` + deal.
+
+```
+GET /run-digest?key=STATS_KEY&force=1&source=adspower
+GET /run-digest?key=STATS_KEY&force=1&source=multilogin
+GET /run-digest?key=STATS_KEY&force=1&source=auto
+```
+
 ## Cron
 
 - `0 9 * * *` UTC — chạy digest  

@@ -918,7 +918,10 @@ export default {
         return new Response("unauthorized", { status: 401 });
       }
       const force = url.searchParams.get("force") === "1";
-      const result = await runMlxBlogDigest(env, { force, limit: 1 });
+      const src = url.searchParams.get("source") || "auto";
+      const source =
+        src === "adspower" || src === "multilogin" || src === "auto" ? src : "auto";
+      const result = await runMlxBlogDigest(env, { force, limit: 1, source });
       return Response.json(result);
     }
 
