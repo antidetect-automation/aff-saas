@@ -65,25 +65,22 @@ async function enrichMeta(item) {
     if (!res.ok) return item;
     const html = await res.text();
     const og =
-      (html.match(
-        /<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)["']/i
-      ) ||
-        html.match(
-          /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:title["']/i
-       ) ||
+      (html.match(/property=["']og:title["']\s+content="([^"]+)"/i) ||
+        html.match(/content="([^"]+)"\s+property=["']og:title["']/i) ||
+        html.match(/property=["']og:title["']\s+content='([^']+)'/i) ||
         [])[1];
     const desc =
-      (html.match(
-        /<meta[^>]+name=["']description["'][^>]+content=["']([^"']+)["']/i
-      ) ||
-        html.match(
-          /<meta[^>]+content=["']([^"']+)["'][^>]+name=["']description["']/i
-        ) ||
-        html.match(
-          /<meta[^>]+property=["']og:description["'][^>]+content=["']([^"']+)["']/i
-        ) ||
+      (html.match(/name=["']description["']\s+content="([^"]+)"/i) ||
+        html.match(/content="([^"]+)"\s+name=["']description["']/i) ||
+        html.match(/property=["']og:description["']\s+content="([^"]+)"/i) ||
         [])[1];
-    if (og) item.title = og.replace(/&#39;/g, "'").replace(/&amp;/g, "&").trim();
+    const cleaned = (og || "")
+      .replace(/&#39;/g, "'")
+      .replace(/&amp;/g, "&")
+      .replace(/&mdash;/g, "—")
+      .trim();
+    // Apostrophe in What's … used to truncate bad regex — require usable length
+    if (cleaned.length >= 20) item.title = cleaned;
     if (desc)
       item.summary = desc
         .replace(/<[^>]+>/g, " ")
