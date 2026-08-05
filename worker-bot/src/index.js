@@ -278,15 +278,13 @@ async function sendDealDesk(env, chatId, source, from) {
     },
     disable_web_page_preview: true,
   });
-}
-
-
   await tg(env, "sendMessage", {
     chat_id: chatId,
     text: "Quick bar: SAAS50 · MIN50 · Deal desk · Pricing",
     reply_markup: replyQuickBar(),
     disable_web_page_preview: true,
   });
+}
 
 async function sendHelp(env, chatId) {
   await tg(env, "sendMessage", {
