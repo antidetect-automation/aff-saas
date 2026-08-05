@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Multilogin X API auth — starter guide</title>
-  <meta name="description" content="Authenticate to Multilogin X API safely: sign-in, tokens, env vars, Postman — before starting profiles." />
+  <title>Multilogin X API auth — MD5 sign-in, Bearer, refresh</title>
+  <meta name="description" content="Authenticate to Multilogin X: MD5 password hash, POST /user/signin, 30-minute Bearer token, refresh and automation tokens — before Launcher start." />
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/api-auth-mlx/" />
-  <meta property="og:title" content="Multilogin X API auth guide" />
+  <meta property="og:title" content="Multilogin X API auth" />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/api-auth-mlx/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
@@ -21,25 +21,38 @@
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
+  <article class="long">
     <p class="eyebrow">Guide</p>
     <h1>Multilogin X API authentication</h1>
-    <p class="lede">Every automation kit starts here. Exact paths change — always verify against Multilogin’s current Postman / docs.</p>
-    <h2>Pattern</h2>
-    <pre><code>1. Sign in (or automation token flow) → receive access token
-2. Store token in env / secret manager — never in git
-3. Attach Authorization header on subsequent calls
-4. Refresh before expiry if your workspace uses short TTLs
-5. Then start profile → CDP attach</code></pre>
-    <h2>Ops rules</h2>
+    <p class="lede">Ninety percent of “Playwright won’t connect” nights are expired tokens or a sign-in body that still sends a raw password. Fix PAM first.</p>
+
+    <p>Official flow: <a href="https://multilogin.com/help/en_US/configure-postman-for-multilogin">Configure Postman</a> · collection: <a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">Postman documenter</a> → folder <strong>Profile Access Management</strong>.</p>
+
+    <h2>Sign-in pattern (from Multilogin help + samples)</h2>
+    <pre><code>POST https://api.multilogin.com/user/signin
+Content-Type: application/json
+
+{
+  "email": "you@agency.com",
+  "password": "&lt;md5-hex of your Multilogin password&gt;"
+}
+
+→ 200: data.token   // ~30 minutes per Multilogin Postman help
+→ use Authorization: Bearer {token} on later calls</code></pre>
+
+    <p>Official JS/Python Playwright samples also hash the password with MD5 before sign-in. Do not commit email/password/token into git — env or secret manager only.</p>
+
+    <h2>Keep the token alive</h2>
     <ul>
-      <li>One secrets source per machine / CI</li>
-      <li>Rotate when teammates leave or tokens leak in logs</li>
-      <li>Prefer Postman to validate auth before coding</li>
+      <li><strong>Refresh</strong> — User Refresh Token endpoint in the same PAM folder.</li>
+      <li><strong>Automation token</strong> — Multilogin’s help says you can mint one and set expiry yourself for longer unattended runs.</li>
+      <li>When every Launcher call returns 401, re-auth before debugging CDP ports — <a href="/errors/token-auth/">token desk</a>.</li>
     </ul>
-    <h2>If it fails</h2>
-    <p><a href="/errors/token-auth/">Token / auth troubleshooting</a> · <a href="/errors/mlx-automation/">API errors</a></p>
-    <div class="note">Browser → <code>SAAS50</code>. Cloud Phone → <code>MIN50</code>. Affiliate disclosure applies.</div>
+
+    <h2>Then what</h2>
+    <p>Start profiles: <a href="/guides/postman-mlx/">Postman</a> · Attach code: <a href="/guides/playwright-mlx/">Playwright</a> · Domain map: <a href="/guides/mlx-api/">API map</a>.</p>
+
+    <div class="note">API requires Pro+. Browser coupon <code>SAAS50</code> · Cloud Phone <code>MIN50</code>. Affiliate disclosure applies.</div>
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_auth">Get Multilogin deal</a>
       <a class="btn ghost" href="/guides/playwright-mlx/">Next: Playwright</a>

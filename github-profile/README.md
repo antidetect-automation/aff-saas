@@ -11,7 +11,8 @@ English Multilogin X & antidetect browser ops hub.
 |--|--|
 | Deal | [Coupons](https://antidetect-automation.github.io/deal/) · [Start](https://antidetect-automation.github.io/start/) |
 | Tools | [WebGL · Proxy · UA/CH · Checklist](https://antidetect-automation.github.io/tools/) |
-| Guides | [Playwright](https://antidetect-automation.github.io/guides/playwright-mlx/) · [Puppeteer](https://antidetect-automation.github.io/guides/puppeteer-mlx/) · [Warmup](https://antidetect-automation.github.io/guides/profile-warmup/) · [Postman](https://antidetect-automation.github.io/guides/postman-mlx/) |
+| Guides | [API map](https://antidetect-automation.github.io/guides/mlx-api/) · [Playwright](https://antidetect-automation.github.io/guides/playwright-mlx/) · [Postman](https://antidetect-automation.github.io/guides/postman-mlx/) · [Warmup](https://antidetect-automation.github.io/guides/profile-warmup/) |
+| Ads / MMO | [Use cases](https://antidetect-automation.github.io/use-cases/) · [Facebook ads](https://antidetect-automation.github.io/use-cases/facebook-ads/) · [Google Ads](https://antidetect-automation.github.io/use-cases/google-ads/) |
 | Compare | [Hub](https://antidetect-automation.github.io/vs/) · [Undetectable](https://antidetect-automation.github.io/vs/undetectable/) · [Octo](https://antidetect-automation.github.io/vs/octo-browser/) · [AdsPower](https://antidetect-automation.github.io/vs/adspower/) |
 | Kits | [Playwright](https://github.com/antidetect-automation/playwright-mlx-starter) · [Puppeteer](https://github.com/antidetect-automation/puppeteer-mlx-starter) · [aff-saas](https://github.com/antidetect-automation/aff-saas) |
 

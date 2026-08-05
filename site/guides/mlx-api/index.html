@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Multilogin X API map — Launcher, auth, profiles, proxy, cookies</title>
+  <meta name="description" content="Operator map of the Multilogin X Postman API: Profile Access Management, Launcher start/stop, profiles, proxies, cookies — with links to our Playwright and ads guides. Official documenter linked." />
+  <link rel="canonical" href="https://antidetect-automation.github.io/guides/mlx-api/" />
+  <meta property="og:title" content="Multilogin X API map" />
+  <meta property="og:url" content="https://antidetect-automation.github.io/guides/mlx-api/" />
+  <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"Multilogin X API map","url":"https://antidetect-automation.github.io/guides/mlx-api/","dateModified":"2026-08-04","author":{"@type":"Organization","name":"antidetect-automation"}}
+  </script>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="/">antidetect-automation</a>
+    <nav>
+      <a href="/guides/">Guides</a>
+      <a href="/guides/mlx-api/">API map</a>
+      <a href="/pricing/">Pricing</a>
+      <a href="/deal/">Deal</a>
+    </nav>
+  </header>
+  <article class="long">
+    <p class="eyebrow">Multilogin X · API</p>
+    <h1>The Multilogin X API, mapped for operators</h1>
+    <p class="lede">If you buy Multilogin for ads, MMO, or automation, the Postman collection is the real product manual. This page translates that collection into “what do I open when X breaks?” — not a pirate copy of their documenter.</p>
+
+    <p>Canonical docs (always win in a conflict):</p>
+    <ul>
+      <li><a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">Official Multilogin API Postman documenter</a></li>
+      <li><a href="https://multilogin.com/help/en_US/configure-postman-for-multilogin">Set up Postman + sign-in</a></li>
+      <li><a href="https://multilogin.com/help/en_US/postman/starting-a-profile-with-postman">Start a browser profile</a></li>
+    </ul>
+    <p>API needs <strong>Pro or higher</strong> on Multilogin’s side. Free five-profile accounts are for UI trials — see <a href="/pricing/">pricing</a>.</p>
+
+    <h2>Folders you’ll actually touch</h2>
+
+    <h3>Profile Access Management</h3>
+    <p>Sign in (password as MD5 hash per Multilogin’s guide), refresh token, automation tokens. Bearer tokens expire fast (help text cites ~30 minutes for the session token). When every call returns 401, start here — not by rewriting Playwright. Our walkthrough: <a href="/guides/api-auth-mlx/">API auth</a> · troubleshooting: <a href="/errors/token-auth/">token errors</a>.</p>
+
+    <h3>Launcher</h3>
+    <p>Start / stop browser profiles. For automation you pass an automation type (<code>playwright</code>, <code>puppeteer</code>, or <code>selenium</code>) so the response includes a local port. Official Playwright samples use the local launcher host pattern <code>launcher.mlx.yt:45001</code> with <code>folder_id</code> and <code>profile_id</code> in the path. The Multilogin agent/app must be running. Attach CDP from that port — <a href="/guides/playwright-mlx/">Playwright guide</a> · <a href="/errors/cdp-attach/">CDP errors</a>.</p>
+
+    <h3>Profile Management</h3>
+    <p>Create, search, update, remove profiles. This is how agencies keep “one ad account ≈ one profile” from turning into a spreadsheet fire. Folders double as geo/offer partitions for media buyers.</p>
+
+    <h3>Proxy</h3>
+    <p>Attach and manage proxies on profiles. Geo mismatch (proxy exit vs profile timezone/language) causes more “fingerprint” panic than WebGL ever will. Ops notes: <a href="/guides/mlx-proxy/">proxy + Multilogin</a> · <a href="/tools/proxy-format/">formatter tool</a> · <a href="/errors/proxy-mlx/">proxy errors</a>.</p>
+
+    <h3>Browser Profile Data / Pre-made Cookies</h3>
+    <p>Cookie and session hygiene for warmup — not a promise of safe accounts. Read <a href="/guides/cookies-sessions/">cookies guide</a> and <a href="/guides/profile-warmup/">warmup checklist</a>.</p>
+
+    <h3>Everything else (Script Runner, bookmarks, object storage, import/export)</h3>
+    <p>Power-user surfaces. We don’t re-host Multilogin’s full schema. Open the Postman documenter folder when you need them; our job is routing you there without sales fog.</p>
+
+    <h2>Typical automation loop (ads / MMO tech)</h2>
+    <pre><code>1. Sign in / refresh token (PAM)
+2. Ensure proxy + folder/profile IDs are known
+3. Launcher: start profile with automation_type=playwright
+4. Connect Playwright/Puppeteer to 127.0.0.1:{port}
+5. Do the job (slowly, per account)
+6. Stop profile; refresh token before the next wave</code></pre>
+
+    <h2>Who this is for</h2>
+    <ul>
+      <li><a href="/use-cases/ads-multi-account/">Ads multi-account</a> · <a href="/use-cases/facebook-ads/">Facebook / Meta ads desks</a> · <a href="/use-cases/google-ads/">Google ads</a></li>
+      <li><a href="/use-cases/affiliate/">Affiliate / arbitrage operators</a></li>
+      <li>Engineers wiring CDP farms — kits in our monorepo + public Playwright/Puppeteer starters</li>
+    </ul>
+
+    <p class="cta-row">
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_mlx_api">Get SAAS50 / MIN50</a>
+      <a class="btn ghost" href="/guides/postman-mlx/">Postman setup</a>
+      <a class="btn ghost" href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">Open official API</a>
+    </p>
+    <div class="note"><strong>Affiliate disclosure:</strong> we may earn a commission via Multilogin codes/links. Endpoints change — trust Multilogin’s documenter over our examples.</div>
+  </article>
+  <footer class="foot"><p><a href="/">← Hub</a> · <a href="/guides/">Guides</a></p></footer>
+</body>
+</html>

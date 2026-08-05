@@ -10,10 +10,12 @@
 2. `/deal/` — transactional
 3. `/vs/adspower/` — primary compare
 4. `/guides/playwright-mlx/` — how-to moat
-5. `/errors/cdp-attach/` — problem intent
-6. `/faq/` — Free / SAAS50 questions
+5. `/guides/mlx-api/` — Postman API authority
+6. `/use-cases/facebook-ads/` + `/use-cases/ads-multi-account/` — ads/MMO intent
+7. `/errors/cdp-attach/` — problem intent
+8. `/faq/` — Free / SAAS50 questions
 
-Secondary essays (same voice, no template spam): GoLogin, Octo, Dolphin, Undetectable, BitBrowser.
+Secondary essays (same voice, no template spam): GoLogin, Octo, Dolphin, Undetectable, BitBrowser, Google ads, affiliate.
 
 ## Publishing rule
 Edit **`site/`** here, then sync to **`antidetect-automation.github.io`**. Never use pages.dev as a second public site.

@@ -10,6 +10,8 @@ Open-source starters that attach automation to Multilogin X profiles.
 | Postman | `postman/` | Collection JSON in this repo |
 
 Guide: https://antidetect-automation.github.io/guides/playwright-mlx/  
+API map: https://antidetect-automation.github.io/guides/mlx-api/  
+Official Postman: https://documenter.getpostman.com/view/28533318/2s946h9Cv9  
 Deal: https://t.me/antidetect_automation_bot?start=aa_kits
 
-Never commit Multilogin tokens or proxies.
+Playwright kit supports Mode A (`CDP_URL`) and Mode B (MD5 sign-in + Launcher start per Multilogin’s published sample).

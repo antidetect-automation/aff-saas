@@ -24,11 +24,18 @@ const LINKS = {
   guidesHub: `${HUB}/guides/`,
   guide: `${HUB}/guides/playwright-mlx/`,
   apiAuth: `${HUB}/guides/api-auth-mlx/`,
+  mlxApi: `${HUB}/guides/mlx-api/`,
+  mlxProxy: `${HUB}/guides/mlx-proxy/`,
   puppeteer: `${HUB}/guides/puppeteer-mlx/`,
   selenium: `${HUB}/guides/selenium-mlx/`,
   postman: `${HUB}/guides/postman-mlx/`,
   cookies: `${HUB}/guides/cookies-sessions/`,
   warmup: `${HUB}/guides/profile-warmup/`,
+  useCases: `${HUB}/use-cases/`,
+  ads: `${HUB}/use-cases/ads-multi-account/`,
+  fbAds: `${HUB}/use-cases/facebook-ads/`,
+  gAds: `${HUB}/use-cases/google-ads/`,
+  affiliate: `${HUB}/use-cases/affiliate/`,
   start: `${HUB}/start/`,
   tools: `${HUB}/tools/`,
   webgl: `${HUB}/tools/webgl-check/`,
@@ -203,11 +210,13 @@ async function sendHelp(env, chatId) {
       "/saas50 — browser code",
       "/min50 — cloud phone code",
       "/auth — Multilogin X API auth",
+      "/api — Multilogin X API map (Postman folders)",
       "/guide — Playwright + Multilogin X",
       "/puppeteer — Puppeteer + Multilogin X",
       "/selenium — Selenium + Multilogin X",
       "/postman — Postman starter",
       "/warmup — profile warm-up checklist",
+      "/ads — ads / Facebook / Google / affiliate use-cases",
       "/tools — free client-side tools",
       "/compare — world antidetect scorecard",
       "/kits — Playwright / Puppeteer starters",
@@ -248,7 +257,7 @@ async function askAI(env, chatId, question) {
   const prompt = [
     "You are the antidetect-automation Telegram assistant.",
     "Answer briefly in English (max 120 words).",
-    "Topics: Multilogin X, Free/Pro/Business pricing 2026, Playwright CDP, SAAS50/MIN50, antidetect comparisons.",
+    "Topics: Multilogin X API (PAM sign-in, Launcher, Playwright CDP), Free/Pro/Business pricing 2026, ads/Facebook/Google multi-account hygiene, SAAS50/MIN50, antidetect comparisons.",
     "State Multilogin is our #1 recommendation for serious automation, but stay factual; no undetectable claims.",
     "If asked about price: Free 5 profiles; Pro from ~$7.08/mo yearly ($85/yr @10) then SAAS50 ~50% (verify checkout).",
     "Always mention affiliate disclosure in one short clause if recommending purchase.",
@@ -341,6 +350,57 @@ async function handleUpdate(env, update) {
   }
   if (text.startsWith("/auth") || text.startsWith("/signin")) {
     await sendLink(env, chatId, "Multilogin X API auth:", LINKS.apiAuth);
+    return;
+  }
+  if (text.startsWith("/api") || text.startsWith("/mlxapi") || text.startsWith("/launcher")) {
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: "Multilogin X API — start with the map, then auth / Postman / Playwright.",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "API map", url: LINKS.mlxApi }],
+          [
+            { text: "Auth", url: LINKS.apiAuth },
+            { text: "Postman", url: LINKS.postman },
+          ],
+          [
+            { text: "Playwright", url: LINKS.guide },
+            { text: "Proxy", url: LINKS.mlxProxy },
+          ],
+          [{ text: "Official Postman docs", url: "https://documenter.getpostman.com/view/28533318/2s946h9Cv9" }],
+        ],
+      },
+      disable_web_page_preview: true,
+    });
+    return;
+  }
+  if (
+    text.startsWith("/ads") ||
+    text.startsWith("/facebook") ||
+    text.startsWith("/fb") ||
+    text.startsWith("/googleads") ||
+    text.startsWith("/affiliate") ||
+    text.startsWith("/mmo")
+  ) {
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: "Ads / MMO use-cases — isolation hygiene, not ban insurance.",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "All use-cases", url: LINKS.useCases }],
+          [
+            { text: "Multi-account ads", url: LINKS.ads },
+            { text: "Facebook ads", url: LINKS.fbAds },
+          ],
+          [
+            { text: "Google Ads", url: LINKS.gAds },
+            { text: "Affiliate", url: LINKS.affiliate },
+          ],
+          [{ text: "Deal SAAS50 / MIN50", url: LINKS.deal }],
+        ],
+      },
+      disable_web_page_preview: true,
+    });
     return;
   }
   if (text.startsWith("/guides")) {
@@ -516,6 +576,8 @@ async function ensureBotMeta(env) {
     { command: "min50", description: "Cloud Phone coupon" },
     { command: "guide", description: "Playwright + MLX guide" },
     { command: "auth", description: "MLX API authentication" },
+    { command: "api", description: "MLX API map (Postman)" },
+    { command: "ads", description: "Ads / FB / Google / affiliate" },
     { command: "puppeteer", description: "Puppeteer + MLX guide" },
     { command: "postman", description: "Postman kit" },
     { command: "warmup", description: "Profile warm-up checklist" },

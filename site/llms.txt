@@ -13,9 +13,19 @@
 ## Tools / guides / errors
 - https://antidetect-automation.github.io/tools/
 - https://antidetect-automation.github.io/guides/
+- https://antidetect-automation.github.io/guides/mlx-api/ — Postman API map (Launcher, PAM, proxy)
+- https://antidetect-automation.github.io/guides/playwright-mlx/
+- https://antidetect-automation.github.io/guides/postman-mlx/
 - https://antidetect-automation.github.io/errors/
 - https://antidetect-automation.github.io/faq/
 - https://antidetect-automation.github.io/glossary/
+
+## Audiences (ads / MMO / affiliate)
+- https://antidetect-automation.github.io/use-cases/
+- https://antidetect-automation.github.io/use-cases/ads-multi-account/
+- https://antidetect-automation.github.io/use-cases/facebook-ads/
+- https://antidetect-automation.github.io/use-cases/google-ads/
+- https://antidetect-automation.github.io/use-cases/affiliate/
 
 ## Kits
 - https://github.com/antidetect-automation/playwright-mlx-starter

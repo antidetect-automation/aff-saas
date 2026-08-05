@@ -1,17 +1,26 @@
 {
   "info": {
     "name": "Multilogin X — antidetect-automation starter",
-    "description": "Skeleton Postman collection. Replace requests with current Multilogin X API from official Postman/docs. CTA: https://antidetect-automation.github.io/guides/postman-mlx/",
+    "description": "Daily-driver requests aligned with Multilogin’s public help (PAM sign-in + Launcher v2 start). Import the FULL official collection from https://documenter.getpostman.com/view/28533318/2s946h9Cv9 — this file is a thin mirror for operators. Guide: https://antidetect-automation.github.io/guides/postman-mlx/",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "baseUrl", "value": "https://api.multilogin.com" },
+    { "key": "apiBase", "value": "https://api.multilogin.com" },
+    { "key": "launcherBase", "value": "https://launcher.mlx.yt:45001" },
     { "key": "token", "value": "" },
-    { "key": "profileId", "value": "" }
+    { "key": "email", "value": "" },
+    { "key": "password_md5", "value": "" },
+    { "key": "folder_id", "value": "" },
+    { "key": "profile_id", "value": "" },
+    { "key": "automation_type", "value": "playwright" }
   ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{token}}", "type": "string" }]
+  },
   "item": [
     {
-      "name": "0. README — update paths from official docs",
+      "name": "0. Open our Postman guide",
       "request": {
         "method": "GET",
         "header": [],
@@ -19,31 +28,62 @@
       }
     },
     {
-      "name": "1. Sign in / refresh (placeholder)",
+      "name": "1. PAM — User Sign In (MD5 password)",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "try {",
+              "  const response = pm.response.json();",
+              "  if (response && response.data && response.data.token) {",
+              "    pm.collectionVariables.set('token', response.data.token);",
+              "  }",
+              "} catch (e) { console.log(e); }"
+            ]
+          }
+        }
+      ],
       "request": {
+        "auth": { "type": "noauth" },
         "method": "POST",
-        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Accept", "value": "application/json" }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password}}\"\n}"
+          "raw": "{\n  \"email\": \"{{email}}\",\n  \"password\": \"{{password_md5}}\"\n}"
         },
-        "url": "{{baseUrl}}/user/signin"
+        "url": "{{apiBase}}/user/signin",
+        "description": "Hash Multilogin password with MD5 first (see Multilogin Configure Postman help). Token ~30 minutes."
       }
     },
     {
-      "name": "2. Start profile (placeholder)",
+      "name": "2. Launcher — Start Browser Profile v2",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-        "url": "{{baseUrl}}/profile/start?profileId={{profileId}}"
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": {
+          "raw": "{{launcherBase}}/api/v2/profile/f/{{folder_id}}/p/{{profile_id}}/start?automation_type={{automation_type}}&headless_mode=false",
+          "host": ["{{launcherBase}}"],
+          "path": ["api", "v2", "profile", "f", "{{folder_id}}", "p", "{{profile_id}}", "start"],
+          "query": [
+            { "key": "automation_type", "value": "{{automation_type}}" },
+            { "key": "headless_mode", "value": "false" }
+          ]
+        },
+        "description": "Multilogin app must be running. Response data.port → CDP http://127.0.0.1:{port}. automation_type: playwright | puppeteer | selenium."
       }
     },
     {
-      "name": "3. Stop profile (placeholder)",
+      "name": "3. Launcher — Stop Browser Profile (check official path)",
       "request": {
         "method": "GET",
-        "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
-        "url": "{{baseUrl}}/profile/stop?profileId={{profileId}}"
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "url": "{{launcherBase}}/api/v1/profile/stop/p/{{profile_id}}",
+        "description": "Matches Multilogin’s published Selenium/Docker samples (v1 stop). Confirm in official Launcher folder if your workspace uses another variant."
       }
     }
   ]

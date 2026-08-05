@@ -4,9 +4,30 @@
   <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-05T01:00:00Z</updated>
+  <updated>2026-08-04T12:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
+  <entry>
+    <title>Multilogin X API map — Launcher, PAM, proxy</title>
+    <link href="https://antidetect-automation.github.io/guides/mlx-api/" />
+    <id>https://antidetect-automation.github.io/guides/mlx-api/</id>
+    <updated>2026-08-04T12:00:00Z</updated>
+    <summary>Operator map of the official Multilogin Postman API for ads and automation desks.</summary>
+  </entry>
+  <entry>
+    <title>Facebook / Meta ads with Multilogin</title>
+    <link href="https://antidetect-automation.github.io/use-cases/facebook-ads/" />
+    <id>https://antidetect-automation.github.io/use-cases/facebook-ads/</id>
+    <updated>2026-08-04T12:00:00Z</updated>
+    <summary>Multi-ad-account hygiene for media buyers — isolation, not ban insurance.</summary>
+  </entry>
+  <entry>
+    <title>Playwright + Multilogin X — official Launcher pattern</title>
+    <link href="https://antidetect-automation.github.io/guides/playwright-mlx/" />
+    <id>https://antidetect-automation.github.io/guides/playwright-mlx/</id>
+    <updated>2026-08-04T12:00:00Z</updated>
+    <summary>MD5 sign-in, launcher.mlx.yt start with automation_type=playwright, connectOverCDP.</summary>
+  </entry>
   <entry>
     <title>Multilogin pricing 2026 — Free / Pro / Business</title>
     <link href="https://antidetect-automation.github.io/pricing/" />
