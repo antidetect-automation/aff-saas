@@ -706,7 +706,22 @@ async function pollTelegram(env) {
 
 export default {
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(pollTelegram(env));
+    ctx.waitUntil(
+      (async () => {
+        await pollTelegram(env);
+        try {
+          if (!env.LEADS) return;
+          const day = new Date().toISOString().slice(0, 10);
+          const last = await env.LEADS.get("bot:meta_day");
+          if (last !== day) {
+            await ensureBotMeta(env);
+            await env.LEADS.put("bot:meta_day", day);
+          }
+        } catch (e) {
+          console.error("bot meta", e);
+        }
+      })()
+    );
   },
 
   async fetch(request, env) {

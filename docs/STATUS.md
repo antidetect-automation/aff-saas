@@ -1,20 +1,23 @@
 # Project status
 
-Updated: 2026-08-05 overnight wave 9 (auto)
+Updated: 2026-08-05 overnight wave 10 (auto)
 
 ## Hard lock
 No new GitHub repos. github.io only public site. Worker = Telegram.
 
-## Wave 9 (conversion + bots + depth)
-- **Bugfix:** `/deal` + `/codes` now open deal desk (codes chooser), not welcome again
-- `sendDeal` keyboard: Multilogin plans, pricing, intent switch, guide
-- Money pages: above-fold / closing CTAs; og/twitter meta; Telegram in footers
-- Deepened Puppeteer + Selenium guides to Playwright spine
-- CDP attach desk: symptoms + connect snippet
-- Sitemap excludes noindex `/vs/*` stubs; feed + llms.txt + kit coupons updated
-- Breadcrumbs / HowTo / health_check from wave 8 retained
+## Live
+- Site: https://antidetect-automation.github.io/
+- Bot: https://t.me/antidetect_automation_bot
+- Worker health: OK
+- Ship: `bash scripts/ship.sh`
+
+## Wave 8–10
+- Breadcrumbs, HowTo, health_check, kit coupons
+- Bugfix `/deal` → code chooser; richer coupon keyboards; daily setMyCommands via cron
+- Money-page CTAs + social meta; deepened Puppeteer/Selenium/CDP/GoLogin
+- Sitemap drops 8 noindex stubs (49 URLs)
 
 ## Owner wake-up
-1. GSC submit sitemap (URL set shrunk — stubs dropped)
+1. GSC submit sitemap
 2. Dev.to or Hashnode Pro
 3. BotFather `/setuserpic`
