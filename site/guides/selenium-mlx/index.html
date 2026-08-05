@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Selenium + Multilogin X — starter guide</title>
-  <meta name="description" content="Attach Selenium to a Multilogin X profile. Prefer Playwright for CDP; Selenium path when your stack requires it." />
+  <title>Selenium + Multilogin X — remote WebDriver port</title>
+  <meta name="description" content="Start Multilogin with automation_type=selenium, attach Remote WebDriver to the returned port. Pro+ API. Prefer Playwright for new CDP work." />
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/selenium-mlx/" />
-  <meta property="og:title" content="Selenium + Multilogin X starter guide" />
+  <meta property="og:title" content="Selenium + Multilogin X" />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/selenium-mlx/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
@@ -21,27 +21,20 @@
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
+  <article class="long">
     <p class="eyebrow">Guide</p>
     <h1>Selenium + Multilogin X</h1>
-    <p class="lede">Prefer Playwright or Puppeteer for CDP. Use Selenium when your existing suite requires it.</p>
-    <h2>Flow</h2>
-    <pre><code>1. Authenticate to Multilogin X API
-2. Start profile by UUID
-3. Read debugger / Selenium address from start response
-4. Point Selenium remote/debugger options at that endpoint
-5. Run suite → stop profile</code></pre>
-    <p>Hosts and field names change — verify against Multilogin’s current Postman collection.</p>
-    <h2>Kit</h2>
-    <ul>
-      <li><a href="https://github.com/antidetect-automation/aff-saas/tree/main/kits/selenium-mlx-starter">selenium-mlx-starter</a> (monorepo)</li>
-      <li>CDP troubleshoot: <a href="/errors/cdp-attach/">CDP attach errors</a></li>
-    </ul>
-    <div class="note">Browser automation → <code>SAAS50</code>. Affiliate disclosure applies.</div>
+    <p class="lede">Legacy desks still on Selenium: start with <code>automation_type=selenium</code>, then <code>webdriver.Remote</code> on <code>http://127.0.0.1:{port}</code>. New projects should prefer <a href="/guides/playwright-mlx/">Playwright</a>.</p>
+    <p>Official sample: Multilogin’s Selenium automation example. API map: <a href="/guides/mlx-api/">/guides/mlx-api/</a>.</p>
+    <h2>Launcher</h2>
+    <pre><code>GET …/api/v2/profile/f/{folder_id}/p/{profile_id}/start
+  ?automation_type=selenium&amp;headless_mode=false</code></pre>
+    <p>Kit (monorepo only — no new public repo): <code>aff-saas/kits/selenium-mlx-starter/</code>.</p>
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_selenium">Get Multilogin deal</a>
-      <a class="btn ghost" href="/guides/playwright-mlx/">Prefer Playwright</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_selenium">SAAS50 / MIN50</a>
+      <a class="btn ghost" href="/guides/playwright-mlx/">Playwright guide</a>
     </p>
+    <div class="note">Affiliate disclosure. Free = no API.</div>
   </article>
   <footer class="foot"><p><a href="/">← Hub</a></p></footer>
 </body>

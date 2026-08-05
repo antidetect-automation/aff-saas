@@ -1,200 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>antidetect-automation</title>
-  <subtitle>Multilogin guides, comparisons, and deal desk updates</subtitle>
+  <subtitle>Multilogin guides, ads use-cases, and deal desk updates</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-04T12:00:00Z</updated>
+  <updated>2026-08-04T18:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
   <entry>
-    <title>Multilogin X API map — Launcher, PAM, proxy</title>
-    <link href="https://antidetect-automation.github.io/guides/mlx-api/" />
-    <id>https://antidetect-automation.github.io/guides/mlx-api/</id>
-    <updated>2026-08-04T12:00:00Z</updated>
-    <summary>Operator map of the official Multilogin Postman API for ads and automation desks.</summary>
+    <title>Multilogin pricing 2026 — Free / Pro / Business</title>
+    <link href="https://antidetect-automation.github.io/pricing/" />
+    <id>https://antidetect-automation.github.io/pricing/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Free 5 profiles, Pro from ~$7.08/mo yearly, stack SAAS50.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin SAAS50 / MIN50 deal desk</title>
+    <link href="https://antidetect-automation.github.io/deal/" />
+    <id>https://antidetect-automation.github.io/deal/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Telegram desk for browser vs Cloud Phone codes.</summary>
   </entry>
   <entry>
     <title>Facebook / Meta ads with Multilogin</title>
     <link href="https://antidetect-automation.github.io/use-cases/facebook-ads/" />
     <id>https://antidetect-automation.github.io/use-cases/facebook-ads/</id>
-    <updated>2026-08-04T12:00:00Z</updated>
-    <summary>Multi-ad-account hygiene for media buyers — isolation, not ban insurance.</summary>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Multi-ad-account hygiene for media buyers.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin X API map — Launcher, PAM, proxy</title>
+    <link href="https://antidetect-automation.github.io/guides/mlx-api/" />
+    <id>https://antidetect-automation.github.io/guides/mlx-api/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Operator map of the official Postman API.</summary>
   </entry>
   <entry>
     <title>Playwright + Multilogin X — official Launcher pattern</title>
     <link href="https://antidetect-automation.github.io/guides/playwright-mlx/" />
     <id>https://antidetect-automation.github.io/guides/playwright-mlx/</id>
-    <updated>2026-08-04T12:00:00Z</updated>
-    <summary>MD5 sign-in, launcher.mlx.yt start with automation_type=playwright, connectOverCDP.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin pricing 2026 — Free / Pro / Business</title>
-    <link href="https://antidetect-automation.github.io/pricing/" />
-    <id>https://antidetect-automation.github.io/pricing/</id>
-    <updated>2026-08-05T01:00:00Z</updated>
-    <summary>Free 5 profiles, Pro from ~$7.08/mo yearly, stack SAAS50.</summary>
-  </entry>
-  <entry>
-    <title>Best antidetect browser 2026 — world scorecard</title>
-    <link href="https://antidetect-automation.github.io/vs/" />
-    <id>https://antidetect-automation.github.io/vs/</id>
-    <updated>2026-08-05T01:00:00Z</updated>
-    <summary>Multilogin #1 vs AdsPower, BitBrowser, Kameleo, Octo, and more.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin vs BitBrowser</title>
-    <link href="https://antidetect-automation.github.io/vs/bitbrowser/" />
-    <id>https://antidetect-automation.github.io/vs/bitbrowser/</id>
-    <updated>2026-08-05T01:00:00Z</updated>
-    <summary>Seat-price BitBrowser vs Multilogin Free/Pro + X API.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin vs MoreLogin</title>
-    <link href="https://antidetect-automation.github.io/vs/morelogin/" />
-    <id>https://antidetect-automation.github.io/vs/morelogin/</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <summary>Premium Multilogin X vs value-tier MoreLogin entry.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin X API auth</title>
-    <link href="https://antidetect-automation.github.io/guides/api-auth-mlx/" />
-    <id>https://antidetect-automation.github.io/guides/api-auth-mlx/</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <summary>Sign-in, tokens, and safe secret handling before CDP.</summary>
-  </entry>
-  <entry>
-    <title>DNS / WebRTC leak snapshot</title>
-    <link href="https://antidetect-automation.github.io/tools/dns-webrtc-check/" />
-    <id>https://antidetect-automation.github.io/tools/dns-webrtc-check/</id>
-    <updated>2026-08-05T00:00:00Z</updated>
-    <summary>Client-side ICE candidate sanity check for Multilogin profiles.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin vs Linken Sphere</title>
-    <link href="https://antidetect-automation.github.io/vs/linken-sphere/" />
-    <id>https://antidetect-automation.github.io/vs/linken-sphere/</id>
-    <updated>2026-08-04T23:00:00Z</updated>
-    <summary>Multilogin X API automation vs Linken Sphere browser farms.</summary>
-  </entry>
-  <entry>
-    <title>CDP attach errors</title>
-    <link href="https://antidetect-automation.github.io/errors/cdp-attach/" />
-    <id>https://antidetect-automation.github.io/errors/cdp-attach/</id>
-    <updated>2026-08-04T23:00:00Z</updated>
-    <summary>Fix Playwright/Puppeteer CDP connect failures on Multilogin X.</summary>
-  </entry>
-  <entry>
-    <title>Timezone / locale checker</title>
-    <link href="https://antidetect-automation.github.io/tools/timezone-locale/" />
-    <id>https://antidetect-automation.github.io/tools/timezone-locale/</id>
-    <updated>2026-08-04T23:00:00Z</updated>
-    <summary>Client-side TZ/locale snapshot for proxy geo alignment.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin vs Undetectable</title>
-    <link href="https://antidetect-automation.github.io/vs/undetectable/" />
-    <id>https://antidetect-automation.github.io/vs/undetectable/</id>
-    <updated>2026-08-04T22:00:00Z</updated>
-    <summary>X API automation vs Undetectable configuration depth.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin vs Octo Browser</title>
-    <link href="https://antidetect-automation.github.io/vs/octo-browser/" />
-    <id>https://antidetect-automation.github.io/vs/octo-browser/</id>
-    <updated>2026-08-04T22:00:00Z</updated>
-    <summary>Premium Multilogin X vs Octo media-buying workflows.</summary>
-  </entry>
-  <entry>
-    <title>Puppeteer + Multilogin X</title>
-    <link href="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
-    <id>https://antidetect-automation.github.io/guides/puppeteer-mlx/</id>
-    <updated>2026-08-04T22:00:00Z</updated>
-    <summary>Attach Puppeteer over CDP to Multilogin X profiles.</summary>
-  </entry>
-  <entry>
-    <title>UA / Client Hints checker</title>
-    <link href="https://antidetect-automation.github.io/tools/ua-ch-check/" />
-    <id>https://antidetect-automation.github.io/tools/ua-ch-check/</id>
-    <updated>2026-08-04T22:00:00Z</updated>
-    <summary>Client-side UA and Client Hints snapshot for profile sanity checks.</summary>
-  </entry>
-  <entry>
-    <title>Start here — Multilogin onboarding</title>
-    <link href="https://antidetect-automation.github.io/start/" />
-    <id>https://antidetect-automation.github.io/start/</id>
     <updated>2026-08-04T18:00:00Z</updated>
-    <summary>Onboarding path from hub → bot → SAAS50 / MIN50.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin vs Incogniton</title>
-    <link href="https://antidetect-automation.github.io/vs/incogniton/" />
-    <id>https://antidetect-automation.github.io/vs/incogniton/</id>
-    <updated>2026-08-04T18:00:00Z</updated>
-    <summary>Free-profile Incogniton vs Multilogin X automation and Cloud Phone.</summary>
-  </entry>
-  <entry>
-    <title>Crypto / airdrop ops</title>
-    <link href="https://antidetect-automation.github.io/use-cases/crypto-airdrop/" />
-    <id>https://antidetect-automation.github.io/use-cases/crypto-airdrop/</id>
-    <updated>2026-08-04T18:00:00Z</updated>
-    <summary>Multi-wallet hygiene with Multilogin profiles — no spam farm advice.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin coupons SAAS50 / MIN50</title>
-    <link href="https://antidetect-automation.github.io/deal/" />
-    <id>https://antidetect-automation.github.io/deal/</id>
-    <updated>2026-08-04T00:00:00Z</updated>
-    <summary>Lifetime discount desk for Multilogin Browser and Cloud Phone.</summary>
-  </entry>
-  <entry>
-    <title>Multilogin FAQ</title>
-    <link href="https://antidetect-automation.github.io/faq/" />
-    <id>https://antidetect-automation.github.io/faq/</id>
-    <updated>2026-08-04T00:00:00Z</updated>
-    <summary>Coupons, Playwright, AdsPower/GoLogin comparisons, disclosure.</summary>
+    <summary>MD5 sign-in, launcher start, connectOverCDP.</summary>
   </entry>
   <entry>
     <title>Multilogin vs AdsPower</title>
     <link href="https://antidetect-automation.github.io/vs/adspower/" />
     <id>https://antidetect-automation.github.io/vs/adspower/</id>
-    <updated>2026-08-04T00:00:00Z</updated>
-    <summary>When premium fingerprints beat budget antidetect browsers.</summary>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>API farms vs RPA desks — honest 2026 take.</summary>
   </entry>
   <entry>
-    <title>Multilogin vs GoLogin</title>
-    <link href="https://antidetect-automation.github.io/vs/gologin/" />
-    <id>https://antidetect-automation.github.io/vs/gologin/</id>
-    <updated>2026-08-04T00:00:00Z</updated>
-    <summary>Premium Multilogin X vs value-tier GoLogin.</summary>
+    <title>Google Ads multi-account with Multilogin</title>
+    <link href="https://antidetect-automation.github.io/use-cases/google-ads/" />
+    <id>https://antidetect-automation.github.io/use-cases/google-ads/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Agency isolation and API QA lanes.</summary>
   </entry>
   <entry>
-    <title>Playwright + Multilogin X</title>
-    <link href="https://antidetect-automation.github.io/guides/playwright-mlx/" />
-    <id>https://antidetect-automation.github.io/guides/playwright-mlx/</id>
-    <updated>2026-08-04T00:00:00Z</updated>
-    <summary>Start profile and attach Playwright over CDP.</summary>
-  </entry>
-
-  <entry>
-    <title>Multilogin vs Dolphin Anty</title>
-    <link href="https://antidetect-automation.github.io/vs/dolphin-anty/" />
-    <id>https://antidetect-automation.github.io/vs/dolphin-anty/</id>
-    <updated>2026-08-04T12:00:00Z</updated>
-    <summary>Premium Multilogin X vs Dolphin Anty media-buying workflows.</summary>
+    <title>Affiliate & arbitrage lanes</title>
+    <link href="https://antidetect-automation.github.io/use-cases/affiliate/" />
+    <id>https://antidetect-automation.github.io/use-cases/affiliate/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Offer/GEO folders without fraud advice.</summary>
   </entry>
   <entry>
-    <title>Free WebGL + proxy tools</title>
-    <link href="https://antidetect-automation.github.io/tools/" />
-    <id>https://antidetect-automation.github.io/tools/</id>
-    <updated>2026-08-04T12:00:00Z</updated>
-    <summary>Client-side utilities for antidetect ops.</summary>
+    <title>Best antidetect browser 2026 — world scorecard</title>
+    <link href="https://antidetect-automation.github.io/vs/" />
+    <id>https://antidetect-automation.github.io/vs/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Multilogin #1 vs AdsPower, Octo, Dolphin, and more.</summary>
   </entry>
   <entry>
-    <title>MLX automation errors</title>
-    <link href="https://antidetect-automation.github.io/errors/mlx-automation/" />
-    <id>https://antidetect-automation.github.io/errors/mlx-automation/</id>
-    <updated>2026-08-04T12:00:00Z</updated>
-    <summary>Troubleshoot Multilogin X API / Playwright CDP failures.</summary>
+    <title>Puppeteer + Multilogin X</title>
+    <link href="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
+    <id>https://antidetect-automation.github.io/guides/puppeteer-mlx/</id>
+    <updated>2026-08-04T18:00:00Z</updated>
+    <summary>Launcher automation_type=puppeteer.</summary>
   </entry>
 </feed>

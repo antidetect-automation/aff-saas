@@ -117,6 +117,10 @@ function mainKeyboard() {
       ],
       [
         { text: "Playwright", url: LINKS.guide },
+        { text: "API map", url: LINKS.mlxApi },
+      ],
+      [
+        { text: "Ads / Facebook", url: LINKS.fbAds },
         { text: "FAQ", url: LINKS.faq },
       ],
     ],

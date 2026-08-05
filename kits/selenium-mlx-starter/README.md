@@ -1,18 +1,18 @@
-# Selenium + Multilogin X starter
+# Selenium + Multilogin X (monorepo kit)
 
-Attach Selenium to a Multilogin profile via debugger address (CDP-compatible flows vary by version).
+Prefer Playwright for new CDP work. This kit exists for desks stuck on Selenium.
 
-Prefer Playwright/Puppeteer kits for CDP:
-- https://github.com/antidetect-automation/playwright-mlx-starter
-- https://github.com/antidetect-automation/puppeteer-mlx-starter
+Mode A: `SELENIUM_URL=http://127.0.0.1:PORT` after Launcher start.  
+Mode B: sign-in + Launcher with `automation_type=selenium`.
+
+Guide: https://antidetect-automation.github.io/guides/selenium-mlx/  
+Deal: https://t.me/antidetect_automation_bot?start=aa_kit_selenium
 
 ```bash
-pip install -r requirements.txt
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt  # or selenium requests python-dotenv
 cp .env.example .env
 python main.py
 ```
 
-Guide: https://antidetect-automation.github.io/guides/playwright-mlx/  
-Deal: https://t.me/antidetect_automation_bot?start=aa_kit_selenium
-
-Affiliate disclosure applies.
+Stays in `aff-saas` — no new public GitHub repo.

@@ -1,22 +1,29 @@
 # Project status
 
-Updated: 2026-08-04 — **API map + ads/MMO audience pages**
+Updated: 2026-08-04 — **ads deepen + kit Mode B + distribution truth**
 
 ## Hard lock
 **No new GitHub repositories.** Existing set only (profile, github.io, aff-saas, existing PW/PP kit mirrors). Selenium/Postman stay in `aff-saas/kits/`.
 
 ## Focus
-Quality SEO on buyer queries (ads, Facebook, Google, affiliate, Multilogin API/Playwright) — deepen heroes, don’t spawn thin repos/pages.
+Quality SEO on buyer queries (ads, Facebook, Google, affiliate, Multilogin API) + conversion silos. Distribution is the bottleneck, not more HTML inventory.
 
-## Recent
-- `docs/API_CONTENT_MAP.md` + `/guides/mlx-api/` from official Postman domains
-- Hardened Playwright / Postman / API-auth guides + PW kit Launcher start (MD5 + `launcher.mlx.yt`)
-- Audience essays: `/use-cases/facebook-ads/`, `/google-ads/`, `/affiliate/` + deepened ads multi-account
-- Bot: `/api`, `/ads` · sitemap / llms / home links
+## Live funnel
+GitHub Pages → Telegram bot → SAAS50 / MIN50
+
+## Distribution (truth)
+- **Dev.to** — previous account/articles **gone** (404). Recreate + new API key before republish.
+- **Hashnode** — token works; **API writes need Pro**. Script: `scripts/publish_hashnode.py`
+- IndexNow ping works when we have URL list.
+
+## Recent (this pass)
+- Deepened Facebook / Google / affiliate use-cases + money↔ads silo
+- Puppeteer + Selenium kits/guides aligned to Launcher Mode B
+- Bot keyboard Ads/API · feed/sitemap hygiene · docs truth
 
 ## Owner manual
-1. GSC verify + sitemap submit (re-submit after this ship)
-2. ~~Publish ≤3 Dev.to~~ — **done** (pricing, AdsPower, Playwright) — see `content/SYNDICATION.md`
-3. BotFather `/setuserpic`
-4. Optional: Hashnode token for mirror of the same 3
-5. **Rotate Dev.to API key** later (was pasted in chat); keep only in `.secrets/`
+1. GSC verify + sitemap submit
+2. New Dev.to account + API key → republish ≤3 (pricing, AdsPower, Playwright)
+3. Optional Hashnode Pro → `python3 scripts/publish_hashnode.py`
+4. BotFather `/setuserpic`
+5. Push kit mirrors: `playwright-mlx-starter`, `puppeteer-mlx-starter` in place

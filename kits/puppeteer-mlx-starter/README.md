@@ -1,15 +1,15 @@
-# Puppeteer + Multilogin X starter
+# Puppeteer + Multilogin X
 
-Connect Puppeteer over CDP to a running Multilogin X profile.
+Mode A: `CDP_URL` after UI/Postman start.  
+Mode B: `MLX_EMAIL` / `MLX_PASSWORD` + folder/profile IDs (Launcher `automation_type=puppeteer`).
 
-Guide: https://antidetect-automation.github.io/guides/playwright-mlx/  
+Guide: https://antidetect-automation.github.io/guides/puppeteer-mlx/  
 Deal: https://t.me/antidetect_automation_bot?start=aa_kit_puppeteer
 
 ```bash
-npm i
 cp .env.example .env
-# set CDP_URL after starting profile
+npm install
 node index.mjs
 ```
 
-Affiliate disclosure: Multilogin purchases via our codes may earn a commission.
+Affiliate disclosure applies.

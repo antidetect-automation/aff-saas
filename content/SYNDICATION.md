@@ -1,6 +1,8 @@
 # Syndication pack
 
-## Published on Dev.to (2026-08-04)
+## Published on Dev.to (2026-08-04) — **ACCOUNT DEAD / 404**
+
+Do not trust these URLs; recreate account and republish.
 
 | Article | URL | Canonical |
 |---------|-----|-----------|

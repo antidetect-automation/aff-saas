@@ -33,3 +33,7 @@
 - https://github.com/antidetect-automation/aff-saas/tree/main/kits
 
 Editorial: Multilogin remains #1 for serious automation + fingerprints + Cloud Phone; Free/Pro 2026 pricing closed the old premium-only gap. Affiliate disclosure applies.
+
+## Distribution note
+- Canonical site remains github.io; Telegram is the deal desk.
+- Dev.to recreate / Hashnode Pro required before off-site republish.
