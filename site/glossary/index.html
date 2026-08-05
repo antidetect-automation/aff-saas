@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Multilogin glossary — SAAS50, MLX, CDP, MIN50</title>
-  <meta name="description" content="Short glossary for Multilogin X operators: SAAS50, MIN50, CDP, profiles, sticky proxies, warm-up." />
+  <title>Multilogin glossary — SAAS50, MIN50, MLX, CDP, Launcher</title>
+  <meta name="description" content="Operator glossary: SAAS50, MIN50, Free/Pro/Business, Multilogin X, Launcher, PAM, CDP, sticky proxy, warmup, folder/profile IDs." />
   <link rel="canonical" href="https://antidetect-automation.github.io/glossary/" />
   <meta property="og:title" content="Multilogin ops glossary" />
   <meta property="og:url" content="https://antidetect-automation.github.io/glossary/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"DefinedTermSet","name":"Multilogin ops glossary","url":"https://antidetect-automation.github.io/glossary/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
@@ -21,26 +24,30 @@
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
+  <article class="long">
     <p class="eyebrow">Reference</p>
     <h1>Multilogin ops glossary</h1>
-    <p class="lede">Shared vocabulary so deal desk answers stay consistent.</p>
+    <p class="lede">Shared vocabulary so deal-desk answers, bot replies, and essays stay consistent.</p>
     <dl>
-      <dt>SAAS50</dt><dd>Affiliate coupon path for Multilogin Antidetect Browser (50% lifetime via our desk). Stack with yearly billing when available.</dd>
-      <dt>MIN50</dt><dd>Affiliate coupon path for Multilogin Cloud Phone.</dd>
-      <dt>Free plan</dt><dd>Multilogin forever-free tier: 5 profiles (cloud mobile + browser). No API/team. Idle 7-day auto-delete risk.</dd>
-      <dt>Pro plan</dt><dd>Paid Multilogin tier with API; yearly examples from ~$7.08/mo at 10 profiles (verify checkout).</dd>
-      <dt>Business plan</dt><dd>Agency tier: higher profile counts, unlimited seats, custom API limits.</dd>
-      <dt>Multilogin X (MLX)</dt><dd>API / automation surface for starting profiles and attaching browsers (Pro+).</dd>
-      <dt>CDP</dt><dd>Chrome DevTools Protocol — how Playwright/Puppeteer attach to a running profile.</dd>
-      <dt>Profile</dt><dd>One isolated browser identity (fingerprint + cookies + often one proxy).</dd>
-      <dt>Sticky proxy</dt><dd>Exit IP that stays stable across a session / warm period.</dd>
-      <dt>Warm-up</dt><dd>Low-risk browsing to build cookies and behavior before high-stakes actions.</dd>
+      <dt>SAAS50</dt><dd>Affiliate coupon path for Multilogin Antidetect Browser (~50% lifetime via our desk). Stack with yearly when checkout allows — <a href="/deal/">deal</a>.</dd>
+      <dt>MIN50</dt><dd>Affiliate coupon path for Multilogin Cloud Phone — <a href="/use-cases/cloud-phone/">Cloud Phone use-case</a>.</dd>
+      <dt>Free plan</dt><dd>Forever-free tier: 5 profiles. No API/team. Idle ~7-day wipe risk — <a href="/pricing/">pricing</a>.</dd>
+      <dt>Pro plan</dt><dd>Paid tier with API; yearly examples from ~$7.08/mo at 10 profiles (verify checkout).</dd>
+      <dt>Business plan</dt><dd>Agency tier: higher profile counts, unlimited seats, higher API limits.</dd>
+      <dt>Multilogin X (MLX)</dt><dd>API / automation surface for profiles (Pro+) — <a href="/guides/mlx-api/">API map</a>.</dd>
+      <dt>PAM</dt><dd>Profile Access Management — sign-in, refresh, automation tokens. Password often MD5-hashed per Multilogin Postman help.</dd>
+      <dt>Launcher</dt><dd>Local Multilogin agent API (e.g. <code>launcher.mlx.yt:45001</code>) to start/stop profiles and return automation ports. App must be running.</dd>
+      <dt>automation_type</dt><dd>Query on start: <code>playwright</code> | <code>puppeteer</code> | <code>selenium</code> so the response includes a usable port.</dd>
+      <dt>CDP</dt><dd>Chrome DevTools Protocol — how Playwright/Puppeteer attach to a running Mimic profile.</dd>
+      <dt>folder_id / profile_id</dt><dd>UUIDs required by Launcher paths; copy from UI/DevTools/Postman.</dd>
+      <dt>Profile</dt><dd>One isolated browser identity (fingerprint + cookies + usually one proxy).</dd>
+      <dt>Sticky proxy</dt><dd>Exit IP that stays stable across a session / warm period — <a href="/guides/mlx-proxy/">proxy guide</a>.</dd>
+      <dt>Warm-up</dt><dd>Low-risk browsing to build coherent cookies/behavior before high-stakes actions — <a href="/guides/profile-warmup/">checklist</a>.</dd>
     </dl>
     <div class="note">Affiliate disclosure applies. Not official Multilogin Support.</div>
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_glossary">Get deal</a>
-      <a class="btn ghost" href="/start/">Start here</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_glossary">Telegram desk</a>
+      <a class="btn ghost" href="/faq/">FAQ</a>
     </p>
   </article>
   <footer class="foot"><p><a href="/">← Hub</a></p></footer>

@@ -8,6 +8,20 @@
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
   <entry>
+    <title>Multilogin Cloud Phone — MIN50 path</title>
+    <link href="https://antidetect-automation.github.io/use-cases/cloud-phone/" />
+    <id>https://antidetect-automation.github.io/use-cases/cloud-phone/</id>
+    <updated>2026-08-04T20:00:00Z</updated>
+    <summary>When Android apps need Cloud Phone instead of browser SAAS50.</summary>
+  </entry>
+  <entry>
+    <title>Multilogin ops glossary</title>
+    <link href="https://antidetect-automation.github.io/glossary/" />
+    <id>https://antidetect-automation.github.io/glossary/</id>
+    <updated>2026-08-04T20:00:00Z</updated>
+    <summary>SAAS50, MIN50, Launcher, PAM, CDP, automation_type.</summary>
+  </entry>
+  <entry>
     <title>Multilogin profile warmup checklist</title>
     <link href="https://antidetect-automation.github.io/guides/profile-warmup/" />
     <id>https://antidetect-automation.github.io/guides/profile-warmup/</id>

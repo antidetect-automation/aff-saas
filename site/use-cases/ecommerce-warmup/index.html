@@ -3,35 +3,49 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ecommerce store warmup with Multilogin</title>
-  <meta name="description" content="Use-case: warm ecommerce browsing sessions in Multilogin before scale. Proxies, pacing, Playwright optional." />
+  <title>Ecommerce account warmup with Multilogin</title>
+  <meta name="description" content="Warm ecommerce buyer accounts in Multilogin before checkout stress: proxy, TZ, pacing, cookie hygiene. SAAS50. No fraud advice." />
   <link rel="canonical" href="https://antidetect-automation.github.io/use-cases/ecommerce-warmup/" />
-  <meta property="og:title" content="Ecommerce warmup with Multilogin" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Ecommerce warmup + Multilogin" />
   <meta property="og:url" content="https://antidetect-automation.github.io/use-cases/ecommerce-warmup/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Ecommerce account warmup with Multilogin","url":"https://antidetect-automation.github.io/use-cases/ecommerce-warmup/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
-    <nav><a href="/deal/">Deal</a><a href="/use-cases/ads-multi-account/">Ads</a><a href="/use-cases/ecommerce-warmup/">Ecommerce</a></nav>
+    <nav>
+      <a href="/use-cases/ecommerce-warmup/">Ecommerce</a>
+      <a href="/guides/profile-warmup/">Warmup</a>
+      <a href="/deal/">Deal</a>
+    </nav>
   </header>
-  <article>
+  <article class="long">
     <p class="eyebrow">Use case</p>
     <h1>Ecommerce warmup</h1>
-    <p class="lede">Build natural browsing history per profile before high-value actions. Prefer human pacing over aggressive scripts.</p>
+    <p class="lede">Stores that run many buyer identities care about coherent sessions more than flashy fingerprint scores. Multilogin keeps jars apart so QA buyers and agency test accounts don’t inherit each other’s carts.</p>
+
+    <h2>Before checkout stress</h2>
     <ol>
-      <li>Match proxy geo to storefront locale.</li>
-      <li>Browse categories / PDPs slowly; avoid instant checkout spam.</li>
-      <li>Keep cookies/session inside that profile only.</li>
-      <li>Format proxy packs with <a href="/tools/proxy-format/">proxy formatter</a>.</li>
+      <li>Sticky residential/mobile proxy matched to the story — <a href="/guides/mlx-proxy/">proxy</a>.</li>
+      <li>Timezone/language snap — <a href="/tools/timezone-locale/">TZ</a>.</li>
+      <li>Browse naturally first — <a href="/guides/profile-warmup/">warmup checklist</a>.</li>
+      <li>Never paste unrelated cookies into a money profile — <a href="/guides/cookies-sessions/">cookies</a>.</li>
     </ol>
+
+    <h2>Automation</h2>
+    <p>Use Playwright for inventory/QA checks, not for carding or payment fraud. Pro+ API: <a href="/guides/playwright-mlx/">guide</a>.</p>
+
+    <div class="note">Follow merchant and network rules. Affiliate disclosure applies.</div>
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_usecase_ecom">Get SAAS50</a>
-      <a class="btn ghost" href="/guides/playwright-mlx/">Playwright guide</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_uc_ecom">SAAS50 / MIN50</a>
+      <a class="btn ghost" href="/use-cases/ads-multi-account/">Ads desks</a>
     </p>
-    <div class="note">Affiliate disclosure applies. Comply with store and platform ToS.</div>
   </article>
   <footer class="foot"><p><a href="/">← Hub</a></p></footer>
 </body>

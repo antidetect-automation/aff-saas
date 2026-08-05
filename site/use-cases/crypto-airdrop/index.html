@@ -3,39 +3,43 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Crypto / airdrop research with Multilogin</title>
-  <meta name="description" content="Use-case: isolate crypto research and airdrop browsers with Multilogin profiles, proxies, and careful pacing." />
+  <title>Crypto / multi-wallet browser hygiene with Multilogin</title>
+  <meta name="description" content="Separate browser profiles for crypto research and wallet UIs with Multilogin. Hygiene only — no sybil/airdrop farming advice. SAAS50." />
   <link rel="canonical" href="https://antidetect-automation.github.io/use-cases/crypto-airdrop/" />
-  <meta property="og:title" content="Crypto / airdrop research with Multilogin" />
+  <meta property="og:title" content="Crypto browser hygiene + Multilogin" />
   <meta property="og:url" content="https://antidetect-automation.github.io/use-cases/crypto-airdrop/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Crypto browser hygiene with Multilogin","url":"https://antidetect-automation.github.io/use-cases/crypto-airdrop/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
-      <a href="/use-cases/ads-multi-account/">Ads</a>
-      <a href="/use-cases/crypto-airdrop/">Crypto</a>
+      <a href="/use-cases/">Use cases</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
+  <article class="long">
     <p class="eyebrow">Use case</p>
-    <h1>Crypto &amp; airdrop research</h1>
-    <p class="lede">Separate wallets/research personas per profile. Prefer residential/mobile proxies that match the story; never reuse warmed cookies across airdrop farms blindly.</p>
+    <h1>Crypto browser hygiene</h1>
+    <p class="lede">URL slug says “airdrop” for legacy search — we will not teach sybil farming. This page is about keeping wallet UIs and research sessions from sharing cookies with each other.</p>
+    <h2>Sane layout</h2>
     <ol>
-      <li>One profile ≈ one research identity</li>
-      <li>Check timezone/language vs proxy (<a href="/tools/fingerprint-checklist/">checklist</a>)</li>
-      <li>Keep seed phrases offline — never in automation logs</li>
-      <li>Automate only low-risk research steps after manual warm</li>
+      <li>Separate Multilogin profile per high-value wallet UI or research identity.</li>
+      <li>Do not install every extension into one mega-profile.</li>
+      <li>Proxy/TZ coherence still matters on web3 frontends — <a href="/guides/mlx-proxy/">proxy</a>.</li>
+      <li>Prefer hardware wallets / official apps when the threat model is theft, not “fingerprint theatre.”</li>
     </ol>
+    <p>We refuse farming playbooks, fake volume scripts, or ToS evasion tips. If that is what you wanted, leave.</p>
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_usecase_crypto">Get SAAS50</a>
-      <a class="btn ghost" href="/guides/cookies-sessions/">Cookies guide</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_uc_crypto">SAAS50 for browser isolation</a>
+      <a class="btn ghost" href="/use-cases/scraping-isolation/">Isolation for automation</a>
     </p>
-    <div class="note">Affiliate disclosure applies. Follow each protocol’s ToS; we don’t assist fraud.</div>
+    <div class="note">Affiliate disclosure. Follow exchange and local law.</div>
   </article>
   <footer class="foot"><p><a href="/">← Hub</a></p></footer>
 </body>

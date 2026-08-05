@@ -215,6 +215,7 @@ async function sendHelp(env, chatId) {
       "/pricing — Free / Pro / Business 2026",
       "/saas50 — browser code",
       "/min50 — cloud phone code",
+      "/phone — alias for MIN50 / Cloud Phone",
       "/auth — Multilogin X API auth",
       "/api — Multilogin X API map (Postman folders)",
       "/guide — Playwright + Multilogin X",
@@ -349,7 +350,7 @@ async function handleUpdate(env, update) {
     await sendDeal(env, chatId, "browser", "cmd_saas50", from);
     return;
   }
-  if (text.startsWith("/min50")) {
+  if (text.startsWith("/min50") || text.startsWith("/phone") || text.startsWith("/cloud")) {
     await sendDeal(env, chatId, "phone", "cmd_min50", from);
     return;
   }

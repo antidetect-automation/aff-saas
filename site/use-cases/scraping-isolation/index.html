@@ -3,44 +3,56 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Scraping with Multilogin — use-case notes</title>
-  <meta name="description" content="Responsible multi-account scraping with Multilogin X: isolation, pacing, proxies — not spam or ToS evasion advice." />
+  <title>Scraping with Multilogin — profile isolation &amp; Playwright</title>
+  <meta name="description" content="Multi-lane scraping hygiene with Multilogin X: one profile one proxy, pacing, Launcher + Playwright. Not ToS evasion. Pro+ API. SAAS50." />
   <link rel="canonical" href="https://antidetect-automation.github.io/use-cases/scraping-isolation/" />
+  <meta property="og:type" content="article" />
   <meta property="og:title" content="Scraping isolation with Multilogin" />
   <meta property="og:url" content="https://antidetect-automation.github.io/use-cases/scraping-isolation/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Scraping with profile isolation","url":"https://antidetect-automation.github.io/use-cases/scraping-isolation/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
       <a href="/use-cases/scraping-isolation/">Scraping</a>
+      <a href="/guides/mlx-api/">API map</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
-    <p class="eyebrow">Use-case</p>
+  <article class="long">
+    <p class="eyebrow">Use case</p>
     <h1>Scraping with profile isolation</h1>
-    <p class="lede">Treat each Multilogin profile as one identity lane. This page is about isolation hygiene — not bypassing site ToS or CAPTCHA farms.</p>
+    <p class="lede">Treat each Multilogin profile as one identity lane. This page is isolation and pacing hygiene — not a guide to bypass site ToS, CAPTCHAs, or access controls you are not allowed to hit.</p>
+
     <h2>Ops pattern</h2>
     <ol>
-      <li>One profile ↔ one proxy sticky lane ↔ one cookie jar</li>
-      <li>Warm slowly — see <a href="/guides/profile-warmup/">warmup checklist</a></li>
-      <li>Automate with <a href="/guides/playwright-mlx/">Playwright</a>; stop profile when idle</li>
-      <li>Log UUID + proxy geo for every failure class</li>
+      <li>One profile ↔ one sticky proxy ↔ one cookie jar.</li>
+      <li>Warm slowly — <a href="/guides/profile-warmup/">warmup</a>.</li>
+      <li>Start via Launcher, attach <a href="/guides/playwright-mlx/">Playwright</a> (Pro+), stop when idle — <a href="/guides/mlx-api/">API map</a>.</li>
+      <li>Log profile UUID + proxy geo for every failure class.</li>
+      <li>Backoff hard when blocked; don’t burn an entire folder on one stupid rate.</li>
     </ol>
+
     <h2>Do not</h2>
     <ul>
-      <li>Blast thousands of cold profiles at once</li>
-      <li>Reuse warmed sessions across unrelated personas</li>
-      <li>Expect “undetectable” outcomes from tools alone</li>
+      <li>Blast thousands of cold profiles at once.</li>
+      <li>Reuse warmed sessions across unrelated personas.</li>
+      <li>Expect “undetectable” outcomes from tools alone.</li>
     </ul>
-    <div class="note">Follow target sites’ terms. Affiliate disclosure applies for Multilogin codes.</div>
+
+    <h2>When tools fail</h2>
+    <p><a href="/errors/cdp-attach/">CDP</a> · <a href="/errors/proxy-mlx/">Proxy</a> · <a href="/errors/token-auth/">Token</a> · <a href="/errors/mlx-automation/">API errors</a></p>
+
+    <div class="note">Follow target sites’ terms and local law. Affiliate disclosure applies for Multilogin codes.</div>
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_uc_scraping">Get SAAS50</a>
-      <a class="btn ghost" href="/errors/proxy-mlx/">Proxy troubleshooting</a>
+      <a class="btn ghost" href="/guides/playwright-mlx/">Playwright guide</a>
     </p>
   </article>
   <footer class="foot"><p><a href="/">← Hub</a></p></footer>

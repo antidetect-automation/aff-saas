@@ -3,40 +3,57 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Multilogin Cloud Phone ops (MIN50)</title>
-  <meta name="description" content="Use-case: Multilogin Cloud Phone for Android app workflows. When to use MIN50 vs SAAS50 browser." />
+  <title>Multilogin Cloud Phone ops — when to use MIN50</title>
+  <meta name="description" content="Multilogin Cloud Phone for Android app lanes vs browser SAAS50: when MIN50 wins, dual-stack desks, warmup notes. Telegram deal." />
   <link rel="canonical" href="https://antidetect-automation.github.io/use-cases/cloud-phone/" />
+  <meta property="og:type" content="article" />
   <meta property="og:title" content="Multilogin Cloud Phone ops" />
   <meta property="og:url" content="https://antidetect-automation.github.io/use-cases/cloud-phone/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Multilogin Cloud Phone ops","url":"https://antidetect-automation.github.io/use-cases/cloud-phone/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
-      <a href="/use-cases/ads-multi-account/">Ads</a>
-      <a href="/use-cases/ecommerce-warmup/">Ecommerce</a>
       <a href="/use-cases/cloud-phone/">Cloud phone</a>
       <a href="/deal/">Deal</a>
+      <a href="/pricing/">Pricing</a>
     </nav>
   </header>
-  <article>
-    <p class="eyebrow">Use case</p>
+  <article class="long">
+    <p class="eyebrow">Use case · Android</p>
     <h1>Cloud Phone workflows</h1>
-    <p class="lede">Choose Cloud Phone when the target is app-native Android. Use browser profiles (<code>SAAS50</code>) for web ads, scraping, and Playwright CDP.</p>
+    <p class="lede">Browser profiles solve Chromium. App-native Android is a different animal. Multilogin’s Cloud Phone exists so you are not duct-taping a second vendor when half the roadmap is mobile apps.</p>
+
+    <h2>MIN50 vs SAAS50</h2>
     <ul>
-      <li><strong>MIN50</strong> — Multilogin Cloud Phone discount via Telegram desk</li>
-      <li><strong>SAAS50</strong> — Antidetect Browser for desktop automation</li>
+      <li><strong>MIN50</strong> — Cloud Phone discount via our Telegram desk when the bottleneck is Android apps / mobile minutes.</li>
+      <li><strong>SAAS50</strong> — Antidetect Browser for web ads, Playwright/CDP, scraping, desktop-like stacks.</li>
     </ul>
-    <p>Bot routes automatically: pick Cloud Phone after <code>/start</code>.</p>
+    <p>Wrong coupon is fixable. Inventing a third string is not. Bot after <code>/start</code>: tap Cloud Phone or Browser.</p>
+
+    <h2>Dual-stack desks</h2>
+    <p>Common pattern: browser Multilogin for Meta/Google web UI + Cloud Phone for the app install or in-app events. Keep identities aligned on purpose — do not casually share the same “brand” story across mismatched geos just because both SKUs sit under one vendor.</p>
+
+    <h2>Ops notes</h2>
+    <ol>
+      <li>Treat each cloud device lane like a profile: one job, one geo story.</li>
+      <li>Confirm minutes/bonuses on Multilogin’s live card — Free/Pro/Business display different mobile allowances — <a href="/pricing/">pricing</a>.</li>
+      <li>When the work flips back to Chromium automation, use <a href="/guides/playwright-mlx/">Playwright</a> on Pro+ browser profiles.</li>
+    </ol>
+
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_usecase_phone">Get MIN50</a>
       <a class="btn ghost" href="/deal/">Both codes explained</a>
+      <a class="btn ghost" href="/use-cases/ads-multi-account/">Ads browser desks</a>
     </p>
-    <div class="note">Affiliate disclosure: commission possible via Multilogin codes/links.</div>
+    <div class="note">Affiliate disclosure: commission possible via Multilogin codes/links. Not Multilogin Support.</div>
   </article>
-  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+  <footer class="foot"><p><a href="/">← Hub</a> · <a href="/use-cases/">Use cases</a></p></footer>
 </body>
 </html>
