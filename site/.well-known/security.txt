@@ -1,3 +1,5 @@
+# antidetect-automation security contact
 Contact: https://t.me/antidetect_automation_bot
-Canonical: https://antidetect-automation.github.io/
 Preferred-Languages: en
+Canonical: https://antidetect-automation.github.io/.well-known/security.txt
+Expires: 2027-08-05T00:00:00.000Z

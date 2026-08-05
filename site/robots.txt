@@ -7,3 +7,4 @@ Sitemap: https://antidetect-automation.github.io/sitemap.xml
 # Thin long-tail /vs stubs use meta noindex,follow on-page; sitemap priority 0.30.
 
 # Thin /vs/* stubs stay noindex,follow and are omitted from sitemap.
+Security: https://antidetect-automation.github.io/.well-known/security.txt

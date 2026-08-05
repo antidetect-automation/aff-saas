@@ -8,11 +8,16 @@
   <link rel="canonical" href="https://antidetect-automation.github.io/errors/mlx-automation/" />
   <meta property="og:title" content="Multilogin X API errors" />
   <meta property="og:url" content="https://antidetect-automation.github.io/errors/mlx-automation/" />
+  <meta property="og:description" content="Triage Multilogin X: token → Launcher start → CDP → proxy." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"TechArticle","headline":"Multilogin X API errors","url":"https://antidetect-automation.github.io/errors/mlx-automation/","dateModified":"2026-08-04"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Errors","item":"https://antidetect-automation.github.io/errors/"},{"@type":"ListItem","position":3,"name":"API automation","item":"https://antidetect-automation.github.io/errors/mlx-automation/"}]}
   </script>
 </head>
 <body>
@@ -49,6 +54,15 @@
     <h2>Map</h2>
     <p><a href="/guides/mlx-api/">API map</a> · <a href="/guides/playwright-mlx/">Playwright</a> · <a href="/guides/puppeteer-mlx/">Puppeteer</a> · <a href="/guides/selenium-mlx/">Selenium</a></p>
 
+        <h2>Launcher start checklist</h2>
+    <ul>
+      <li>Agent/app running on the same machine as <code>launcher.mlx.yt:45001</code>.</li>
+      <li><code>automation_type=playwright|puppeteer|selenium</code> set deliberately.</li>
+      <li>Stop via Launcher when idle — <code>browser.close()</code> ≠ Multilogin stop.</li>
+      <li>Folder/profile IDs copied from UI/Postman, not guessed UUIDs from screenshots.</li>
+    </ul>
+    <h2>Ads desks</h2>
+    <p>API flakes during peak spend: authenticate once in Postman, then run scripts. Isolation still wins — <a href="/use-cases/ads-multi-account/">ads playbook</a>.</p>
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_api">SAAS50 / MIN50</a>
       <a class="btn ghost" href="/errors/">All error desks</a>

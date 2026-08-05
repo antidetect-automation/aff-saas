@@ -8,11 +8,16 @@
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/api-auth-mlx/" />
   <meta property="og:title" content="Multilogin X API auth" />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/api-auth-mlx/" />
+  <meta property="og:description" content="MD5 sign-in, Bearer ~30m, refresh and automation tokens before Launcher." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
   {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://antidetect-automation.github.io/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://antidetect-automation.github.io/guides/"}, {"@type": "ListItem", "position": 3, "name": "API auth", "item": "https://antidetect-automation.github.io/guides/api-auth-mlx/"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"Multilogin X API authentication","url":"https://antidetect-automation.github.io/guides/api-auth-mlx/","dateModified":"2026-08-05"}
   </script>
 </head>
 <body>
@@ -58,6 +63,17 @@ Content-Type: application/json
     <p>Start profiles: <a href="/guides/postman-mlx/">Postman</a> · Attach code: <a href="/guides/playwright-mlx/">Playwright</a> · Domain map: <a href="/guides/mlx-api/">API map</a>.</p>
 
     <div class="note">API requires Pro+. Browser coupon <code>SAAS50</code> · Cloud Phone <code>MIN50</code>. Affiliate disclosure applies.</div>
+        <h2>Node one-liner (hash)</h2>
+    <pre><code>import { createHash } from "node:crypto";
+const password = createHash("md5").update(plainPassword, "utf8").digest("hex");</code></pre>
+    <p>Match Multilogin’s official samples. Free plan still cannot call API after a perfect hash — <a href="/pricing/">upgrade to Pro+</a>.</p>
+    <h2>Common 401 causes</h2>
+    <ul>
+      <li>Plain password in JSON body</li>
+      <li>Expired Bearer reused across a long job</li>
+      <li>Wrong API host / typo’d Authorization header</li>
+      <li>Testing on Free — no API at all</li>
+    </ul>
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_auth">Get Multilogin deal</a>
       <a class="btn ghost" href="/guides/playwright-mlx/">Next: Playwright</a>

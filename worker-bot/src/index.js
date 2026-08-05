@@ -137,6 +137,7 @@ function replyQuickBar() {
       [{ text: "SAAS50" }, { text: "MIN50" }],
       [{ text: "Deal desk" }, { text: "Pricing" }],
       [{ text: "Playwright" }, { text: "API map" }],
+      [{ text: "Errors" }, { text: "Ads desks" }],
     ],
     resize_keyboard: true,
     is_persistent: true,
@@ -679,6 +680,46 @@ async function handleUpdate(env, update) {
   }
   if (text === "API map") {
     await sendLink(env, chatId, "Multilogin X API map:", LINKS.mlxApi);
+    return;
+  }
+  if (text === "Errors") {
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: "Troubleshooting:",
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "Error desk", url: LINKS.errorsHub }],
+          [
+            { text: "API errors", url: LINKS.errors },
+            { text: "Token auth", url: LINKS.tokenErr },
+          ],
+          [
+            { text: "CDP attach", url: LINKS.cdpErr },
+            { text: "Proxy errors", url: LINKS.proxyErr },
+          ],
+        ],
+      },
+    });
+    return;
+  }
+  if (text === "Ads desks") {
+    await tg(env, "sendMessage", {
+      chat_id: chatId,
+      text: "Ads / affiliate desks:",
+      reply_markup: {
+        inline_keyboard: [
+          [
+            { text: "Facebook ads", url: LINKS.fbAds },
+            { text: "Google Ads", url: LINKS.gAds },
+          ],
+          [
+            { text: "Multi-account ads", url: LINKS.ads },
+            { text: "Affiliate", url: LINKS.affiliate },
+          ],
+          [{ text: "Deal SAAS50 / MIN50", url: LINKS.deal }],
+        ],
+      },
+    });
     return;
   }
 
