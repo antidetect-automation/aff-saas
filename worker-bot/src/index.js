@@ -863,8 +863,8 @@ export default {
           console.error("bot meta", e);
         }
         try {
-          // Hourly budget inside runMlxBlogDigest (KV digest:last_hour)
-          await runMlxBlogDigest(env, { limit: 2 });
+          // Once per UTC day inside runMlxBlogDigest (KV digest:last_day); 1 new post max
+          await runMlxBlogDigest(env, { limit: 1 });
         } catch (e) {
           console.error("mlx digest", e);
         }
@@ -890,7 +890,7 @@ export default {
         return new Response("unauthorized", { status: 401 });
       }
       const force = url.searchParams.get("force") === "1";
-      const result = await runMlxBlogDigest(env, { force, limit: 3 });
+      const result = await runMlxBlogDigest(env, { force, limit: 1 });
       return Response.json(result);
     }
 

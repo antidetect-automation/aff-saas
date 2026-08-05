@@ -5,7 +5,9 @@ workers_dev = true
 account_id = "44bc4c025421375e599a08b06cce356a"
 
 [triggers]
-crons = ["* * * * *"]
+# Minute: Telegram poll fallback + daily digest gate (KV day budget)
+# Explicit 09:00 UTC also fires digest check
+crons = ["* * * * *", "0 9 * * *"]
 
 [[kv_namespaces]]
 binding = "LEADS"

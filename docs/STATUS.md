@@ -1,13 +1,13 @@
 # Project status
 
-Updated: 2026-08-05 — offline MLX blog digest on Cloudflare
+Updated: 2026-08-05 — daily MLX digest → channel `-1004445803393`
 
-## Offline automation
-- **Cloudflare Worker cron** pulls `multilogin.com/blog/feed`, AI commentary, KV store, optional Telegram `DIGEST_CHAT_ID`
-- Bot: `/digest` · HTTP: `/digests` · `/run-digest?key=`
-- Docs: `docs/OFFLINE_AUTOMATION.md`
+## Digest
+- Cron: `0 9 * * *` UTC (+ minute gate)
+- AI: Cloudflare Workers AI llama-3.2-3b (**no paid API needed**)
+- Channel: `DIGEST_CHAT_ID=-1004445803393` (verified post message_id=4)
+- Dedupe: KV `digest:posted:<url>` after successful send only
+- Docs: `docs/DIGEST_CHANNEL.md`
 
-## Owner once
-```bash
-printf '%s' '<your_tg_chat_id>' | npx wrangler secret put DIGEST_CHAT_ID
-```
+## Owner
+Bot must stay **admin** on the channel.

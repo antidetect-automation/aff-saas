@@ -1,10 +1,13 @@
 /**
- * Multilogin blog → AI commentary digest (Cloudflare cron-safe).
- * Uses official RSS only. Does NOT republish Multilogin body copy.
+ * Multilogin blog → AI commentary → Telegram channel (1×/day).
+ * Official RSS only. Does NOT republish Multilogin’s full article body.
+ * Dedupe forever by source URL in KV (digest:posted:*).
  */
 const FEED = "https://multilogin.com/blog/feed";
 const HUB = "https://antidetect-automation.github.io";
 const BOT = "https://t.me/antidetect_automation_bot";
+/** Fallback if DIGEST_CHAT_ID secret missing */
+const DEFAULT_CHANNEL = "-1004445803393";
 
 const ALLOW_CAT =
   /ads|cloud phone|proxies|affiliate|web automation|browser fingerprint|cookie|multilogin update|product update|multiple accounting|review|guides/i;
@@ -20,6 +23,24 @@ function stripHtml(html) {
     .replace(/&amp;/g, "&")
     .replace(/\s+/g, " ")
     .trim();
+}
+
+function normalizeLink(url) {
+  try {
+    const u = new URL(String(url).trim());
+    u.hash = "";
+    let path = u.pathname.replace(/\/+$/, "") || "/";
+    return `${u.origin}${path}`.toLowerCase();
+  } catch {
+    return String(url || "")
+      .trim()
+      .replace(/\/+$/, "")
+      .toLowerCase();
+  }
+}
+
+function postedKey(link) {
+  return `digest:posted:${normalizeLink(link)}`;
 }
 
 function parseRssItems(xml) {
@@ -58,67 +79,69 @@ function topicOk(item) {
 }
 
 async function writeCommentary(env, item) {
+  const system = [
+    "You are the voice of antidetect-automation — an independent Multilogin affiliate desk.",
+    "Write ORIGINAL commentary. Never copy Multilogin’s sentences.",
+    "Tone: operator / media-buyer / automation desk. No hype, no undetectable/never-ban claims.",
+    "Always steer readers toward our Telegram deal desk and github.io hub for SAAS50 (browser) / MIN50 (Cloud Phone).",
+  ].join(" ");
+
   const prompt = [
-    "You write short Multilogin-desk commentary for antidetect-automation (affiliate hub).",
-    "Rules: do NOT copy Multilogin's wording; 120-180 words max; no undetectable/never-ban claims;",
-    "mention when Cloud Phone vs browser / SAAS50 vs MIN50 might matter if relevant;",
-    "end with one practical next step pointing readers to our hub paths.",
+    "Write a Telegram channel post in English, 140–200 words, plain text.",
+    "Structure:",
+    "1) 1–2 sentence hook: why this Multilogin blog topic matters for ads / multi-account / automation desks.",
+    "2) 2–3 bullet-like short lines (use • ) with practical ops angles (proxy, warmup, API, Cloud Phone vs browser if relevant).",
+    "3) Soft CTA: open our Telegram bot for SAAS50/MIN50 codes, then skim pricing/deal on the hub.",
+    "Do NOT include raw URLs in the body (buttons add links). Do NOT paste Multilogin prose.",
     "",
-    `Title: ${item.title}`,
+    `Article title: ${item.title}`,
     `Categories: ${item.categories.join(", ") || "n/a"}`,
-    `RSS blurb: ${item.summary}`,
-    "",
-    "Write plain text paragraphs only.",
+    `RSS blurb (context only, do not quote closely): ${item.summary}`,
   ].join("\n");
 
   const result = await env.AI.run("@cf/meta/llama-3.2-3b-instruct", {
     messages: [
-      {
-        role: "system",
-        content:
-          "Concise Multilogin ops commentator. Original wording only. Affiliate desk, not Multilogin Support.",
-      },
+      { role: "system", content: system },
       { role: "user", content: prompt },
     ],
-    max_tokens: 280,
+    max_tokens: 420,
   });
   const text =
     (typeof result === "string" ? result : result?.response || "") ||
-    `${item.title} — see Multilogin’s post and our deal desk for SAAS50 / MIN50.`;
-  return String(text).slice(0, 1600).trim();
+    `${item.title}\n\nMultilogin dropped a useful ops post. Grab SAAS50 (browser) or MIN50 (Cloud Phone) on our Telegram deal desk, then read pricing notes on the hub before you scale.`;
+  return String(text).slice(0, 1800).trim();
 }
 
 async function tgSend(env, chatId, text, replyMarkup) {
-  if (!env.BOT_TOKEN || !chatId) return null;
-  const body = {
-    chat_id: chatId,
-    text,
-    disable_web_page_preview: false,
-    reply_markup: replyMarkup,
-  };
+  if (!env.BOT_TOKEN || !chatId) return { ok: false, description: "missing token/chat" };
   const res = await fetch(
     `https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        disable_web_page_preview: false,
+        reply_markup: replyMarkup,
+      }),
     }
   );
   return res.json();
 }
 
 /**
- * Run at most once per hour unless force=true.
- * Stores drafts in KV; optional Telegram notify via DIGEST_CHAT_ID secret.
+ * Once per UTC day (unless force). Posts at most `limit` NEW articles (default 1).
+ * Marks link in KV only after Telegram succeeds → no duplicate channel spam.
  */
-export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
+export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
   if (!env.LEADS) return { ok: false, reason: "no_kv" };
   if (!env.AI) return { ok: false, reason: "no_ai" };
 
-  const hourKey = new Date().toISOString().slice(0, 13);
+  const dayKey = new Date().toISOString().slice(0, 10);
   if (!force) {
-    const last = await env.LEADS.get("digest:last_hour");
-    if (last === hourKey) return { ok: true, skipped: "hour_budget" };
+    const last = await env.LEADS.get("digest:last_day");
+    if (last === dayKey) return { ok: true, skipped: "day_budget", day: dayKey };
   }
 
   let xml;
@@ -135,13 +158,26 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
     return { ok: false, reason: String(e) };
   }
 
+  const chatId = String(env.DIGEST_CHAT_ID || DEFAULT_CHANNEL);
   const items = parseRssItems(xml).filter(topicOk);
   const created = [];
   const errors = [];
+  const skippedDup = [];
+
   for (const item of items) {
     if (created.length >= limit) break;
-    const seenKey = `digest:seen:${item.guid}`;
-    if (!force && (await env.LEADS.get(seenKey))) continue;
+
+    const pKey = postedKey(item.link);
+    if (await env.LEADS.get(pKey)) {
+      skippedDup.push(item.link);
+      continue;
+    }
+    // also honor legacy guid keys
+    const guidKey = `digest:seen:${item.guid}`;
+    if (await env.LEADS.get(guidKey)) {
+      skippedDup.push(item.link);
+      continue;
+    }
 
     let body;
     try {
@@ -149,9 +185,80 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
     } catch (e) {
       console.error("digest ai", e);
       errors.push({ title: item.title, error: String(e) });
-      // still publish a stub so the pipeline is observable
-      body = `${item.title}\n\nMultilogin published a related post. Commentary AI was busy — read the source, then grab SAAS50 / MIN50 on our deal desk if you need browser or Cloud Phone seats.\n\nHub: ${HUB}/deal/`;
+      body = [
+        item.title,
+        "",
+        "Multilogin published a relevant ops post. We write our own desk notes — not reprints.",
+        "",
+        "• Browser automation / ads lanes → coupon SAAS50",
+        "• Cloud Phone / Android lanes → coupon MIN50",
+        "",
+        "Open the Telegram bot for codes, then check hub pricing before you scale.",
+      ].join("\n");
     }
+
+    const msg = [
+      "📡 MLX desk note",
+      "(commentary — not a Multilogin reprint)",
+      "",
+      item.title,
+      "",
+      body.slice(0, 1100),
+      "",
+      "———",
+      `🔗 Source: ${item.link}`,
+      `🤖 Codes: ${BOT}?start=aa_digest`,
+      `🌐 Hub: ${HUB}/`,
+      `💰 Deal: ${HUB}/deal/ · Pricing: ${HUB}/pricing/`,
+      "",
+      "Affiliate disclosure: purchases via SAAS50 / MIN50 may earn us a commission. Not Multilogin Support.",
+    ].join("\n");
+
+    let tg;
+    try {
+      tg = await tgSend(env, chatId, msg, {
+        inline_keyboard: [
+          [
+            { text: "📲 Get SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
+            { text: "Deal desk", url: `${HUB}/deal/` },
+          ],
+          [
+            { text: "Pricing 2026", url: `${HUB}/pricing/` },
+            { text: "Read Multilogin", url: item.link },
+          ],
+          [
+            { text: "Playwright guide", url: `${HUB}/guides/playwright-mlx/` },
+            { text: "Facebook ads desk", url: `${HUB}/use-cases/facebook-ads/` },
+          ],
+        ],
+      });
+    } catch (e) {
+      errors.push({ title: item.title, notify: String(e) });
+      continue;
+    }
+
+    if (!tg?.ok) {
+      errors.push({
+        title: item.title,
+        telegram: tg?.description || JSON.stringify(tg).slice(0, 200),
+      });
+      // Do NOT mark posted — retry next day
+      continue;
+    }
+
+    // Persist link forever ( ~2y TTL; refreshed on touch conceptually via long TTL )
+    await env.LEADS.put(
+      pKey,
+      JSON.stringify({
+        link: item.link,
+        title: item.title,
+        posted_at: new Date().toISOString(),
+        chat_id: chatId,
+        message_id: tg.result?.message_id,
+      }),
+      { expirationTtl: 60 * 60 * 24 * 730 }
+    );
+    await env.LEADS.put(guidKey, "1", { expirationTtl: 60 * 60 * 24 * 730 });
 
     const record = {
       title: item.title,
@@ -160,15 +267,8 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
       body,
       created_at: new Date().toISOString(),
       hub: `${HUB}/deal/`,
+      channel: chatId,
     };
-
-    await env.LEADS.put(seenKey, "1", { expirationTtl: 60 * 60 * 24 * 120 });
-    await env.LEADS.put(
-      `digest:item:${encodeURIComponent(item.guid).slice(0, 200)}`,
-      JSON.stringify(record),
-      { expirationTtl: 60 * 60 * 24 * 90 }
-    );
-
     let latest = [];
     try {
       latest = JSON.parse((await env.LEADS.get("digest:latest")) || "[]");
@@ -176,51 +276,38 @@ export async function runMlxBlogDigest(env, { force = false, limit = 2 } = {}) {
       latest = [];
     }
     latest.unshift(record);
-    await env.LEADS.put("digest:latest", JSON.stringify(latest.slice(0, 25)));
+    await env.LEADS.put("digest:latest", JSON.stringify(latest.slice(0, 40)));
 
-    const msg = [
-      "MLX desk note (commentary — not a Multilogin reprint)",
-      "",
-      item.title,
-      "",
-      body.slice(0, 900),
-      "",
-      `Source: ${item.link}`,
-      `Deal desk: ${BOT}?start=aa_digest`,
-      `Hub: ${HUB}/deal/`,
-      "",
-      "Affiliate disclosure: SAAS50 / MIN50 may earn us a commission.",
-    ].join("\n");
-
-    if (env.DIGEST_CHAT_ID) {
-      try {
-        await tgSend(env, env.DIGEST_CHAT_ID, msg, {
-          inline_keyboard: [
-            [
-              { text: "Read Multilogin", url: item.link },
-              { text: "SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
-            ],
-            [
-              { text: "Pricing", url: `${HUB}/pricing/` },
-              { text: "Deal", url: `${HUB}/deal/` },
-            ],
-          ],
-        });
-      } catch (e) {
-        errors.push({ title: item.title, notify: String(e) });
-      }
-    }
-
-    created.push({ title: item.title, link: item.link });
+    created.push({ title: item.title, link: item.link, message_id: tg.result?.message_id });
   }
 
-  await env.LEADS.put("digest:last_hour", hourKey);
+  // Only consume day budget if we posted OR there was nothing new (avoid blocking retries on TG fail)
+  if (created.length > 0 || (skippedDup.length > 0 && errors.length === 0 && created.length === 0)) {
+    await env.LEADS.put("digest:last_day", dayKey);
+  }
+  // If all candidates failed TG, don't set last_day so cron retries later today
+
   await env.LEADS.put(
     "digest:last_run",
-    JSON.stringify({ at: new Date().toISOString(), created: created.length, errors: errors.length })
+    JSON.stringify({
+      at: new Date().toISOString(),
+      day: dayKey,
+      created: created.length,
+      skipped_dup: skippedDup.length,
+      errors: errors.length,
+      chat_id: chatId,
+    })
   );
 
-  return { ok: true, created, scanned: items.length, errors };
+  return {
+    ok: true,
+    day: dayKey,
+    chat_id: chatId,
+    created,
+    scanned: items.length,
+    skipped_dup: skippedDup.slice(0, 10),
+    errors,
+  };
 }
 
 export async function latestDigests(env, n = 5) {
