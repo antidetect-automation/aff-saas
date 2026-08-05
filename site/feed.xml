@@ -8,6 +8,20 @@
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
   <entry>
+    <title>Multilogin profile warmup checklist</title>
+    <link href="https://antidetect-automation.github.io/guides/profile-warmup/" />
+    <id>https://antidetect-automation.github.io/guides/profile-warmup/</id>
+    <updated>2026-08-04T19:00:00Z</updated>
+    <summary>Proxy/TZ/cookies pacing before ads spend.</summary>
+  </entry>
+  <entry>
+    <title>CDP attach errors with Multilogin + Playwright</title>
+    <link href="https://antidetect-automation.github.io/errors/cdp-attach/" />
+    <id>https://antidetect-automation.github.io/errors/cdp-attach/</id>
+    <updated>2026-08-04T19:00:00Z</updated>
+    <summary>Port, automation_type, token — not fingerprint theatre.</summary>
+  </entry>
+  <entry>
     <title>Multilogin pricing 2026 — Free / Pro / Business</title>
     <link href="https://antidetect-automation.github.io/pricing/" />
     <id>https://antidetect-automation.github.io/pricing/</id>

@@ -12,19 +12,7 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"Does Multilogin have a free plan?","acceptedAnswer":{"@type":"Answer","text":"Yes. Multilogin offers a Free forever plan with 5 profiles. No API or team seats. Profiles may be removed if unused for 7 days. Confirm details on Multilogin’s checkout."}},
-      {"@type":"Question","name":"How much is Multilogin Pro?","acceptedAnswer":{"@type":"Answer","text":"On yearly billing we saw Pro from about $7.08 per month ($85 per year) at 10 profiles. Prices change — check Multilogin directly. SAAS50 may reduce browser checkout further via our affiliate desk."}},
-      {"@type":"Question","name":"What is SAAS50?","acceptedAnswer":{"@type":"Answer","text":"SAAS50 is our affiliate coupon path for Multilogin Antidetect Browser (50% lifetime intent). Apply it on official checkout and verify the invoice."}},
-      {"@type":"Question","name":"What is MIN50?","acceptedAnswer":{"@type":"Answer","text":"MIN50 is the Cloud Phone coupon path from the same Telegram desk."}},
-      {"@type":"Question","name":"Can I use Playwright on the Free plan?","acceptedAnswer":{"@type":"Answer","text":"No. Free has no API. Use Pro or higher for Multilogin X automation."}},
-      {"@type":"Question","name":"Is Multilogin better than AdsPower?","acceptedAnswer":{"@type":"Answer","text":"For scripted, higher-stakes work we usually recommend Multilogin. AdsPower can still win on RPA habits and raw seat cost. See our Multilogin vs AdsPower essay."}},
-      {"@type":"Question","name":"Are you Multilogin Support?","acceptedAnswer":{"@type":"Answer","text":"No. Independent affiliate hub."}}
-    ]
-  }
+  {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Does Multilogin have a free plan?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Multilogin offers a Free forever plan with 5 profiles. No API or team seats. Profiles may be removed if unused for 7 days. Confirm details on Multilogin’s checkout."}}, {"@type": "Question", "name": "How much is Multilogin Pro?", "acceptedAnswer": {"@type": "Answer", "text": "On yearly billing we saw Pro from about $7.08 per month ($85 per year) at 10 profiles. Prices change — check Multilogin directly. SAAS50 may reduce browser checkout further via our affiliate desk."}}, {"@type": "Question", "name": "What is SAAS50?", "acceptedAnswer": {"@type": "Answer", "text": "SAAS50 is our affiliate coupon path for Multilogin Antidetect Browser (50% lifetime intent). Apply it on official checkout and verify the invoice."}}, {"@type": "Question", "name": "What is MIN50?", "acceptedAnswer": {"@type": "Answer", "text": "MIN50 is the Cloud Phone coupon path from the same Telegram desk."}}, {"@type": "Question", "name": "Can I use Playwright on the Free plan?", "acceptedAnswer": {"@type": "Answer", "text": "No. Free has no API. Use Pro or higher for Multilogin X automation."}}, {"@type": "Question", "name": "Is Multilogin better than AdsPower?", "acceptedAnswer": {"@type": "Answer", "text": "For scripted, higher-stakes work we usually recommend Multilogin. AdsPower can still win on RPA habits and raw seat cost. See our Multilogin vs AdsPower essay."}}, {"@type": "Question", "name": "Are you Multilogin Support?", "acceptedAnswer": {"@type": "Answer", "text": "No. Independent affiliate hub."}}, {"@type": "Question", "name": "Do I need Multilogin for Facebook or Google ads?", "acceptedAnswer": {"@type": "Answer", "text": "If you run multiple ad lanes from one workstation and need cookie isolation. See our Facebook and Google Ads use-cases. Not ban insurance."}}, {"@type": "Question", "name": "Where is the Multilogin API documented?", "acceptedAnswer": {"@type": "Answer", "text": "Use Multilogin's official Postman documenter. Our operator map is at /guides/mlx-api/ and Playwright at /guides/playwright-mlx/."}}, {"@type": "Question", "name": "Why does Playwright connectOverCDP fail with Multilogin?", "acceptedAnswer": {"@type": "Answer", "text": "Usually Multilogin app not running, missing automation_type on start, wrong port, or expired token. See /errors/cdp-attach/ and /errors/token-auth/."}}]}
   </script>
 </head>
 <body>
@@ -62,6 +50,16 @@
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_faq">Telegram desk</a>
       <a class="btn ghost" href="/deal/">Deal page</a>
     </p>
+  
+    <h2>Do I need Multilogin for Facebook / Google ads?</h2>
+    <p>Only if you run multiple money lanes from one workstation and care about cookie isolation. Read <a href="/use-cases/facebook-ads/">Facebook</a> and <a href="/use-cases/google-ads/">Google Ads</a>. Isolation is hygiene — not ban insurance.</p>
+
+    <h2>Where is the Multilogin API documented?</h2>
+    <p>Official Postman documenter first. Our operator map: <a href="/guides/mlx-api/">/guides/mlx-api/</a>. Playwright attach: <a href="/guides/playwright-mlx/">guide</a>.</p>
+
+    <h2>Why does connectOverCDP fail?</h2>
+    <p>Usually app not running, missing <code>automation_type</code>, stale port, or expired token — <a href="/errors/cdp-attach/">CDP desk</a> · <a href="/errors/token-auth/">token desk</a>.</p>
+
   </article>
   <footer class="foot"><p><a href="/">← Hub</a></p></footer>
 </body>

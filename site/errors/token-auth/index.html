@@ -3,49 +3,53 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Multilogin X token / auth errors — troubleshooting</title>
-  <meta name="description" content="Fix Multilogin X API token and sign-in failures: expired tokens, wrong host, rate limits, refresh flows." />
+  <title>Multilogin API token / 401 errors — MD5 sign-in &amp; refresh</title>
+  <meta name="description" content="Fix Multilogin API 401s: MD5 password hash, 30-minute Bearer, refresh and automation tokens before Launcher start." />
   <link rel="canonical" href="https://antidetect-automation.github.io/errors/token-auth/" />
-  <meta property="og:title" content="Multilogin X token / auth errors" />
+  <meta property="og:title" content="Token / auth errors" />
   <meta property="og:url" content="https://antidetect-automation.github.io/errors/token-auth/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"Multilogin API token errors","url":"https://antidetect-automation.github.io/errors/token-auth/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
-      <a href="/errors/mlx-automation/">API</a>
       <a href="/errors/token-auth/">Token</a>
+      <a href="/guides/api-auth-mlx/">Auth guide</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
-    <p class="eyebrow">Troubleshooting</p>
-    <h1>Token / auth errors</h1>
-    <p class="lede">If start-profile always 401/403, fix auth before touching fingerprints or proxies.</p>
-    <table>
-      <thead><tr><th>Symptom</th><th>Check</th></tr></thead>
-      <tbody>
-        <tr><td>401 / unauthorized</td><td>Token expired; re-run sign-in / refresh per current MLX docs</td></tr>
-        <tr><td>403 / forbidden</td><td>Wrong workspace / automation permission / revoked token</td></tr>
-        <tr><td>Intermittent auth fails</td><td>Race: reuse one token across parallel workers without refresh lock</td></tr>
-        <tr><td>Works in Postman, fails in script</td><td>Header name casing, base URL environment mismatch</td></tr>
-      </tbody>
-    </table>
-    <h2>Next</h2>
+  <article class="long">
+    <p class="eyebrow">Error desk</p>
+    <h1>Token &amp; auth errors</h1>
+    <p class="lede">If every Launcher call is 401, stop debugging CDP ports. You have a PAM / token problem.</p>
+
+    <h2>Most common mistakes</h2>
     <ul>
-      <li><a href="/guides/api-auth-mlx/">API auth guide</a></li>
-      <li><a href="/guides/postman-mlx/">Postman kit</a></li>
-      <li><a href="/errors/cdp-attach/">CDP attach errors</a></li>
+      <li>Sending a <strong>raw password</strong> instead of the <strong>MD5 hex</strong> Multilogin’s Postman help expects.</li>
+      <li>Keeping a Bearer token past ~30 minutes without refresh / automation token.</li>
+      <li>Calling cloud APIs from a machine that never signed in successfully in Postman first.</li>
+      <li>Expecting Free-plan API — Free has no API; need Pro+ — <a href="/pricing/">pricing</a>.</li>
     </ul>
-    <div class="note">Never commit tokens. Affiliate disclosure applies. Not Multilogin Support.</div>
+
+    <h2>Fix path</h2>
+    <ol>
+      <li>Reproduce sign-in in Postman — <a href="/guides/postman-mlx/">Postman guide</a>.</li>
+      <li>Follow <a href="/guides/api-auth-mlx/">API auth</a>; store token in env, never git.</li>
+      <li>Then start profile — <a href="/guides/mlx-api/">API map</a>.</li>
+    </ol>
+
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_token">Deal desk</a>
-      <a class="btn ghost" href="/errors/mlx-automation/">General API errors</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_token">Get Multilogin deal</a>
+      <a class="btn ghost" href="/errors/cdp-attach/">CDP errors</a>
     </p>
+    <div class="note">Affiliate disclosure applies.</div>
   </article>
-  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+  <footer class="foot"><p><a href="/errors/">← Errors</a></p></footer>
 </body>
 </html>

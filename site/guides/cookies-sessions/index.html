@@ -3,39 +3,48 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cookies &amp; sessions in Multilogin profiles</title>
-  <meta name="description" content="How to think about cookies, sessions, and profile isolation in Multilogin antidetect workflows. Practical ops notes." />
+  <title>Cookies &amp; sessions in Multilogin — don’t mix money lanes</title>
+  <meta name="description" content="Cookie and session hygiene for Multilogin profiles: one account one jar, no BM soup, API data notes. For ads desks. SAAS50." />
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/cookies-sessions/" />
-  <meta property="og:title" content="Cookies & sessions in Multilogin" />
+  <meta property="og:title" content="Cookies & sessions — Multilogin" />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/cookies-sessions/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"Cookies and sessions in Multilogin","url":"https://antidetect-automation.github.io/guides/cookies-sessions/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
-      <a href="/guides/playwright-mlx/">Playwright</a>
       <a href="/guides/cookies-sessions/">Cookies</a>
+      <a href="/guides/mlx-api/">API map</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
+  <article class="long">
     <p class="eyebrow">Guide</p>
     <h1>Cookies &amp; sessions</h1>
-    <p class="lede">Treat each Multilogin profile as one identity store. Mixing warmed cookies across unrelated accounts defeats isolation.</p>
-    <h2>Rules of thumb</h2>
-    <ul>
-      <li>One profile → one long-lived session narrative</li>
-      <li>Export/import cookies only with matching proxy geo + fingerprint era</li>
-      <li>After proxy changes, expect re-auth; don’t force old cookies blindly</li>
-      <li>Automate with Playwright only after manual warm looks normal</li>
-    </ul>
-    <h2>Related</h2>
-    <p><a href="/guides/playwright-mlx/">Playwright + MLX</a> · <a href="/tools/webgl-check/">WebGL check</a> · <a href="/errors/mlx-automation/">API errors</a></p>
+    <p class="lede">Most “fingerprint failed” panics on ads desks are cookie stories: you pasted yesterday’s BM jar into today’s profile, or three buyers shared one Chromium storage and then acted surprised.</p>
+
+    <h2>Rules that keep money lanes alive</h2>
+    <ol>
+      <li>One Multilogin profile ≈ one login you care about. Not “the agency Chrome.”</li>
+      <li>Never merge cookies across unrelated Business Managers or MCC lanes.</li>
+      <li>Export/import only when you understand what you overwrite — Multilogin’s Postman collection has Browser Profile Data / cookie folders; paths move — <a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">official API</a>.</li>
+      <li>After proxy changes, expect some sessions to invalidate. That is normal.</li>
+    </ol>
+
+    <h2>Warmth vs stolen jars</h2>
+    <p>Warm cookies you earned inside a coherent geo/proxy story. Buying mystery cookie packs and dumping them into Multilogin is how you discover platform abuse systems the expensive way. We don’t facilitate that.</p>
+
+    <h2>Next</h2>
+    <p><a href="/guides/profile-warmup/">Warmup</a> · <a href="/guides/mlx-proxy/">Proxy</a> · <a href="/use-cases/ads-multi-account/">Ads multi-account</a> · <a href="/errors/token-auth/">API tokens</a></p>
+
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_cookies">Deal desk</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_cookies">Get SAAS50 / MIN50</a>
     </p>
     <div class="note">Affiliate disclosure applies.</div>
   </article>

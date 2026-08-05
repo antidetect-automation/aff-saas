@@ -3,46 +3,58 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Profile warm-up for Multilogin — practical checklist</title>
-  <meta name="description" content="How to warm Multilogin profiles safely: cookies, pace, proxy geo, fingerprint checks — before scaling automation." />
+  <title>Multilogin profile warmup checklist — before ads spend</title>
+  <meta name="description" content="Warm Multilogin profiles before ads spend: proxy/TZ match, cookies, pacing, Free idle wipe, API start. SAAS50 desk." />
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/profile-warmup/" />
-  <meta property="og:title" content="Multilogin profile warm-up checklist" />
+  <meta property="og:title" content="Profile warmup checklist" />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/profile-warmup/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"HowTo","name":"Multilogin profile warmup checklist","url":"https://antidetect-automation.github.io/guides/profile-warmup/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
       <a href="/guides/profile-warmup/">Warmup</a>
-      <a href="/tools/fingerprint-checklist/">Checklist</a>
+      <a href="/use-cases/ads-multi-account/">Ads</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
+  <article class="long">
     <p class="eyebrow">Guide</p>
     <h1>Profile warm-up checklist</h1>
-    <p class="lede">Warming is about consistency, not speed. A cold profile + automated burst is a common failure mode.</p>
+    <p class="lede">Warmup is not a magic “trust score.” It’s making sure proxy, timezone, cookies, and human pacing don’t contradict each other the first time a platform sees the lane.</p>
+
+    <h2>Before login</h2>
     <ol>
-      <li>Assign a sticky residential/mobile proxy that matches the persona’s geo.</li>
-      <li>Align timezone, language, and WebRTC/DNS expectations with that geo.</li>
-      <li>Snapshot fingerprints with <a href="/tools/webgl-check/">WebGL</a> + <a href="/tools/ua-ch-check/">UA / Client Hints</a>.</li>
-      <li>Browse a few benign sites manually or with slow automation; persist cookies/sessions.</li>
-      <li>Only then run your real target workflow — still with human-like pacing.</li>
+      <li>Sticky proxy attached and geo-checked once inside the profile — <a href="/guides/mlx-proxy/">proxy</a> · <a href="/tools/proxy-format/">formatter</a>.</li>
+      <li>Timezone + language snapped to that exit — <a href="/tools/timezone-locale/">TZ tool</a>.</li>
+      <li>Fresh profile storage for that account — no leftover BM cookies — <a href="/guides/cookies-sessions/">cookies</a>.</li>
+      <li>Confirm WebGL / UA basics inside the profile if the desk cares — <a href="/tools/webgl-check/">WebGL</a> · <a href="/tools/ua-ch-check/">UA/CH</a>.</li>
     </ol>
-    <h2>Do not</h2>
+
+    <h2>First sessions</h2>
     <ul>
-      <li>Reuse one cookie jar across unrelated accounts</li>
-      <li>Rotate proxies mid-session without a freeze-thaw plan</li>
-      <li>Claim or chase “undetectable” setups</li>
+      <li>Browse slowly. Prefer everyday pages before ad manager mega-clicks.</li>
+      <li>Don’t jump countries. Don’t rotate IP mid-login.</li>
+      <li>One profile ≈ one money identity. Parallel junk testing belongs elsewhere.</li>
     </ul>
-    <div class="note">Affiliate disclosure applies for Multilogin codes <code>SAAS50</code> / <code>MIN50</code>.</div>
+
+    <h2>Free-tier gotcha</h2>
+    <p>Multilogin Free can wipe idle profiles after about seven days. Warm a trial week, decide, then move to Pro if you need API or permanence — <a href="/pricing/">pricing</a>.</p>
+
+    <h2>Automation after warmth</h2>
+    <p>Once the human path looks sane, wire Launcher + Playwright for QA — <a href="/guides/mlx-api/">API map</a> · <a href="/guides/playwright-mlx/">Playwright</a>. Ads context: <a href="/use-cases/facebook-ads/">Facebook</a> · <a href="/use-cases/google-ads/">Google</a>.</p>
+
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_warmup">Get deal on Telegram</a>
-      <a class="btn ghost" href="/guides/cookies-sessions/">Cookies guide</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_warmup">SAAS50 / MIN50</a>
+      <a class="btn ghost" href="/tools/fingerprint-checklist/">Fingerprint checklist</a>
     </p>
+    <div class="note">Affiliate disclosure. No guaranteed “aged” profiles.</div>
   </article>
   <footer class="foot"><p><a href="/">← Hub</a></p></footer>
 </body>

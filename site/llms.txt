@@ -20,6 +20,11 @@
 - https://antidetect-automation.github.io/faq/
 - https://antidetect-automation.github.io/glossary/
 
+## Ops guides
+- https://antidetect-automation.github.io/guides/profile-warmup/
+- https://antidetect-automation.github.io/guides/cookies-sessions/
+- https://antidetect-automation.github.io/errors/cdp-attach/
+
 ## Audiences (ads / MMO / affiliate)
 - https://antidetect-automation.github.io/use-cases/
 - https://antidetect-automation.github.io/use-cases/ads-multi-account/

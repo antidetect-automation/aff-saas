@@ -3,49 +3,51 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Multilogin CDP attach errors — troubleshooting</title>
-  <meta name="description" content="Fix Playwright/Puppeteer CDP connect failures on Multilogin X: debugger URL, race on start, WebSocket vs HTTP endpoint." />
+  <title>CDP attach errors with Multilogin + Playwright</title>
+  <meta name="description" content="Fix Multilogin CDP connectOverCDP failures: app not running, missing automation_type, stale port, token expiry. Ads automation desk." />
   <link rel="canonical" href="https://antidetect-automation.github.io/errors/cdp-attach/" />
-  <meta property="og:title" content="Multilogin CDP attach errors" />
+  <meta property="og:title" content="CDP attach errors" />
   <meta property="og:url" content="https://antidetect-automation.github.io/errors/cdp-attach/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"CDP attach errors with Multilogin","url":"https://antidetect-automation.github.io/errors/cdp-attach/","dateModified":"2026-08-04"}
+  </script>
 </head>
 <body>
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
-      <a href="/errors/mlx-automation/">API</a>
-      <a href="/errors/cdp-attach/">CDP</a>
+      <a href="/errors/">Errors</a>
+      <a href="/guides/playwright-mlx/">Playwright</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
-  <article>
-    <p class="eyebrow">Troubleshooting</p>
-    <h1>CDP attach errors</h1>
-    <p class="lede">Most connect fails are timing or wrong debugger URL — not “fingerprint broken.”</p>
-    <table>
-      <thead><tr><th>Error pattern</th><th>Likely cause</th><th>Fix</th></tr></thead>
-      <tbody>
-        <tr><td>ECONNREFUSED / timeout</td><td>Profile not fully started</td><td>Await start response; short retry loop</td></tr>
-        <tr><td>Invalid browser endpoint</td><td>HTTP vs WS mismatch</td><td>Match Playwright <code>connectOverCDP</code> / Puppeteer <code>browserURL</code> to docs</td></tr>
-        <tr><td>Session closed immediately</td><td>Stop raced your script</td><td>Keep profile alive until script finishes</td></tr>
-        <tr><td>Works once, fails later</td><td>Stale token / rate limits</td><td>Refresh X API auth; see <a href="/errors/mlx-automation/">API errors</a></td></tr>
-      </tbody>
-    </table>
-    <h2>Guides</h2>
-    <ul>
-      <li><a href="/guides/playwright-mlx/">Playwright + Multilogin X</a></li>
-      <li><a href="/guides/puppeteer-mlx/">Puppeteer + Multilogin X</a></li>
-      <li><a href="/guides/selenium-mlx/">Selenium + Multilogin X</a></li>
-    </ul>
-    <div class="note">Affiliate disclosure applies. Not Multilogin Support.</div>
+  <article class="long">
+    <p class="eyebrow">Error desk</p>
+    <h1>CDP attach failures</h1>
+    <p class="lede"><code>connectOverCDP</code> timing out is almost never “the fingerprint.” It’s the Launcher, the port, or the token.</p>
+
+    <h2>Checklist</h2>
+    <ol>
+      <li><strong>Multilogin app running</strong> on the same machine that calls <code>launcher.mlx.yt:45001</code>.</li>
+      <li>Start with <code>automation_type=playwright</code> (or puppeteer). Without it you may not get an automation port — <a href="/guides/playwright-mlx/">guide</a>.</li>
+      <li>Use <code>http://127.0.0.1:{data.port}</code> from the start response — not a guessed 9222.</li>
+      <li>Token still valid (~30 minutes per Multilogin help) — <a href="/errors/token-auth/">token desk</a>.</li>
+      <li>Don’t <code>chromium.launch()</code> a naked browser and expect Multilogin’s profile storage.</li>
+      <li>Mimic cores for Playwright; Stealthfox + Playwright is not available per Multilogin docs.</li>
+    </ol>
+
+    <h2>Ads desks</h2>
+    <p>If CDP works but every site smells datacenter, switch to the <a href="/errors/proxy-mlx/">proxy desk</a>. If auth 401s cascade, stop rewriting Playwright — fix PAM first via <a href="/guides/api-auth-mlx/">API auth</a>.</p>
+
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_cdp">Deal desk</a>
-      <a class="btn ghost" href="/errors/proxy-mlx/">Proxy errors</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_cdp">SAAS50 / MIN50</a>
+      <a class="btn ghost" href="/guides/mlx-api/">API map</a>
     </p>
+    <div class="note">Affiliate disclosure. Pro+ required for API start.</div>
   </article>
-  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+  <footer class="foot"><p><a href="/errors/">← Errors</a></p></footer>
 </body>
 </html>
