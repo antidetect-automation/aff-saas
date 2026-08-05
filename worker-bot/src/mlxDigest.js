@@ -95,6 +95,17 @@ function nicheHashtags(item) {
   return [...tags].slice(0, 12).join(" ");
 }
 
+/** Strip AI coupon-hashtags; always end with our niche tag line. */
+function finalizePostBody(raw, tags) {
+  let t = String(raw || "")
+    .replace(/#SAAS50\b/gi, "SAAS50")
+    .replace(/#MIN50\b/gi, "MIN50")
+    .trim();
+  // Drop trailing hashtag blob — we own discovery tags
+  t = t.replace(/(?:\n[ \t]*#[a-z0-9_]+\b[ \t]*)+\s*$/i, "").trim();
+  return `${t}\n\n${tags}`.slice(0, 1400);
+}
+
 function topicOk(item) {
   if (DENY_TITLE.test(item.title)) return false;
   const blob = `${item.title} ${item.categories.join(" ")}`;
@@ -154,8 +165,7 @@ async function writeCommentary(env, item) {
       tags,
     ].join("\n");
   text = String(text).trim();
-  if (!text.includes("#multilogin")) text = `${text}\n\n${tags}`;
-  return text.slice(0, 1900);
+  return finalizePostBody(text, tags);
 }
 
 async function tgSend(env, chatId, text, replyMarkup) {
@@ -244,8 +254,7 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
     }
 
     const tags = nicheHashtags(item);
-    let postBody = body.slice(0, 1400);
-    if (!postBody.includes("#multilogin")) postBody = `${postBody}\n\n${tags}`;
+    const postBody = finalizePostBody(body, tags);
 
     // No legalese / a_aid jargon on channel — offer first. Soft note lives on hub /deal.
     const msg = [
