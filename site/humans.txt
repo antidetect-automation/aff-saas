@@ -1,9 +1,11 @@
 /* TEAM */
-Site: antidetect-automation
-GitHub: https://github.com/antidetect-automation
-Location: Remote
+Owner: antidetect-automation
+Site: https://antidetect-automation.github.io/
+Telegram: https://t.me/antidetect_automation_bot
 
 /* SITE */
-Standards: HTML5, CSS3
+Standards: HTML, CSS
 Software: GitHub Pages, Cloudflare Workers
-Language: English
+Focus: Multilogin ops, ads isolation, API/Playwright guides
+Codes: SAAS50 (browser), MIN50 (cloud phone)
+Affiliate disclosure applies — not Multilogin Support.
