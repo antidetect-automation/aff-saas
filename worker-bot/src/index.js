@@ -130,6 +130,19 @@ function mainKeyboard() {
   };
 }
 
+/** Persistent reply keyboard — text matches handled in handleUpdate. */
+function replyQuickBar() {
+  return {
+    keyboard: [
+      [{ text: "SAAS50" }, { text: "MIN50" }],
+      [{ text: "Deal desk" }, { text: "Pricing" }],
+      [{ text: "Playwright" }, { text: "API map" }],
+    ],
+    resize_keyboard: true,
+    is_persistent: true,
+  };
+}
+
 async function sendWelcome(env, chatId, source, from) {
   await track(env, {
     chat_id: chatId,
@@ -147,9 +160,11 @@ async function sendWelcome(env, chatId, source, from) {
       "",
       DISCLOSURE,
       "",
-      "Pick your product:",
+      "Pick your product (buttons below, or tap *SAAS50* / *MIN50* on the keyboard):",
       "• *Browser* / Playwright / ads → `SAAS50` (50%)",
       "• *Cloud Phone* / Android apps → `MIN50` (50%)",
+      "",
+      "Tip: `/deal` opens the coupon chooser anytime.",
       "",
       `Pricing: ${LINKS.pricing}`,
       `Ads desks: ${LINKS.fbAds}`,
@@ -159,6 +174,13 @@ async function sendWelcome(env, chatId, source, from) {
     ].join("\n"),
     parse_mode: "Markdown",
     reply_markup: mainKeyboard(),
+    disable_web_page_preview: true,
+  });
+  // Persistent quick bar for return visits (second message keeps reply kb without wiping inline)
+  await tg(env, "sendMessage", {
+    chat_id: chatId,
+    text: "Quick bar ready — SAAS50 · MIN50 · Deal desk · Pricing · Playwright · API map",
+    reply_markup: replyQuickBar(),
     disable_web_page_preview: true,
   });
 }
@@ -257,6 +279,14 @@ async function sendDealDesk(env, chatId, source, from) {
     disable_web_page_preview: true,
   });
 }
+
+
+  await tg(env, "sendMessage", {
+    chat_id: chatId,
+    text: "Quick bar: SAAS50 · MIN50 · Deal desk · Pricing",
+    reply_markup: replyQuickBar(),
+    disable_web_page_preview: true,
+  });
 
 async function sendHelp(env, chatId) {
   await tg(env, "sendMessage", {
@@ -625,6 +655,32 @@ async function handleUpdate(env, update) {
   }
   if (text.startsWith("/help")) {
     await sendHelp(env, chatId);
+    return;
+  }
+
+  // Persistent reply-keyboard labels (exact)
+  if (text === "SAAS50") {
+    await sendDeal(env, chatId, "browser", "kb_saas50", from);
+    return;
+  }
+  if (text === "MIN50") {
+    await sendDeal(env, chatId, "phone", "kb_min50", from);
+    return;
+  }
+  if (text === "Deal desk") {
+    await sendDealDesk(env, chatId, "kb_deal", from);
+    return;
+  }
+  if (text === "Pricing") {
+    await sendLink(env, chatId, "Multilogin pricing 2026 (Free / Pro / Business):", LINKS.pricing);
+    return;
+  }
+  if (text === "Playwright") {
+    await sendLink(env, chatId, "Playwright + Multilogin X guide:", LINKS.guide);
+    return;
+  }
+  if (text === "API map") {
+    await sendLink(env, chatId, "Multilogin X API map:", LINKS.mlxApi);
     return;
   }
 

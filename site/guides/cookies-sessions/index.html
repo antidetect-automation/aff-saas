@@ -8,11 +8,16 @@
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/cookies-sessions/" />
   <meta property="og:title" content="Cookies & sessions — Multilogin" />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/cookies-sessions/" />
+  <meta property="og:description" content="One profile one jar. No BM soup. Warm cookies you earned." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"TechArticle","headline":"Cookies and sessions in Multilogin","url":"https://antidetect-automation.github.io/guides/cookies-sessions/","dateModified":"2026-08-04"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://antidetect-automation.github.io/guides/"},{"@type":"ListItem","position":3,"name":"Cookies","item":"https://antidetect-automation.github.io/guides/cookies-sessions/"}]}
   </script>
 </head>
 <body>
@@ -45,6 +50,14 @@
     <h2>Next</h2>
     <p><a href="/guides/profile-warmup/">Warmup</a> · <a href="/guides/mlx-proxy/">Proxy</a> · <a href="/use-cases/ads-multi-account/">Ads multi-account</a> · <a href="/errors/token-auth/">API tokens</a></p>
 
+        <h2>Playwright / API ops</h2>
+    <p>When you attach over CDP, you inherit that profile’s jar — do not <code>context.clearCookies()</code> for “clean tests” on money lanes. Sacrificial QA profiles exist for a reason. Token problems are separate: <a href="/errors/token-auth/">token desk</a>.</p>
+    <h2>Quick failures</h2>
+    <ul>
+      <li>Imported cookies from another geo → sudden logouts and 2FA storms.</li>
+      <li>Shared team profile for “just checking Ads Manager” → BM soup.</li>
+      <li>Cloud Phone vs browser jars are not interchangeable.</li>
+    </ul>
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_guide_cookies">Get SAAS50 / MIN50</a>
     </p>

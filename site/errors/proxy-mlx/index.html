@@ -8,11 +8,16 @@
   <link rel="canonical" href="https://antidetect-automation.github.io/errors/proxy-mlx/" />
   <meta property="og:title" content="Proxy errors — Multilogin" />
   <meta property="og:url" content="https://antidetect-automation.github.io/errors/proxy-mlx/" />
+  <meta property="og:description" content="Bad auth strings, rotating IPs mid-session, TZ mismatch — ads desk checklist." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"TechArticle","headline":"Multilogin proxy errors","url":"https://antidetect-automation.github.io/errors/proxy-mlx/","dateModified":"2026-08-04"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Errors","item":"https://antidetect-automation.github.io/errors/"},{"@type":"ListItem","position":3,"name":"Proxy","item":"https://antidetect-automation.github.io/errors/proxy-mlx/"}]}
   </script>
 </head>
 <body>
@@ -39,6 +44,15 @@
       <li>Open a geo-check page manually once before automation farms.</li>
     </ol>
     <p>API Proxy folder lives in Multilogin’s <a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">Postman documenter</a>.</p>
+        <h2>Symptoms teams mislabel as “fingerprint”</h2>
+    <ul>
+      <li>Login emails say “new device / new location” after every restart — sticky proxy died or rotated.</li>
+      <li>WebRTC or DNS leak shows another country than the profile story — use <a href="/tools/dns-webrtc-check/">DNS/WebRTC check</a>.</li>
+      <li>Auth string works in curl but Multilogin UI rejects it — format slip: <a href="/tools/proxy-format/">formatter</a>.</li>
+      <li>CDP is fine; every site rate-limits you — datacenter exit IP, not Playwright.</li>
+    </ul>
+    <h2>Ads / MMO note</h2>
+    <p>One money lane ↔ one sticky exit. After changing proxy, expect some cookies to die — <a href="/guides/cookies-sessions/">cookies</a>. Then re-warm — <a href="/guides/profile-warmup/">warmup</a>.</p>
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_err_proxy">SAAS50 / MIN50</a>
       <a class="btn ghost" href="/use-cases/ads-multi-account/">Ads playbook</a>

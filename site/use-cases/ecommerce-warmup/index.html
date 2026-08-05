@@ -9,11 +9,16 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Ecommerce warmup + Multilogin" />
   <meta property="og:url" content="https://antidetect-automation.github.io/use-cases/ecommerce-warmup/" />
+  <meta property="og:description" content="Warm ecommerce identities before checkout stress. No fraud advice." />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Article","headline":"Ecommerce account warmup with Multilogin","url":"https://antidetect-automation.github.io/use-cases/ecommerce-warmup/","dateModified":"2026-08-04"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Use cases","item":"https://antidetect-automation.github.io/use-cases/"},{"@type":"ListItem","position":3,"name":"Ecommerce","item":"https://antidetect-automation.github.io/use-cases/ecommerce-warmup/"}]}
   </script>
 </head>
 <body>
@@ -44,6 +49,14 @@
     <p>Use Playwright for inventory/QA checks, not for carding or payment fraud. Pro+ API: <a href="/guides/playwright-mlx/">guide</a>.</p>
 
     <div class="note">Follow merchant and network rules. Affiliate disclosure applies.</div>
+        <h2>What this is not</h2>
+    <p>Not carding, not synthetic identity fraud, not “bypass merchant risk” theater. Legitimate multi-brand QA, marketplace operators, and agency test buyers separate sessions so bugs in one cart don’t poison another.</p>
+    <h2>After first purchase path works</h2>
+    <ol>
+      <li>Log profile UUID + proxy geo next to each test SKU.</li>
+      <li>Keep automation on inventory/price checks — humans on payment UI when policy is ambiguous.</li>
+      <li>If you also run ads: don’t reuse ecommerce buyer profiles as ad-account profiles — <a href="/use-cases/ads-multi-account/">ads playbook</a>.</li>
+    </ol>
     <p class="cta-row">
       <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_uc_ecom">SAAS50 / MIN50</a>
       <a class="btn ghost" href="/use-cases/ads-multi-account/">Ads desks</a>
