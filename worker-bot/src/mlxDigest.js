@@ -101,9 +101,20 @@ function finalizePostBody(raw, tags) {
     .replace(/#SAAS50\b/gi, "SAAS50")
     .replace(/#MIN50\b/gi, "MIN50")
     .trim();
-  // Drop trailing hashtag blob — we own discovery tags
-  t = t.replace(/(?:\n[ \t]*#[a-z0-9_]+\b[ \t]*)+\s*$/i, "").trim();
-  return `${t}\n\n${tags}`.slice(0, 1400);
+  const lines = t.split("\n");
+  while (lines.length) {
+    const last = lines[lines.length - 1].trim();
+    if (!last) {
+      lines.pop();
+      continue;
+    }
+    if (/^(#[a-z0-9_]+\b\s*)+$/i.test(last)) {
+      lines.pop();
+      continue;
+    }
+    break;
+  }
+  return `${lines.join("\n").trim()}\n\n${tags}`.slice(0, 1400);
 }
 
 function topicOk(item) {
@@ -165,7 +176,8 @@ async function writeCommentary(env, item) {
       tags,
     ].join("\n");
   text = String(text).trim();
-  return finalizePostBody(text, tags);
+  // Tags applied once in runMlxBlogDigest via finalizePostBody
+  return text.slice(0, 1800);
 }
 
 async function tgSend(env, chatId, text, replyMarkup) {
@@ -313,7 +325,7 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
       title: item.title,
       source: item.link,
       categories: item.categories,
-      body,
+      body: postBody,
       created_at: new Date().toISOString(),
       hub: `${HUB}/deal/`,
       channel: chatId,
