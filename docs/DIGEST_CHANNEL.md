@@ -46,8 +46,15 @@ GET /run-digest?key=STATS_KEY&force=1
 
 `force=1` bỏ qua day budget nhưng **vẫn skip URL đã posted**.
 
+## Pages mirror
+
+After Telegram success (+ `GITHUB_TOKEN` secret): writes MD + HTML into **aff-saas**, syncs via Pages Action. See [OFFLINE_AUTOMATION.md](./OFFLINE_AUTOMATION.md#github-pages-auto-publish-after-telegram).
+
+Hub: https://antidetect-automation.github.io/digest/
+
 ## Owner checklist
 
 1. Add `@antidetect_automation_bot` as channel admin  
-2. Secret đã set: `DIGEST_CHAT_ID=-1004445803393`  
-3. Optional test: `/run-digest?key=...&force=1`
+2. Secret: `DIGEST_CHAT_ID=-1004445803393`  
+3. Secret: `GITHUB_TOKEN` (PAT with Contents write on `aff-saas`) for Pages mirror  
+4. Optional test: `/run-digest?key=...&force=1`  

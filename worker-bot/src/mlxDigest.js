@@ -1,8 +1,11 @@
 /**
  * Multilogin blog → AI commentary → Telegram channel (1×/day).
+ * After Telegram success → optional GitHub Pages publish (GITHUB_TOKEN).
  * Official RSS only. Does NOT republish Multilogin’s full article body.
  * Dedupe forever by source URL in KV (digest:posted:*).
  */
+import { publishDigestToGithub } from "./githubPublisher.js";
+
 const FEED = "https://multilogin.com/blog/feed";
 const HUB = "https://antidetect-automation.github.io";
 const BOT = "https://t.me/antidetect_automation_bot";
@@ -317,6 +320,34 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
     );
     await env.LEADS.put(guidKey, "1", { expirationTtl: 60 * 60 * 24 * 730 });
 
+    // GitHub Pages mirror (aff-saas site/digest + content/digest/_posts) — soft-fail
+    let github = { ok: false, skipped: "not_attempted" };
+    try {
+      github = await publishDigestToGithub(env, {
+        title: item.title,
+        body: postBody,
+        item,
+      });
+      if (github?.ok) {
+        await env.LEADS.put(
+          `digest:gh:${normalizeLink(item.link)}`,
+          JSON.stringify({
+            url: github.url,
+            commit_sha: github.commit_sha,
+            at: new Date().toISOString(),
+          }),
+          { expirationTtl: 60 * 60 * 24 * 730 }
+        );
+      } else if (github?.error) {
+        console.error("digest github", github.error);
+        errors.push({ title: item.title, github: github.error });
+      }
+    } catch (e) {
+      console.error("digest github", e);
+      errors.push({ title: item.title, github: String(e) });
+      github = { ok: false, error: String(e) };
+    }
+
     const record = {
       title: item.title,
       source: item.link,
@@ -325,6 +356,8 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
       created_at: new Date().toISOString(),
       hub: `${HUB}/deal/`,
       channel: chatId,
+      github_url: github?.url || null,
+      github_ok: Boolean(github?.ok),
     };
     let latest = [];
     try {
@@ -335,7 +368,14 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
     latest.unshift(record);
     await env.LEADS.put("digest:latest", JSON.stringify(latest.slice(0, 40)));
 
-    created.push({ title: item.title, link: item.link, message_id: tg.result?.message_id });
+    created.push({
+      title: item.title,
+      link: item.link,
+      message_id: tg.result?.message_id,
+      github_url: github?.url || null,
+      github_ok: Boolean(github?.ok),
+      github_error: github?.error || github?.skipped || null,
+    });
   }
 
   // Only consume day budget if we posted OR there was nothing new (avoid blocking retries on TG fail)

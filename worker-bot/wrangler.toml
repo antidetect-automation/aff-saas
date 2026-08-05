@@ -21,3 +21,7 @@ database_id = "ca12dbf0-8354-41a3-91ac-862eae3770bb"
 
 [ai]
 binding = "AI"
+
+# Secrets (wrangler secret put): BOT_TOKEN, STATS_KEY, DIGEST_CHAT_ID, GITHUB_TOKEN
+# Optional: GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH
+

@@ -27,10 +27,37 @@ npx wrangler deploy
 
 Get chat id: message the bot, then check `/stats?key=` or any update logger. Or use `@userinfobot`.
 
-### Limits (Cloudflare free)
+## GitHub Pages auto-publish (after Telegram)
 
-- Cron + Workers AI + KV: fine for ~2 posts/hour max (we budget **1 run/hour**, ≤2 new items)
-- Does **not** auto-commit to github.io (needs GitHub token). Site updates still via your existing `ship.sh` when you want — or add GitHub Actions later.
+After a successful channel `sendMessage`, the Worker calls `publishDigestToGithub`:
+
+1. Builds Jekyll-style Markdown → `content/digest/_posts/YYYY-MM-DD-slug.md`
+2. Builds live HTML → `site/digest/YYYY-MM-DD-slug/index.html`
+3. Commits both via **GitHub Git Data API** (no `git` CLI) on `aff-saas` `main`
+4. Existing Action `deploy-pages.yml` syncs `site/**` → `antidetect-automation.github.io`
+
+### Secret (owner, once)
+
+```bash
+cd worker-bot
+# Fine-grained or classic PAT: Contents read/write on antidetect-automation/aff-saas
+printf '%s' 'ghp_...' | npx wrangler secret put GITHUB_TOKEN
+```
+
+Optional overrides (also via wrangler secrets / vars): `GITHUB_OWNER`, `GITHUB_REPO`, `GITHUB_BRANCH`.
+
+Without `GITHUB_TOKEN`, Telegram still posts; GitHub step returns `skipped: no_GITHUB_TOKEN`.
+
+### Local Python mirror
+
+```bash
+export GITHUB_TOKEN=...
+python3 scripts/github_publisher.py --title "..." --body-file /tmp/post.txt
+```
+
+### CTA on site pages
+
+Desk funnel only: bot `@antidetect_automation_bot`, codes **SAAS50** / **MIN50**, partner URL `https://multilogin.com?a_aid=saas`. No “bypass Cloudflare/Datadome” claims.
 
 ## GitHub Actions free (alternative / hybrid)
 

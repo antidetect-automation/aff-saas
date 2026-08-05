@@ -21,6 +21,7 @@ PRI = {
     "/": 1.0,
     "/pricing/": 0.96,
     "/deal/": 0.96,
+    "/digest/": 0.88,
     "/start/": 0.95,
     "/guides/mlx-api/": 0.94,
     "/guides/playwright-mlx/": 0.94,
