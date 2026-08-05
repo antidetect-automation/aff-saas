@@ -6,6 +6,9 @@ Funnel plumbing beats distribution. **Repo count frozen.** Deepen MMO/ads + API 
 ## Locked repos only
 `antidetect-automation` · `*.github.io` · `aff-saas` · existing `playwright-mlx-starter` / `puppeteer-mlx-starter`.
 
+## Overnight auto (Aug 4)
+Deepened ads playbooks, warmup/cookies, CDP/token/proxy errors, FAQ schema, IndexNow script, bot welcome ads/API links.
+
 ## Mature
 - SSOT: aff-saas → github.io → Telegram → Multilogin
 - Pricing / deal / AdsPower / Playwright / mlx-api essays
