@@ -1,19 +1,20 @@
 # Project status
 
-Updated: 2026-08-04 overnight wave 7 (auto)
+Updated: 2026-08-05 overnight wave 9 (auto)
 
 ## Hard lock
-No new GitHub repos. One site: github.io. Bot: Cloudflare Worker.
+No new GitHub repos. github.io only public site. Worker = Telegram.
 
-## Wave 7
-- `scripts/ship.sh` one-shot deploy pipeline
-- Home start-here: deep compares only + Playwright
-- `prefers-reduced-motion` CSS
-- Handoff doc aligned to GitHub Pages (not pages.dev)
-- Bot menu: glossary
-- Atom feed trimmed to hero URLs
+## Wave 9 (conversion + bots + depth)
+- **Bugfix:** `/deal` + `/codes` now open deal desk (codes chooser), not welcome again
+- `sendDeal` keyboard: Multilogin plans, pricing, intent switch, guide
+- Money pages: above-fold / closing CTAs; og/twitter meta; Telegram in footers
+- Deepened Puppeteer + Selenium guides to Playwright spine
+- CDP attach desk: symptoms + connect snippet
+- Sitemap excludes noindex `/vs/*` stubs; feed + llms.txt + kit coupons updated
+- Breadcrumbs / HowTo / health_check from wave 8 retained
 
 ## Owner wake-up
-1. GSC submit sitemap  
-2. Dev.to or Hashnode Pro  
+1. GSC submit sitemap (URL set shrunk — stubs dropped)
+2. Dev.to or Hashnode Pro
 3. BotFather `/setuserpic`

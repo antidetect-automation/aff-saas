@@ -3,14 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Selenium + Multilogin X — remote WebDriver port</title>
-  <meta name="description" content="Start Multilogin with automation_type=selenium, attach Remote WebDriver to the returned port. Pro+ API. Prefer Playwright for new CDP work." />
+  <title>Selenium + Multilogin X — Remote WebDriver port</title>
+  <meta name="description" content="Start Multilogin with automation_type=selenium, attach Remote WebDriver to 127.0.0.1:port. Pro+ API. Prefer Playwright for new CDP work. SAAS50." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/selenium-mlx/" />
-  <meta property="og:title" content="Selenium + Multilogin X" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="antidetect-automation" />
+  <meta property="og:title" content="Selenium + Multilogin X — WebDriver guide" />
+  <meta property="og:description" content="Launcher start with automation_type=selenium, then Remote WebDriver. Prefer Playwright for new desks." />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/selenium-mlx/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"Selenium + Multilogin X","url":"https://antidetect-automation.github.io/guides/selenium-mlx/","dateModified":"2026-08-05"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://antidetect-automation.github.io/guides/"},{"@type":"ListItem","position":3,"name":"Selenium","item":"https://antidetect-automation.github.io/guides/selenium-mlx/"}]}
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -18,26 +29,68 @@
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
-      <a href="/guides/playwright-mlx/">Playwright</a>
+      <a href="/guides/mlx-api/">API map</a>
       <a href="/guides/selenium-mlx/">Selenium</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
+
   <article id="main" class="long">
-    <p class="eyebrow">Guide</p>
+    <p class="eyebrow">Guide · Selenium</p>
     <h1>Selenium + Multilogin X</h1>
-    <p class="lede">Legacy desks still on Selenium: start with <code>automation_type=selenium</code>, then <code>webdriver.Remote</code> on <code>http://127.0.0.1:{port}</code>. New projects should prefer <a href="/guides/playwright-mlx/">Playwright</a>.</p>
-    <p>Official sample: Multilogin’s Selenium automation example. API map: <a href="/guides/mlx-api/">/guides/mlx-api/</a>.</p>
-    <h2>Launcher</h2>
-    <pre><code>GET …/api/v2/profile/f/{folder_id}/p/{profile_id}/start
-  ?automation_type=selenium&amp;headless_mode=false</code></pre>
-    <p>Kit (monorepo only — no new public repo): <code>aff-saas/kits/selenium-mlx-starter/</code>.</p>
+    <p class="lede">Legacy desks still shipping Selenium: start the profile with <code>automation_type=selenium</code>, then attach <code>webdriver.Remote</code> to <code>http://127.0.0.1:{port}</code>. New projects should prefer <a href="/guides/playwright-mlx/">Playwright + CDP</a>.</p>
+
+    <p><strong>Plan gate:</strong> Free has no API — <a href="/pricing/">Pro+</a>. Official Multilogin samples and the Postman Launcher folder remain the source of truth if paths move.</p>
+
+    <h2>Mode A vs Mode B</h2>
+    <ul>
+      <li><strong>Mode A:</strong> Start via UI/Postman, put the returned WebDriver URL/port into env, connect only.</li>
+      <li><strong>Mode B:</strong> MD5 sign-in + Launcher start (<code>automation_type=selenium</code>) in the monorepo kit, then Remote attach. Agent must be running.</li>
+    </ul>
+
+    <h2>Launcher start</h2>
+    <pre><code>GET https://launcher.mlx.yt:45001/api/v2/profile/f/{folder_id}/p/{profile_id}/start
+  ?automation_type=selenium&amp;headless_mode=false
+Authorization: Bearer {token}
+→ data.port</code></pre>
+
+    <h2>Minimal Remote snippet (Python-shaped)</h2>
+    <pre><code>from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+options = Options()
+driver = webdriver.Remote(
+    command_executor=f"http://127.0.0.1:{port_from_launcher}",
+    options=options,
+)
+driver.get("https://example.com")</code></pre>
+    <p>Exact capability names can vary by Multilogin agent build — check their Selenium example before fighting DesiredCapabilities archaeology.</p>
+
+    <h2>When attach fails</h2>
+    <ul>
+      <li>App not running on this machine</li>
+      <li>Wrong automation_type (selenium vs playwright)</li>
+      <li>Expired token → <a href="/errors/token-auth/">token desk</a></li>
+      <li>Port races / stale session → same class of failures as <a href="/errors/cdp-attach/">CDP attach</a></li>
+    </ul>
+
+    <h2>Kit location</h2>
+    <p>No new public Selenium repo (hard lock). Starter lives in the monorepo: <code>aff-saas/kits/selenium-mlx-starter/</code> on GitHub under <a href="https://github.com/antidetect-automation/aff-saas/tree/main/kits/selenium-mlx-starter">aff-saas/kits</a>.</p>
+
+    <div class="note">
+      Browser → <code>SAAS50</code>. Cloud Phone → <code>MIN50</code>. Affiliate disclosure applies.
+    </div>
+
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_selenium">SAAS50 / MIN50</a>
-      <a class="btn ghost" href="/guides/playwright-mlx/">Playwright guide</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_selenium">Get codes on Telegram</a>
+      <a class="btn ghost" href="/guides/playwright-mlx/">Prefer Playwright</a>
+      <a class="btn ghost" href="/guides/mlx-api/">API map</a>
     </p>
-    <div class="note">Affiliate disclosure. Free = no API.</div>
   </article>
-  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+
+  <footer class="foot">
+    <p><strong>Affiliate disclosure:</strong> We may earn a commission from Multilogin purchases via our codes.</p>
+    <p><a href="/">← Hub</a> · <a href="/guides/">Guides</a></p>
+  </footer>
 </body>
 </html>

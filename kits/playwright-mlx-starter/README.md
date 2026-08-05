@@ -24,4 +24,6 @@ node index.mjs
 
 Deal desk: https://t.me/antidetect_automation_bot?start=aa_kit_pw
 
+Coupon: browser **SAAS50** · Cloud Phone **MIN50** via [Telegram bot](https://t.me/antidetect_automation_bot).
+
 Affiliate disclosure: we may earn a commission via Multilogin codes/links.

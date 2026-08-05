@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "site"
 BASE = "https://antidetect-automation.github.io"
-TODAY = "2026-08-04"
+TODAY = "2026-08-05"
 STUBS = {
     "/vs/blink/",
     "/vs/vision/",
@@ -95,13 +95,17 @@ def main() -> None:
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     ]
     for path in ordered:
+        if path in STUBS:
+            continue  # on-page noindex; keep crawl budget on heroes
         loc = BASE + ("/" if path == "/" else path)
         lines.append(
             f"  <url><loc>{loc}</loc><lastmod>{TODAY}</lastmod><priority>{priority(path):.2f}</priority></url>"
         )
     lines.append("</urlset>")
-    (ROOT / "sitemap.xml").write_text("\n".join(lines) + "\n")
-    print(f"wrote {len(ordered)} urls")
+    body = "\n".join(lines) + "\n"
+    (ROOT / "sitemap.xml").write_text(body)
+    n = body.count("<url>")
+    print(f"wrote {n} urls (skipped stubs {len([u for u in ordered if u in STUBS])})")
 
 
 if __name__ == "__main__":

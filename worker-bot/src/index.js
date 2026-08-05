@@ -3,6 +3,8 @@ const BOT_PUBLIC = "https://t.me/antidetect_automation_bot";
 const DISCLOSURE =
   "Affiliate disclosure: if you buy Multilogin with our codes/links, we may earn a commission. We are not Multilogin Support.";
 
+const MLX_PLANS = "https://multilogin.com/pricing";
+
 const LINKS = {
   deal: `${HUB}/deal/`,
   pricing: `${HUB}/pricing/`,
@@ -175,6 +177,12 @@ async function sendDeal(env, chatId, intent, source, from) {
     event: "deal",
     intent: code,
   });
+  const switchLabel =
+    browser ? "Switch → Cloud Phone MIN50" : "Switch → Browser SAAS50";
+  const switchData = browser ? "intent:phone" : "intent:browser";
+  const extraUrl = browser ? LINKS.guide : LINKS.cloudPhone;
+  const extraLabel = browser ? "Playwright guide" : "Cloud Phone guide";
+
   await tg(env, "sendMessage", {
     chat_id: chatId,
     text: [
@@ -182,22 +190,66 @@ async function sendDeal(env, chatId, intent, source, from) {
       product,
       "",
       "2026 Multilogin: Free 5 profiles · Pro from ~$7/mo yearly · then stack this 50% code.",
-      `Pricing: ${LINKS.pricing}`,
+      `Our pricing notes: ${LINKS.pricing}`,
+      `Official plans: ${MLX_PLANS}`,
       "",
-      "1. Open Multilogin’s official checkout (prefer yearly −35%)",
+      "1. Open Multilogin’s checkout (prefer yearly −35%)",
       "2. Apply the code",
       "3. Assign proxies carefully, then warm before scale",
       "",
       DISCLOSURE,
       "",
       `Deal: ${LINKS.deal}`,
-      `Guide: ${LINKS.guide}`,
+      `${extraLabel}: ${extraUrl}`,
     ].join("\n"),
     parse_mode: "Markdown",
     reply_markup: {
       inline_keyboard: [
         [
-          { text: "Open hub", url: HUB },
+          { text: "Multilogin plans", url: MLX_PLANS },
+          { text: "Pricing notes", url: LINKS.pricing },
+        ],
+        [
+          { text: "Deal page", url: LINKS.deal },
+          { text: extraLabel, url: extraUrl },
+        ],
+        [{ text: switchLabel, callback_data: switchData }],
+      ],
+    },
+    disable_web_page_preview: true,
+  });
+}
+
+async function sendDealDesk(env, chatId, source, from) {
+  await track(env, {
+    chat_id: chatId,
+    tg_user_id: from?.id,
+    tg_username: from?.username,
+    source: source || "cmd_deal",
+    event: "deal_desk",
+    intent: "chooser",
+  });
+  await tg(env, "sendMessage", {
+    chat_id: chatId,
+    text: [
+      "*Deal desk — pick a code*",
+      "",
+      "• Browser / antidetect → *SAAS50*",
+      "• Cloud Phone / Android → *MIN50*",
+      "",
+      "Tap below (or /saas50 · /min50). Then apply on Multilogin checkout.",
+      "",
+      DISCLOSURE,
+    ].join("\n"),
+    parse_mode: "Markdown",
+    reply_markup: {
+      inline_keyboard: [
+        [
+          { text: "Browser → SAAS50", callback_data: "intent:browser" },
+          { text: "Cloud Phone → MIN50", callback_data: "intent:phone" },
+        ],
+        [
+          { text: "Multilogin plans", url: MLX_PLANS },
           { text: "Deal page", url: LINKS.deal },
         ],
       ],
@@ -341,7 +393,7 @@ async function handleUpdate(env, update) {
     return;
   }
   if (text.startsWith("/deal") || text.startsWith("/codes")) {
-    await sendWelcome(env, chatId, "cmd_deal", from);
+    await sendDealDesk(env, chatId, "cmd_deal", from);
     return;
   }
   if (text.startsWith("/pricing") || text.startsWith("/price") || text.startsWith("/plans")) {
@@ -601,6 +653,7 @@ async function ensureBotMeta(env) {
     { command: "ads", description: "Ads / FB / Google / affiliate" },
     { command: "usecases", description: "All use-cases hub" },
     { command: "puppeteer", description: "Puppeteer + MLX guide" },
+    { command: "selenium", description: "Selenium + MLX guide" },
     { command: "postman", description: "Postman kit" },
     { command: "warmup", description: "Profile warm-up checklist" },
     { command: "tools", description: "Free tools" },

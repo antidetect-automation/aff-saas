@@ -7,4 +7,5 @@ python3 scripts/quality_check.py
 bash scripts/sync_github_io.sh
 (cd worker-bot && npm run deploy)
 python3 scripts/indexnow_ping.py
+python3 scripts/health_check.py
 echo "ship complete"

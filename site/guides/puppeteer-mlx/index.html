@@ -3,14 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Puppeteer + Multilogin X — Launcher start and connect</title>
-  <meta name="description" content="Start a Multilogin Mimic profile with automation_type=puppeteer, connect puppeteer-core to 127.0.0.1:port. Pro+ API. SAAS50." />
+  <title>Puppeteer + Multilogin X — start profile over CDP</title>
+  <meta name="description" content="Official Multilogin Launcher pattern: MD5 sign-in, start Mimic with automation_type=puppeteer, connect puppeteer-core to 127.0.0.1:port. Pro+ API. SAAS50." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
-  <meta property="og:title" content="Puppeteer + Multilogin X" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="antidetect-automation" />
+  <meta property="og:title" content="Puppeteer + Multilogin X — CDP guide" />
+  <meta property="og:description" content="Sign-in → Launcher start with automation_type=puppeteer → connect. Same spine as Playwright." />
   <meta property="og:url" content="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
   <meta property="og:image" content="https://antidetect-automation.github.io/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="/assets/site.css" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"TechArticle","headline":"Puppeteer + Multilogin X","url":"https://antidetect-automation.github.io/guides/puppeteer-mlx/","dateModified":"2026-08-05"}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://antidetect-automation.github.io/"},{"@type":"ListItem","position":2,"name":"Guides","item":"https://antidetect-automation.github.io/guides/"},{"@type":"ListItem","position":3,"name":"Puppeteer","item":"https://antidetect-automation.github.io/guides/puppeteer-mlx/"}]}
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -18,29 +29,84 @@
   <header class="top">
     <a class="brand" href="/">antidetect-automation</a>
     <nav>
-      <a href="/guides/playwright-mlx/">Playwright</a>
+      <a href="/guides/mlx-api/">API map</a>
       <a href="/guides/puppeteer-mlx/">Puppeteer</a>
       <a href="/deal/">Deal</a>
     </nav>
   </header>
+
   <article id="main" class="long">
-    <p class="eyebrow">Guide</p>
+    <p class="eyebrow">Guide · Mimic + Puppeteer</p>
     <h1>Puppeteer + Multilogin X</h1>
-    <p class="lede">Same spine as Playwright: MD5 sign-in → Launcher start with <code>automation_type=puppeteer</code> → connect <code>puppeteer-core</code> to <code>http://127.0.0.1:{port}</code>. Free Multilogin has no API — need Pro+.</p>
-    <p>Full map: <a href="/guides/mlx-api/">API map</a>. Sibling deep dive: <a href="/guides/playwright-mlx/">Playwright guide</a> (most teams should start there).</p>
-    <h2>Launcher start</h2>
-    <pre><code>GET https://launcher.mlx.yt:45001/api/v2/profile/f/{folder_id}/p/{profile_id}/start
-  ?automation_type=puppeteer&amp;headless_mode=false
-Authorization: Bearer {token}</code></pre>
-    <p>Multilogin app must be running. Official Postman: <a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">documenter</a>.</p>
-    <h2>Kit</h2>
-    <p>Mode A (<code>CDP_URL</code>) or Mode B (email/password + folder/profile): <a href="https://github.com/antidetect-automation/puppeteer-mlx-starter">puppeteer-mlx-starter</a>.</p>
+    <p class="lede">Same ops spine as Playwright: authenticate, ask the local Launcher to start a profile with <code>automation_type=puppeteer</code>, then attach <code>puppeteer-core</code> to the port Multilogin returns. Most teams should still prefer <a href="/guides/playwright-mlx/">Playwright</a>; use Puppeteer when the desk’s libraries already assume it.</p>
+
+    <p><strong>Plan gate:</strong> Free has no API — need Pro or higher (<a href="/pricing/">pricing</a>). Playwright/Puppeteer attach to <strong>Mimic</strong> cores; Multilogin’s docs say Stealthfox + Playwright is not available yet (assume the same constraint for Puppeteer until their examples say otherwise).</p>
+
+    <h2>Source of truth</h2>
+    <ul>
+      <li><a href="https://documenter.getpostman.com/view/28533318/2s946h9Cv9">API Postman documenter</a> (Launcher start)</li>
+      <li><a href="https://multilogin.com/help/en_US/postman/starting-a-profile-with-postman">Start profile (Launcher v2)</a></li>
+      <li>Our map: <a href="/guides/mlx-api/">/guides/mlx-api/</a> · sibling: <a href="/guides/playwright-mlx/">Playwright</a></li>
+    </ul>
+
+    <h2>Mode A vs Mode B</h2>
+    <ul>
+      <li><strong>Mode A:</strong> Start the profile in UI or Postman, put <code>CDP_URL=http://127.0.0.1:PORT</code> in <code>.env</code>, connect only.</li>
+      <li><strong>Mode B:</strong> Script MD5 sign-in + Launcher start with <code>automation_type=puppeteer</code>, then connect. Multilogin agent must be running. Email/password + <code>folder_id</code> / <code>profile_id</code> required.</li>
+    </ul>
+
+    <h2>Flow</h2>
+    <pre><code>1. POST https://api.multilogin.com/user/signin
+   body: { "email": "...", "password": "&lt;md5 hex of password&gt;" }
+   → data.token (~30 min)
+
+2. GET https://launcher.mlx.yt:45001/api/v2/profile/f/{folder_id}/p/{profile_id}/start
+     ?automation_type=puppeteer&amp;headless_mode=false
+   Authorization: Bearer {token}
+   → data.port
+
+3. puppeteer.connect({ browserURL: `http://127.0.0.1:${port}`, defaultViewport: null })
+
+4. Use an existing page — do not launch a naked Chromium
+
+5. Stop the profile via Launcher when the job ends</code></pre>
+
+    <h2>Minimal connect snippet</h2>
+    <pre><code>import puppeteer from "puppeteer-core";
+
+const browser = await puppeteer.connect({
+  browserURL: `http://127.0.0.1:${portFromLauncher}`,
+  defaultViewport: null,
+});
+const pages = await browser.pages();
+const page = pages[0] || await browser.newPage();
+await page.goto("https://example.com");</code></pre>
+
+    <h2>When connect fails</h2>
+    <ul>
+      <li>App not running / wrong machine → Launcher never opened a port</li>
+      <li>Forgot <code>automation_type=puppeteer</code></li>
+      <li>Token expired → <a href="/errors/token-auth/">token errors</a></li>
+      <li>Stale port / race → <a href="/errors/cdp-attach/">CDP attach desk</a></li>
+    </ul>
+
+    <h2>Ops for ads / MMO desks</h2>
+    <p>Automate reporting and QA. Keep humans on policy-sensitive clicks. Isolation: <a href="/use-cases/facebook-ads/">Facebook ads</a> · <a href="/use-cases/google-ads/">Google ads</a> · <a href="/use-cases/ads-multi-account/">multi-account ads</a>.</p>
+
+    <div class="note">
+      Need Multilogin first? Browser → <code>SAAS50</code>. Cloud Android → <code>MIN50</code>. Affiliate desk — not Multilogin Support.
+    </div>
+
     <p class="cta-row">
-      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_puppeteer">SAAS50 / MIN50</a>
-      <a class="btn ghost" href="/guides/playwright-mlx/">Prefer Playwright?</a>
+      <a class="btn primary" href="https://t.me/antidetect_automation_bot?start=aa_puppeteer">Get codes on Telegram</a>
+      <a class="btn ghost" href="https://github.com/antidetect-automation/puppeteer-mlx-starter">Puppeteer kit</a>
+      <a class="btn ghost" href="/guides/playwright-mlx/">Prefer Playwright</a>
     </p>
-    <div class="note">Affiliate disclosure applies.</div>
   </article>
-  <footer class="foot"><p><a href="/">← Hub</a></p></footer>
+
+  <footer class="foot">
+    <p><strong>Affiliate disclosure:</strong> We may earn a commission from Multilogin purchases via our codes.</p>
+    <p><a href="/">← Hub</a> · <a href="/guides/">Guides</a> · <a href="/guides/mlx-api/">API map</a></p>
+  </footer>
 </body>
 </html>

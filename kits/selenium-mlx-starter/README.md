@@ -16,3 +16,6 @@ python main.py
 ```
 
 Stays in `aff-saas` — no new public GitHub repo.
+
+Coupon: browser **SAAS50** · Cloud Phone **MIN50** via [Telegram bot](https://t.me/antidetect_automation_bot).
+

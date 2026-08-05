@@ -4,7 +4,7 @@
   <subtitle>Multilogin pricing, ads, API guides, deal desk</subtitle>
   <link href="https://antidetect-automation.github.io/feed.xml" rel="self" />
   <link href="https://antidetect-automation.github.io/" />
-  <updated>2026-08-04T22:00:00Z</updated>
+  <updated>2026-08-05T12:00:00Z</updated>
   <id>https://antidetect-automation.github.io/</id>
   <author><name>antidetect-automation</name></author>
   <entry>
@@ -76,5 +76,33 @@
     <id>https://antidetect-automation.github.io/glossary/</id>
     <updated>2026-08-04T22:00:00Z</updated>
     <summary>SAAS50 · Launcher · automation_type.</summary>
+  </entry>
+  <entry>
+    <title>Start here onboarding</title>
+    <link href="https://antidetect-automation.github.io/start/" />
+    <id>https://antidetect-automation.github.io/start/</id>
+    <updated>2026-08-05T12:00:00Z</updated>
+    <summary>Pricing → Telegram → tools → Playwright.</summary>
+  </entry>
+  <entry>
+    <title>Puppeteer + Multilogin X</title>
+    <link href="https://antidetect-automation.github.io/guides/puppeteer-mlx/" />
+    <id>https://antidetect-automation.github.io/guides/puppeteer-mlx/</id>
+    <updated>2026-08-05T12:00:00Z</updated>
+    <summary>Launcher start → puppeteer.connect.</summary>
+  </entry>
+  <entry>
+    <title>Selenium + Multilogin X</title>
+    <link href="https://antidetect-automation.github.io/guides/selenium-mlx/" />
+    <id>https://antidetect-automation.github.io/guides/selenium-mlx/</id>
+    <updated>2026-08-05T12:00:00Z</updated>
+    <summary>Remote WebDriver; prefer Playwright for new work.</summary>
+  </entry>
+  <entry>
+    <title>CDP attach error desk</title>
+    <link href="https://antidetect-automation.github.io/errors/cdp-attach/" />
+    <id>https://antidetect-automation.github.io/errors/cdp-attach/</id>
+    <updated>2026-08-05T12:00:00Z</updated>
+    <summary>Port · automation_type · token.</summary>
   </entry>
 </feed>
