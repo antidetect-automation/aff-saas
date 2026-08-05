@@ -6,9 +6,8 @@
 const FEED = "https://multilogin.com/blog/feed";
 const HUB = "https://antidetect-automation.github.io";
 const BOT = "https://t.me/antidetect_automation_bot";
-/** Your partner affiliate entry (prefer this over raw Multilogin URLs in public CTAs) */
-const AFF = "https://multilogin.com/?a_aid=saas";
-const AFF_PRICING = "https://multilogin.com/pricing?a_aid=saas";
+/** Exact partner affiliate URL — do not add path/query except a_aid=saas */
+const AFF = "https://multilogin.com?a_aid=saas";
 /** Fallback if DIGEST_CHAT_ID secret missing */
 const DEFAULT_CHANNEL = "-1004445803393";
 
@@ -75,6 +74,27 @@ function parseRssItems(xml) {
   return items;
 }
 
+function nicheHashtags(item) {
+  const blob = `${item.title} ${(item.categories || []).join(" ")}`.toLowerCase();
+  const tags = new Set(["#multilogin", "#antidetect", "#antidetectbrowser", "#multiaccount"]);
+  const map = [
+    [/facebook|meta|bm\b/, ["#facebookads", "#metaads", "#mediabuying"]],
+    [/google\s*ads|mcc/, ["#googleads", "#ppcm"]],
+    [/cloud\s*phone|android/, ["#cloudphone", "#androidfarm", "#MIN50"]],
+    [/playwright|puppeteer|selenium|automation|cdp|api/, ["#playwright", "#browserautomation", "#mlxapi"]],
+    [/prox/, ["#proxy", "#residentialproxy"]],
+    [/cookie|warmup|warm-up|session/, ["#profilewarmup", "#cookies"]],
+    [/affiliate|cpa|arbitrage/, ["#affiliatemarketing", "#cpa"]],
+    [/social/, ["#socialmedia", "#socialaccounts"]],
+    [/scrap/, ["#webscraping"]],
+  ];
+  for (const [re, hs] of map) {
+    if (re.test(blob)) hs.forEach((h) => tags.add(h));
+  }
+  tags.add("#SAAS50");
+  return [...tags].slice(0, 12).join(" ");
+}
+
 function topicOk(item) {
   if (DENY_TITLE.test(item.title)) return false;
   const blob = `${item.title} ${item.categories.join(" ")}`;
@@ -82,28 +102,32 @@ function topicOk(item) {
 }
 
 async function writeCommentary(env, item) {
+  const tags = nicheHashtags(item);
   const system = [
-    "You are antidetect-automation: an independent Multilogin affiliate growth desk for ads / MMO / API operators.",
-    "Write 100% ORIGINAL desk commentary. Never copy or closely paraphrase Multilogin’s blog sentences.",
-    "Tone: senior operator — practical, direct, no hype. Ban words: undetectable, never-ban, guaranteed approval.",
-    "Conversion goal: readers open our Telegram bot for SAAS50 (browser) / MIN50 (Cloud Phone), then our hub deal/pricing pages.",
-    "Never tell readers to open Multilogin’s blog URL. Never invent discounts other than SAAS50 / MIN50.",
+    "You write Telegram channel posts for antidetect-automation (Multilogin affiliate desk).",
+    "100% original commentary. Never copy Multilogin blog text. No undetectable/never-ban claims.",
+    "Optimize for Telegram search: put high-intent niche keywords in the FIRST two lines",
+    "(examples: Multilogin, antidetect browser, Facebook ads multi account, Cloud Phone, Playwright CDP).",
+    "Do NOT invent URLs. Do NOT mention Multilogin blog source links.",
+    "Push CTAs: Telegram bot for SAAS50/MIN50 codes + partner Multilogin link a_aid=saas (buttons handle links).",
   ].join(" ");
 
   const prompt = [
-    "Write a Telegram channel post in English, 130–180 words, plain text, no markdown URLs.",
+    "Telegram post, English, 120–160 words, plain text.",
     "",
-    "Structure (strict):",
-    "HOOK: 1–2 lines — why this topic burns money for multi-account / ads / automation desks right now.",
-    "ANGLE: 3 lines starting with • — concrete ops advice (proxy sticky, warmup, cookies, API/Pro gate, Cloud Phone vs browser) tied loosely to the topic.",
-    "CTA: 2 lines — (1) message our Telegram bot for SAAS50 or MIN50 (2) skim our hub deal + pricing before checkout.",
+    "Line 1: keyword-rich headline (not clickbait) including Multilogin + niche term from the topic.",
+    "Line 2: blank",
+    "Then HOOK 1–2 sentences with searchable phrases (ads desk, multi-account, antidetect, Cloud Phone, API).",
+    "Then 3 lines starting with • practical ops tips.",
+    "Then CTA: get SAAS50 (browser) or MIN50 (Cloud Phone) on our Telegram bot; use our Multilogin partner link for signup.",
+    "LAST LINE must be exactly these hashtags (copy as-is):",
+    tags,
     "",
-    "Do NOT mention “source”, “original article”, “read more on Multilogin’s blog”, or paste their URL.",
-    "You may say “today’s Multilogin industry note” once if needed — then pivot to OUR desk actions.",
+    "Do not add other hashtags. Do not paste URLs in body.",
     "",
-    `Topic title (inspiration only): ${item.title}`,
-    `Topic tags: ${item.categories.join(", ") || "n/a"}`,
-    `Context blurb (do not quote): ${item.summary}`,
+    `Topic (inspiration): ${item.title}`,
+    `Tags: ${item.categories.join(", ") || "n/a"}`,
+    `Blurb (do not quote): ${item.summary}`,
   ].join("\n");
 
   const result = await env.AI.run("@cf/meta/llama-3.2-3b-instruct", {
@@ -113,20 +137,24 @@ async function writeCommentary(env, item) {
     ],
     max_tokens: 420,
   });
-  const text =
+  let text =
     (typeof result === "string" ? result : result?.response || "") ||
     [
-      item.title,
+      `Multilogin antidetect tip: ${item.title}`,
       "",
-      "Multi-account desks bleed money when proxy, warmup, and plan gates are wrong — not when the blog post is long.",
+      "Ads and multi-account desks lose money on bad proxy/warmup — not on missing a blog reprint.",
       "",
-      "• Browser / Playwright / ads lanes → grab SAAS50 on Telegram",
-      "• Cloud Phone / Android lanes → grab MIN50",
-      "• Confirm Free vs Pro (API) on our pricing notes before you scale",
+      "• Browser / ads / Playwright → SAAS50 on our bot",
+      "• Cloud Phone / Android → MIN50",
+      "• Confirm Pro if you need API before farming",
       "",
-      "Open the bot for codes, then finish on our deal desk.",
+      "Grab codes on Telegram, then open Multilogin via our partner link.",
+      "",
+      tags,
     ].join("\n");
-  return String(text).slice(0, 1800).trim();
+  text = String(text).trim();
+  if (!text.includes("#multilogin")) text = `${text}\n\n${tags}`;
+  return text.slice(0, 1900);
 }
 
 async function tgSend(env, chatId, text, replyMarkup) {
@@ -214,19 +242,19 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
       ].join("\n");
     }
 
+    const tags = nicheHashtags(item);
+    let postBody = body.slice(0, 1200);
+    if (!postBody.includes("#multilogin")) postBody = `${postBody}\n\n${tags}`;
+
     const msg = [
-      "📡 Desk note",
-      "",
-      item.title,
-      "",
-      body.slice(0, 1100),
+      postBody,
       "",
       "———",
-      `🤖 Codes: ${BOT}?start=aa_digest`,
-      `🌐 Hub: ${HUB}/`,
-      `🏷 Multilogin (partner): ${AFF}`,
+      `Bot codes: ${BOT}?start=aa_digest`,
+      `Multilogin: ${AFF}`,
+      `Hub: ${HUB}/deal/`,
       "",
-      "Affiliate disclosure: links/codes (SAAS50 / MIN50 / a_aid) may earn us a commission. Independent desk — not Multilogin Support.",
+      "Affiliate disclosure: SAAS50 / MIN50 / a_aid=saas may earn a commission. Not Multilogin Support.",
     ].join("\n");
 
     let tg;
@@ -234,16 +262,12 @@ export async function runMlxBlogDigest(env, { force = false, limit = 1 } = {}) {
       tg = await tgSend(env, chatId, msg, {
         inline_keyboard: [
           [
-            { text: "📲 Get SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
-            { text: "Open Multilogin", url: AFF },
+            { text: "📲 SAAS50 / MIN50", url: `${BOT}?start=aa_digest` },
+            { text: "Multilogin", url: AFF },
           ],
           [
             { text: "Deal desk", url: `${HUB}/deal/` },
-            { text: "Our pricing notes", url: `${HUB}/pricing/` },
-          ],
-          [
-            { text: "Multilogin plans", url: AFF_PRICING },
-            { text: "Playwright guide", url: `${HUB}/guides/playwright-mlx/` },
+            { text: "Pricing notes", url: `${HUB}/pricing/` },
           ],
         ],
       });

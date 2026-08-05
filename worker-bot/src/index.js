@@ -5,8 +5,7 @@ const BOT_PUBLIC = "https://t.me/antidetect_automation_bot";
 const DISCLOSURE =
   "Affiliate disclosure: if you buy Multilogin with our codes/links, we may earn a commission. We are not Multilogin Support.";
 
-const MLX_PLANS = "https://multilogin.com/pricing?a_aid=saas";
-const MLX_AFF = "https://multilogin.com/?a_aid=saas";
+const MLX_AFF = "https://multilogin.com?a_aid=saas";
 
 
 const LINKS = {
@@ -219,7 +218,7 @@ async function sendDeal(env, chatId, intent, source, from) {
       "",
       "2026 Multilogin: Free 5 profiles · Pro from ~$7/mo yearly · then stack this 50% code.",
       `Our pricing notes: ${LINKS.pricing}`,
-      `Official plans: ${MLX_PLANS}`,
+      `Official plans: ${MLX_AFF}`,
       "",
       "1. Open Multilogin’s checkout (prefer yearly −35%)",
       "2. Apply the code",
@@ -234,8 +233,8 @@ async function sendDeal(env, chatId, intent, source, from) {
     reply_markup: {
       inline_keyboard: [
         [
-          { text: "Multilogin plans", url: MLX_PLANS },
           { text: "Open Multilogin", url: MLX_AFF },
+          { text: "Pricing notes", url: LINKS.pricing },
         ],
         [
           { text: "Deal page", url: LINKS.deal },
@@ -277,8 +276,8 @@ async function sendDealDesk(env, chatId, source, from) {
           { text: "Cloud Phone → MIN50", callback_data: "intent:phone" },
         ],
         [
-          { text: "Multilogin plans", url: MLX_PLANS },
           { text: "Open Multilogin", url: MLX_AFF },
+          { text: "Deal page", url: LINKS.deal },
         ],
       ],
     },
