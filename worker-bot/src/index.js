@@ -180,7 +180,7 @@ async function sendWelcome(env, chatId, source, from) {
   // Persistent quick bar for return visits (second message keeps reply kb without wiping inline)
   await tg(env, "sendMessage", {
     chat_id: chatId,
-    text: "Quick bar ready — SAAS50 · MIN50 · Deal desk · Pricing · Playwright · API map",
+    text: "Quick bar ready — SAAS50 · MIN50 · Deal · Pricing · Playwright · API · Errors · Ads",
     reply_markup: replyQuickBar(),
     disable_web_page_preview: true,
   });
