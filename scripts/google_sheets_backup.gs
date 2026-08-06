@@ -1,19 +1,8 @@
 /**
  * Google Sheets backup via Apps Script Web App (doPost).
  *
- * SETUP (one-time, ~2 min):
- * 1. Create a Google Sheet → rename first tab to `digests` (or leave blank; script creates it).
- * 2. Extensions → Apps Script → paste this whole file → Save.
- * 3. Deploy → New deployment → Type: Web app
- *    - Execute as: Me
- *    - Who has access: Anyone
- * 4. Copy the Web app URL.
- * 5. Worker secret:
- *      cd worker-bot && printf '%s' 'WEB_APP_URL' | npx wrangler secret put SHEETS_WEBHOOK_URL
- *
- * Optional shared secret (same value in Script Properties + Worker):
- *      Script Properties: SHEETS_HOOK_SECRET=...
- *      wrangler secret put SHEETS_HOOK_SECRET
+ * After editing: Deploy → Manage deployments → ✏️ → New version → Deploy
+ * (URL thường giữ nguyên.)
  */
 
 var SHEET_NAME = "digests";
@@ -49,6 +38,9 @@ function doPost(e) {
     }
     ensureHeaders_(sheet);
 
+    var body = normalizeNewlines_(data.body || "");
+    var cta = normalizeNewlines_(data.cta_footer || "");
+
     sheet.appendRow([
       data.posted_at || new Date().toISOString(),
       data.feed || "",
@@ -57,11 +49,26 @@ function doPost(e) {
       data.github_url || "",
       data.telegram_message_id || "",
       data.channel_id || "",
-      data.body || "",
-      data.cta_footer || "",
+      body,
+      cta,
     ]);
 
-    return json_({ ok: true, sheet: SHEET_NAME, rows: sheet.getLastRow() });
+    var last = sheet.getLastRow();
+    // Column H = body — wrap + row height so line breaks look like the site
+    var bodyCell = sheet.getRange(last, 8);
+    bodyCell.setWrapStrategy(SpreadsheetApp.WrapStrategy.WRAP);
+    bodyCell.setVerticalAlignment("top");
+    sheet.getRange(last, 9).setWrapStrategy(SpreadsheetApp.WrapStrategy.WRAP);
+    var lines = body.split("\n").length;
+    sheet.setRowHeight(last, Math.min(480, Math.max(60, 18 * (lines + 1))));
+    sheet.setColumnWidth(8, 420);
+
+    return json_({
+      ok: true,
+      sheet: SHEET_NAME,
+      rows: last,
+      body_lines: lines,
+    });
   } catch (err) {
     return json_({ ok: false, error: String(err) });
   }
@@ -75,10 +82,20 @@ function doGet() {
   });
 }
 
+function normalizeNewlines_(s) {
+  return String(s)
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .replace(/\\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 function ensureHeaders_(sheet) {
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(HEADERS);
     sheet.setFrozenRows(1);
+    sheet.setColumnWidth(8, 420);
     return;
   }
   var first = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
