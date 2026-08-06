@@ -24,4 +24,5 @@ binding = "AI"
 
 # Secrets (wrangler secret put): BOT_TOKEN, STATS_KEY, DIGEST_CHAT_ID, GITHUB_TOKEN
 # Optional: GITHUB_OWNER, GITHUB_REPO, GITHUB_BRANCH
+# Sheets backup: SHEETS_WEBHOOK_URL (+ optional SHEETS_HOOK_SECRET)
 

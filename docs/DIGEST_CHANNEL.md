@@ -6,6 +6,25 @@
 
 Chỉ cân nhắc OpenAI/Anthropic trả phí nếu muốn giọng viết “đắt” hơn — không bắt buộc.
 
+## Google Sheets backup
+
+After each successful Telegram digest post, Worker POSTs a row to an **Apps Script Web App**.
+
+1. Copy `scripts/google_sheets_backup.gs` into a Sheet’s Apps Script project  
+2. Deploy → Web app → Execute as **Me** → Who has access **Anyone**  
+3. Secret:
+   ```bash
+   cd worker-bot
+   printf '%s' 'https://script.google.com/macros/s/.../exec' | npx wrangler secret put SHEETS_WEBHOOK_URL
+   # optional:
+   # printf '%s' 'random-secret' | npx wrangler secret put SHEETS_HOOK_SECRET
+   # (same value in Apps Script → Project Settings → Script properties → SHEETS_HOOK_SECRET)
+   ```
+
+Without `SHEETS_WEBHOOK_URL`, digest still posts; sheets step returns `skipped`.
+
+Columns: `posted_at, feed, title, source_url, github_url, telegram_message_id, channel_id, body, cta_footer`
+
 ## Sources (auto)
 
 1. **Multilogin** RSS `multilogin.com/blog/feed` (priority)

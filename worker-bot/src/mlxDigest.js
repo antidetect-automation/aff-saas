@@ -5,6 +5,7 @@
 import { publishDigestToGithub } from "./githubPublisher.js";
 import { notifySearchEngines } from "./indexNow.js";
 import { fetchAdsPowerCandidates } from "./competitorSources.js";
+import { backupDigestToSheets } from "./sheetsBackup.js";
 
 const FEED = "https://multilogin.com/blog/feed";
 const HUB = "https://antidetect-automation.github.io";
@@ -419,6 +420,36 @@ export async function runMlxBlogDigest(
       github_url: github?.url || null,
       github_ok: Boolean(github?.ok),
     };
+
+    // Google Sheets backup (Apps Script webhook) — soft-fail
+    let sheets = { ok: false, skipped: "not_attempted" };
+    try {
+      sheets = await backupDigestToSheets(env, {
+        posted_at: record.created_at,
+        feed: record.feed,
+        title: item.title,
+        source_url: item.link,
+        github_url: github?.url || "",
+        telegram_message_id: tg.result?.message_id,
+        channel_id: chatId,
+        body: postBody,
+        cta_footer:
+          "SAAS50 / MIN50 · " +
+          BOT +
+          "?start=aa_digest · " +
+          AFF,
+      });
+      if (!sheets?.ok && !sheets?.skipped) {
+        console.error("sheets backup", sheets.error || sheets);
+        errors.push({ title: item.title, sheets: sheets.error || sheets.status });
+      }
+    } catch (e) {
+      console.error("sheets backup", e);
+      errors.push({ title: item.title, sheets: String(e) });
+      sheets = { ok: false, error: String(e) };
+    }
+    record.sheets_ok = Boolean(sheets?.ok);
+
     let latest = [];
     try {
       latest = JSON.parse((await env.LEADS.get("digest:latest")) || "[]");
@@ -437,6 +468,8 @@ export async function runMlxBlogDigest(
       github_ok: Boolean(github?.ok),
       github_error: github?.error || github?.skipped || null,
       search: github?.search || null,
+      sheets_ok: Boolean(sheets?.ok),
+      sheets_error: sheets?.error || sheets?.skipped || null,
     });
   }
 
