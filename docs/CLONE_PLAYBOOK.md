@@ -58,6 +58,19 @@ Copy bảng này cho mỗi brand:
 
 ---
 
+## 2b. Template sẵn (khuyến nghị)
+
+Golden folder đã seed:
+
+`/Users/k/Downloads/AFF-DESK-TEMPLATE`
+
+```bash
+cp -R /Users/k/Downloads/AFF-DESK-TEMPLATE /Users/k/Downloads/AFF-<BRAND>
+# Open Folder trong Cursor → sửa brand.config.json → chat: bootstrap + deploy
+```
+
+Chi tiết owner/agent: `AFF-DESK-TEMPLATE/START_HERE.md`, `AGENTS.md`.
+
 ## 3. Cách clone hợp lý (filesystem)
 
 ### Bước A — Copy code (không ảnh hưởng gốc)
