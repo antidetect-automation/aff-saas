@@ -1,46 +1,53 @@
 # antidetect-automation
 
-## Money / pricing
-- https://antidetect-automation.github.io/pricing/ — Free 5 · Pro ≈$7/mo yr · Business
-- https://antidetect-automation.github.io/deal/ — SAAS50 / MIN50
-- https://antidetect-automation.github.io/start/
-- https://t.me/antidetect_automation_bot
+> Multilogin partner ops hub: pricing notes, world compares, Playwright/API guides, and Telegram deal desk (SAAS50 / MIN50). Independent — not Multilogin Support.
 
-## Compare (world)
-Deep essays (prefer these): AdsPower, GoLogin, Dolphin Anty, Octo, Undetectable, BitBrowser.
-Thin long-tail stubs are noindex on purpose.
-- https://antidetect-automation.github.io/vs/ — scorecard hub
-- AdsPower, GoLogin, Dolphin Anty, Octo, Undetectable, Linken Sphere, Incogniton, Hidemium, MoreLogin, BitBrowser, Kameleo, VMLogin, Vision, Blink
+## Money / pricing
+- [Pricing 2026](https://antidetect-automation.github.io/pricing/): Free 5 · Pro · Business
+- [Deal desk](https://antidetect-automation.github.io/deal/): SAAS50 / MIN50
+- [Start / onboarding](https://antidetect-automation.github.io/start/)
+- [Telegram deal bot](https://t.me/antidetect_automation_bot)
+
+## Compare
+- [Compare hub](https://antidetect-automation.github.io/vs/)
+- [vs AdsPower](https://antidetect-automation.github.io/vs/adspower/)
+- [vs GoLogin](https://antidetect-automation.github.io/vs/gologin/)
+- [vs Dolphin Anty](https://antidetect-automation.github.io/vs/dolphin-anty/)
+- [vs Octo Browser](https://antidetect-automation.github.io/vs/octo-browser/)
+- [vs Undetectable](https://antidetect-automation.github.io/vs/undetectable/)
+- [vs BitBrowser](https://antidetect-automation.github.io/vs/bitbrowser/)
 
 ## Tools / guides / errors
-- https://antidetect-automation.github.io/tools/
-- https://antidetect-automation.github.io/guides/
-- https://antidetect-automation.github.io/guides/mlx-api/ — Postman API map (Launcher, PAM, proxy)
-- https://antidetect-automation.github.io/guides/playwright-mlx/
-- https://antidetect-automation.github.io/guides/postman-mlx/
-- https://antidetect-automation.github.io/errors/
-- https://antidetect-automation.github.io/faq/
-- https://antidetect-automation.github.io/glossary/
+- [Tools](https://antidetect-automation.github.io/tools/)
+- [Guides](https://antidetect-automation.github.io/guides/)
+- [Multilogin X API map](https://antidetect-automation.github.io/guides/mlx-api/)
+- [Playwright + Multilogin X](https://antidetect-automation.github.io/guides/playwright-mlx/)
+- [Postman kit](https://antidetect-automation.github.io/guides/postman-mlx/)
+- [Error desk](https://antidetect-automation.github.io/errors/)
+- [FAQ](https://antidetect-automation.github.io/faq/)
+- [Glossary](https://antidetect-automation.github.io/glossary/)
+- [Profile warmup](https://antidetect-automation.github.io/guides/profile-warmup/)
+- [Cookies & sessions](https://antidetect-automation.github.io/guides/cookies-sessions/)
+- [CDP attach errors](https://antidetect-automation.github.io/errors/cdp-attach/)
 
-## Ops guides
-- https://antidetect-automation.github.io/guides/profile-warmup/
-- https://antidetect-automation.github.io/guides/cookies-sessions/
-- https://antidetect-automation.github.io/errors/cdp-attach/
-
-## Audiences (ads / MMO / affiliate)
-- https://antidetect-automation.github.io/use-cases/
-- https://antidetect-automation.github.io/use-cases/ads-multi-account/
-- https://antidetect-automation.github.io/use-cases/facebook-ads/
-- https://antidetect-automation.github.io/use-cases/google-ads/
-- https://antidetect-automation.github.io/use-cases/affiliate/
+## Audiences
+- [Use cases](https://antidetect-automation.github.io/use-cases/)
+- [Ads multi-account](https://antidetect-automation.github.io/use-cases/ads-multi-account/)
+- [Facebook ads](https://antidetect-automation.github.io/use-cases/facebook-ads/)
+- [Google ads](https://antidetect-automation.github.io/use-cases/google-ads/)
+- [Affiliate](https://antidetect-automation.github.io/use-cases/affiliate/)
 
 ## Kits
-- https://github.com/antidetect-automation/playwright-mlx-starter
-- https://github.com/antidetect-automation/puppeteer-mlx-starter
-- https://github.com/antidetect-automation/aff-saas/tree/main/kits
+- [Playwright starter](https://github.com/antidetect-automation/playwright-mlx-starter)
+- [Puppeteer starter](https://github.com/antidetect-automation/puppeteer-mlx-starter)
+- [Kits in aff-saas](https://github.com/antidetect-automation/aff-saas/tree/main/kits)
 
-Editorial: Multilogin remains #1 for serious automation + fingerprints + Cloud Phone; Free/Pro 2026 pricing closed the old premium-only gap. Affiliate disclosure applies.
+## Meta
+- [About](https://antidetect-automation.github.io/about/)
+- [Digest](https://antidetect-automation.github.io/digest/)
+- [Sitemap](https://antidetect-automation.github.io/sitemap.xml)
+- [Feed](https://antidetect-automation.github.io/feed.xml)
 
-## Distribution note
-- Canonical site remains github.io; Telegram is the deal desk.
-- Dev.to recreate / Hashnode Pro required before off-site republish.
+## Optional
+- Canonical site is github.io; Telegram is the coupon desk only.
+- Affiliate disclosure applies on money paths.
